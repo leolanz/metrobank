@@ -1,0 +1,62 @@
+@import '../../Theme/variables.scss';
+
+.stepper-box {
+  height: calc(100vh - 150px);
+  .numbers-container {
+    &.ben {
+      margin-top: 42px;
+    }
+  }
+
+  .MuiStepLabel-label.MuiStepLabel-alternativeLabel {
+    display: none;
+  }
+
+  .MuiPaper-root:first-child {
+    background-color: transparent;
+
+    .MuiStepLabel-label {
+      color: #fff;
+
+      &.MuiStepLabel-active {
+        color: #fff;
+      }
+    }
+
+    .MuiStepIcon-root {
+      color: $gray-light;
+
+      &.MuiStepIcon-active {
+        color: $primary-dark;
+        .MuiStepIcon-text {
+          color: #fff;
+        }
+      }
+
+      .MuiStepIcon-text {
+        color: #fff;
+        fill: #fff;
+      }
+    }
+  }
+}
+
+img,
+video,
+button {
+  display: block;
+}
+
+@media (min-width: 1199px) {
+  .stepper-box {
+    position: absolute;
+    left: 270px;
+    display: inline-flex;
+    flex-direction: column;
+    width: calc(100% - 270px);
+
+    .MuiPaper-root {
+      display: none;
+    }
+  }
+}

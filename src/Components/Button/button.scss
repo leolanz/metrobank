@@ -1,0 +1,82 @@
+@import '../../Theme/variables.scss';
+
+@mixin button($bg-color: $primary-dark, $color: #fff) {
+  min-width: 72px;
+  max-width: 256px;
+  height: 48px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  border-radius: 4px;
+  padding: 10px 15px;
+  border: 0;
+  outline: 0;
+  background-color: $bg-color;
+  color: $color;
+
+  a {
+    color: $color;
+    text-decoration: none;
+  }
+
+  &.full {
+    width: 100%;
+    max-width: none;
+  }
+  &.ben {
+    border-radius: 22px;
+    margin: 6px 0;
+    background-color: #023e7c;
+
+    &.btn-tertiary {
+      background-color: #fff;
+      color: #023e7c;
+    }
+  }
+  @media (min-width: 992px) {
+    min-width: 84px;
+    height: 56px;
+  }
+}
+
+.btn-primary {
+  @include button();
+
+  box-shadow: 0px 0px 0px 4px rgba(40, 53, 147, 0.1);
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &.ben {
+      background-color: $gray-light;
+      color: $gray-medium;
+    }
+  }
+}
+
+.btn-secondary {
+  @include button($surface-color, $primary-dark);
+
+  border: 1px solid $primary-dark;
+  box-shadow: 0px 0px 0px 4px rgba(40, 53, 147, 0.1);
+}
+
+.btn-tertiary {
+  @include button($surface-color, $gray-medium);
+
+  border: 1px solid $gray-light;
+}
+.btn-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    display: flex;
+    margin-right: 6px;
+  }
+}

@@ -1,0 +1,93 @@
+.data-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+
+  .data-content {
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    .title {
+      margin: 0;
+      margin-bottom: 30px;
+    }
+    .ic-phone {
+      display: flex;
+      align-items: center;
+      margin-bottom: 7px;
+      margin-top: 4px;
+      .code {
+        font-weight: bold;
+        margin-left: 16px;
+      }
+    }
+    .ic-email {
+      margin-right: 12px;
+      color: #818999;
+      svg {
+        font-size: 28px;
+      }
+    }
+    .telf {
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .phone {
+        margin-top: 5px;
+        display: flex;
+        .number {
+          margin-left: 10px;
+          font-size: 15px;
+          color: #818999;
+        }
+      }
+    }
+  }
+}
+.foo {
+  .footer-box {
+    height: 60px;
+  }
+}
+.buttons-repeat {
+  &.ben {
+    display: flex;
+  }
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .data-wrapper {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    .data-content {
+      margin-top: 100px;
+      justify-content: flex-start;
+
+      .title {
+        margin-bottom: 42px;
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .buttons {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 565px;
+    min-width: 352px;
+  }
+}

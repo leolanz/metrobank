@@ -1,0 +1,24 @@
+.bar-content {
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  margin: 0px;
+  background-color: #c9ced8;
+  position: relative;
+
+  .bar-progress {
+    content: '';
+    width: 20%;
+    height: 4px;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    background-color: #006ef8;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bar-content {
+    display: none;
+  }
+}

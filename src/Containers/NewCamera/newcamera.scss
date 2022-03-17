@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 335px;
+  margin: auto;
+  margin-top: 15px;
+  .title {
+    width: 350px;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 24px;
+    max-width: none;
+    .text-blue {
+      color: #2c80ed;
+      font-weight: bold;
+    }
+  }
+  .text {
+    font-size: 16px;
+    text-align: center;
+    width: 350px;
+  }
+}
+.buttons-repeat {
+  display: flex;
+}

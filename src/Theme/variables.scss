@@ -1,0 +1,60 @@
+$primary-dark: #283593;
+$primary-light: #2c80ed;
+
+$secondary-dark: #26a69a;
+$secondary-light: #a4eae3;
+
+$success-dark: #7cb342;
+$success-medium: #b7eb8f;
+$success-light: #f6ffed;
+
+$error-dark: #da1414;
+$error-medium: #ff7875;
+$error-light: #feefef;
+
+$info-dark: #1890ff;
+$info-medium: #69c0ff;
+$info-light: #e6f7ff;
+
+$warning-dark: #faad14;
+$warning-medium: #ffe58f;
+$warning-light: #fffbe6;
+
+$text-dark: #364156;
+$text-white: #ffffff;
+
+$gray-medium: #818999;
+$gray-light: #e7e7ed;
+
+$surface-color: #f8f9ff;
+
+:export {
+  $primary-dark: primary-dark;
+  $primary-light: primary-light;
+
+  $secondary-dark: secondary-dark;
+  $secondary-light: secondary-light;
+
+  $success-dark: success-dark;
+  $success-medium: success-medium;
+  $success-light: success-light;
+
+  $error-dark: error-dark;
+  $error-medium: error-medium;
+  $error-light: error-light;
+
+  $info-dark: info-dark;
+  $info-medium: info-medium;
+  $info-light: info-light;
+
+  $warning-dark: warning-dark;
+  $warning-medium: warning-medium;
+  $warning-light: warning-light;
+
+  $text-dark: text-dark;
+
+  $gray-medium: gray-medium;
+  $gray-light: gray-light;
+
+  $surface-color: surface-color;
+}

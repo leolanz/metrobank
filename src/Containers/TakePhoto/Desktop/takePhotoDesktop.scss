@@ -1,0 +1,199 @@
+@import '../../../Theme/variables.scss';
+
+.container-camera {
+  display: flex;
+  flex-direction: column;
+  //   justify-content: space-evenly;
+  align-items: center;
+  .photo-file {
+    display: none;
+  }
+
+  #canvas {
+    display: none;
+  }
+
+  .preview-container-desk {
+    display: none;
+    width: 100%;
+    max-width: 760px;
+    // height: 100vh;
+    flex-direction: column;
+    // justify-content: center;
+    margin-top: 100px;
+    align-items: center;
+
+    //*********************************************
+
+    .camera-container {
+      width: 600px;
+      height: 450px;
+      max-width: 700px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+      border-radius: 12px;
+      overflow: hidden;
+
+      &.hidden {
+        display: none;
+      }
+      &.dashed {
+        border: 2px dashed #d6d6d6;
+      }
+
+      .notDevices-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .ic-notDevices {
+          margin-bottom: 50px;
+          .MuiSvgIcon-root {
+            font-size: 100px;
+            color: #d6d6d6;
+          }
+        }
+        .text-notDevices {
+          text-align: center;
+        }
+      }
+      .video {
+        &.inverted {
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+        }
+      }
+      .photo {
+        object-fit: contain;
+        &.inverted {
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+        }
+      }
+    }
+
+    .btn-take-camera {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      width: 76px;
+      height: 76px;
+      border-radius: 40px;
+      background-color: #003e7e;
+      border: 4px solid #004e9e;
+      padding-top: 7px;
+      box-shadow: 0px 25px 32px rgb(0 110 248 / 30%);
+      cursor: pointer;
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .footer-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .footer-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .footer-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-oval {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px 5px;
+      color: #4864e6;
+      width: 76px;
+      height: 56px;
+      background-color: #ebedfa;
+      border-radius: 28px;
+      border: 2px solid #f3f4f6;
+    }
+    //**********************************************************
+    .selfie {
+      width: 100%;
+      height: 390px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px dashed #c1c1ca;
+      border-radius: 12px;
+      margin: 15px;
+
+      .title {
+        color: #4864e6;
+        margin: 20px;
+      }
+      .text {
+        text-align: center;
+      }
+    }
+
+    .image-desk {
+      width: 700px;
+      height: 400px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: 20px;
+      overflow: hidden;
+      border: 1px dashed #c1c1ca;
+      border-radius: 5px;
+      .ic-delete {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 20px;
+        bottom: 20px;
+        cursor: pointer;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+      }
+      #show-image-Desk {
+        position: relative;
+        margin: 10px;
+        object-fit: contain;
+        border-radius: 12px;
+      }
+    }
+
+    .next {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+//desktop
+@media (min-width: 1200px) {
+  .container-camera {
+    .preview-container-rs {
+      display: none; //ocultamos pantalla responsiva
+    }
+    .preview-container-desk {
+      display: flex; //mostramos pantalla desktop
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@import '../../Theme/variables.scss';
+
+.input-label{
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+
+}
+.wrapper-input {
+  display: flex;
+  min-width: 320px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  height: 56px;
+  border: 1px solid #ededed;
+  // box-shadow: 0 0 2px 2px#cae3fc;
+  margin: 10px 0px;
+  padding: 16px 12px;
+  background-color: #fff;
+
+  &.label{
+    margin-top: 0;
+  }
+
+  &.focus {
+    border: 1px solid #40a9ff;
+    box-shadow: 0 0 2px 2px#cae3fc;
+  }
+
+  &.error {
+    border: 1px solid $error-medium;
+    box-shadow: 0 0 2px 2px$error-medium;
+  }
+  &.disabled {
+    background-color: #eaeaec;
+    color: #989aa2;
+    input {
+      background-color: #eaeaec;
+      color: #989aa2;
+    }
+    border: none;
+    box-shadow: none;
+  }
+
+  &.textarea {
+    height: 100px;
+    textarea {
+      resize: none;
+    }
+  }
+
+  .input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #fff;
+    font-size: 15px;
+    font-family: 'Roboto';
+    &:focus {
+      border: none;
+      outline: none;
+    }
+
+    /* ocultar las flechas cuando el input es tipo numero*/
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /*cambio color placehoder*/
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #818999;
+      opacity: 1; /* Firefox */
+    }
+  }
+  .ic-input {
+    padding-top: 5px;
+    &.ic-left {
+      margin-right: 5px;
+    }
+    &.ic-right {
+      margin-left: 5px;
+    }
+  }
+}
+.text-error {
+  margin-top: -8px;
+  margin-bottom: 10px;
+  color: $error-medium;
+}

@@ -1,0 +1,28 @@
+.container {
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;  
+  
+  &.ben{
+    height: calc(100vh - 82px);
+    margin-top: 82px;
+  }
+}
+// tablets
+@media (min-width: 576px) and (max-width: 1199px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+// Desktop
+@media (min-width: 1200px) {
+  .container {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}

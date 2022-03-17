@@ -1,0 +1,36 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  .col {
+    border: 1px solid black;
+
+    @for $i from 1 through 12 {
+      &.size-#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+  }
+}
+
+// tablets
+@media (min-width: 576px) and (max-width: 1199px) {
+  .row {
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 32px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+// Desktop
+@media (min-width: 1200px) {
+  .row {
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 48px;
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+}
