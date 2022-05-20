@@ -2,12 +2,15 @@ import React from 'react';
 import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import LoopOutlinedIcon from '@material-ui/icons/LoopOutlined';
+import { toast } from 'react-toastify';
 
 import { Button, Container } from '../../../Components';
 import Footer from '../../Footer/Footer';
 import PlaceHolder from '../../../Assets/placeholder-selfie.svg';
 import { RequireContext } from '../../../Context';
 import './takePhotoIOs.scss';
+
+import { api } from '../../../Connection/Connection';
 
 const TakePhoto = (props) => {
   const [require] = React.useContext(RequireContext); // Llamamos el contexto de require
@@ -18,9 +21,12 @@ const TakePhoto = (props) => {
   );
   const [picture, setPicture] = React.useState('');
   const [successfulUpload, setSuccessfulUpload] = React.useState(false);
+  const [registered, setRegistered] = React.useState(false);
+
+  const imgRef = React.useRef(props.id);
 
   const previewFile = () => {
-    const file = document.querySelector(`#${props.id}`).files[0];
+    const file = imgRef.current.files[0];
 
     if (file) {
       setFirst(true); // ocultamos el boton de siguiente
@@ -62,8 +68,44 @@ const TakePhoto = (props) => {
     setFirst(false);
     setSuccessfulUpload(false);
     props.delete(); // disparamos el evento para reiniciar 'el ultimo paso'
-    const repeat = document.querySelector(`#${props.id}`);
-    repeat?.click();
+    imgRef.current?.click();
+  };
+
+  const validate = async () => {
+    const payload = {
+      phone: require.phone,
+      channel: require.channel,
+      email: require.email,
+    };
+    const endpoint = `${api.domainServer}/api/request/validate`;
+    const config = {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    };
+
+    try {
+      const response = await fetch(endpoint, config);
+      const res = await response.json();
+      console.log(res);
+      if (res === true) {
+        setRegistered(true);
+        toast.error(`Detectamos que ya posee una cuenta`, {
+          toastId: 'custom-id-error',
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          closeButton: false,
+        });
+      }
+    } catch (err) {
+      console.log('ERROR');
+      console.log(err);
+    }
   };
 
   const FooterShwitch = () => {
@@ -73,6 +115,7 @@ const TakePhoto = (props) => {
           <Button
             id={`${props.id}-takePhoto`}
             full
+            disabled={registered}
             ben={props?.channel === 'BEN'}
             color="primary"
             as="label"
@@ -94,9 +137,9 @@ const TakePhoto = (props) => {
             full
             color="tertiary"
             onClick={() => {
-              console.log('AQUI####');
               reset();
             }}
+            htmlFor={props.id}
             icon={<LoopOutlinedIcon />}
           >
             <span className="text-repeat">Repetir foto</span>
@@ -134,6 +177,9 @@ const TakePhoto = (props) => {
   };
 
   React.useEffect(() => {
+    validate();
+  }, []);
+  React.useEffect(() => {
     // si tenemos una imagen cargada entonces la colocamos
     if (props?.preview !== undefined && props?.preview !== null && props?.preview !== '') {
       setPicture(props?.preview);
@@ -170,6 +216,7 @@ const TakePhoto = (props) => {
       <div className="container-camera">
         <input
           id={props.id}
+          ref={imgRef}
           type="file"
           className="photo-file"
           accept="image/*"

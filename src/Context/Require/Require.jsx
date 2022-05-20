@@ -5,6 +5,8 @@ export const RequireContext = React.createContext(); // primero creamos el conte
 export const RequireProvider = (props) => {
   // luego creamos el provider
   const [require, setRequire] = React.useState({
+    urlIdentificationDocument: '', // nombre de la image del documento
+    urlSelfie: '', // nombre de la image del selfie
     channel: '',
     platform: '',
     name: '',
@@ -14,7 +16,7 @@ export const RequireProvider = (props) => {
     expires: '', // expira
     dateOfBirth: '', // fecha de nacimiento
     nationality: '',
-    placeOfBirth: '', // lugar de nacimiento
+    placeBirth: '', // lugar de nacimiento
     gender: '', // genero
     address: '',
     phone: '',
@@ -23,10 +25,10 @@ export const RequireProvider = (props) => {
     selfieCache: '', // almacenamos la imagen local para mostrar
     document: '', // Nombre de la imagen
     documentCache: '', // almacenamos la imagen local para mostrar
-    pep: '',
+    pep: {}, // string para saber si la persona es PEP
     activity: '', // actividad economica
-    requestImage: [], // arreglo para ids de imagenes
-
+    aml: false, // boolean para saber si la api list retorna resultados de ser asi quedaria rechazado por aml.
+    bankResponse: '', // Respusta de Mpay
     requestId: '', // id enviado por mpay
     returnUrlCancel: '', // url de redireccion enviada por mpay si el usuario cancela
     returnFinish: 'https://www.google.com', // url de redireccion enviada por mpay para que el usuario finalice el proceso

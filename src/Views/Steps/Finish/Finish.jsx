@@ -14,7 +14,7 @@ const Finish = (props) => {
   const [require] = React.useContext(RequireContext); // Llamamos el contexto de require
 
   const FinishBen = () => {
-    const Finish1 = () => {
+    if (!require.aml) {
       return (
         <>
           <div className="finish-wrapper">
@@ -51,44 +51,44 @@ const Finish = (props) => {
           </div>
         </>
       );
-    };
+    }
 
-    const Finish2 = () => {
-      return (
-        <>
-          <div className="finish-wrapper">
-            <div className="content">
-              <div className="img-box">
-                <img
-                  className="image-finish"
-                  src={FinishBenCheckImg}
-                  alt="finish-ben"
-                  align="center"
-                />
-              </div>
-
-              <h3 className="title blue">¡Hemos recibido su solicitud!</h3>
-
-              <p>
-                Nuestra Área de Atención al cliente estará evaluando su solicitud y próximamente
-                será contactado.{' '}
-              </p>
+    return (
+      <>
+        <div className="finish-wrapper">
+          <div className="content">
+            <div className="img-box">
+              <img
+                className="image-finish"
+                src={FinishBenCheckImg}
+                alt="finish-ben"
+                align="center"
+              />
             </div>
-            <Footer align="center" column>
-              <div className="buttons-repeat ben">
-                <a
-                  className="btn-primary full ben"
-                  href={`${require.returnFinish}?requestId=${require.requestId}`}
-                >
-                  Finalizar
-                </a>
-              </div>
-            </Footer>
+
+            <h3 className="title blue">¡Hemos recibido su solicitud!</h3>
+
+            <p>
+              Nuestra Área de Atención al cliente estará evaluando su solicitud y próximamente será
+              contactado.{' '}
+            </p>
           </div>
-        </>
-      );
-    };
-    return <Finish1 />;
+          <Footer align="center" column>
+            <div className="buttons-repeat ben">
+              <a
+                className="btn-primary full ben"
+                // href={`${require.returnUrlCancel}?requestId=${require.requestId}`}
+                onClick={() => {
+                  window.history.go(-1); // regresa a la pagina anterior
+                }}
+              >
+                Ok, entendido
+              </a>
+            </div>
+          </Footer>
+        </div>
+      </>
+    );
   };
 
   const FinishOther = () => {

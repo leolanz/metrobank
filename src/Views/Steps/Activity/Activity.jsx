@@ -14,7 +14,7 @@ import {
 
 import { Button, Container } from '../../../Components';
 import { Search, Footer, Loading } from '../../../Containers';
-import { domainServer, domainPython } from '../../../Connection/Connection';
+import { api } from '../../../Connection/Connection';
 import { RequireContext } from '../../../Context';
 
 import './activity.scss';
@@ -24,6 +24,7 @@ const Activity = (props) => {
   const [value, setValue] = React.useState('');
   const [require, setRequire] = React.useContext(RequireContext); // Llamamos el contexto de require
   const [option, setOption] = React.useState([]);
+  const [optionPEP, setOptionPEP] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
   const convertDate = (date) => {
@@ -85,7 +86,7 @@ const Activity = (props) => {
     return dateResult;
   };
 
-  const sendRequestDash = () => {
+  const sendRequestDash = (codeMpay) => {
     const reqClone = { ...{}, ...require };
 
     reqClone.selfieCache = '';
@@ -98,7 +99,10 @@ const Activity = (props) => {
     reqClone.issued = new Date(issued);
     reqClone.expires = new Date(expires);
     reqClone.dateOfBirth = new Date(dateOfBirth);
-    fetch(`${domainServer}/api/request/save`, {
+
+    reqClone.bankResponse = codeMpay;
+
+    fetch(`${api.domainServer}/api/request/save`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -116,11 +120,10 @@ const Activity = (props) => {
       })
       .then((res) => {
         setLoading(false);
-        // props?.next();
+        props.next();
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
         toast.error(`error: ${err}`, {
           position: 'top-center',
           autoClose: 3000,
@@ -139,7 +142,7 @@ const Activity = (props) => {
     dat.selfieCache = '';
     dat.documentCache = '';
 
-    fetch('https://onboardingbnp.mpaycenter.com/onboarding/verification', {
+    fetch(api.mpay, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -157,13 +160,11 @@ const Activity = (props) => {
         });
       })
       .then((res) => {
-        sendRequestDash();
-
         if (res.code === 0) {
+          // la respuesta de mpay fue exitosa
           setRequire((prevState) => {
             return { ...prevState, ...{ bankResponse: res.code, returnFinish: res.data.url } };
           });
-          props?.next();
         } else {
           toast.error(res.description, {
             position: 'top-center',
@@ -175,11 +176,12 @@ const Activity = (props) => {
             closeButton: false,
           });
         }
+        sendRequestDash(res.code);
       })
       .catch((err) => {
         setLoading(false);
         const error = JSON.parse(err);
-        sendRequestDash();
+        sendRequestDash(error.code);
 
         toast.error(`error: ${error.description}`, {
           position: 'top-center',
@@ -195,7 +197,7 @@ const Activity = (props) => {
   const sendOCR = (img) => {
     setLoading(true);
 
-    fetch(`${domainPython}/ocr/`, {
+    fetch(`${api.domainPython}/ocr/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -204,7 +206,7 @@ const Activity = (props) => {
       },
       body: JSON.stringify({
         faceselfie: img,
-        ocrident: 'myawsbucketface',
+        ocrident: api.bucket,
       }),
     })
       .then((response) => {
@@ -228,10 +230,14 @@ const Activity = (props) => {
               require.lastName === res[0].Apellidos &&
               require.dateOfBirth === res[0].Fecha_de_Nacimiento &&
               require.nationality === res[0].Nacionalidad &&
-              require.placeOfBirth === res[0].Lugar_de_Nacimiento &&
+              require.placeBirth === res[0].Lugar_de_Nacimiento &&
               require.gender === res[0].Genero
             ) {
-              sendRequestMPAy();
+              if (require.aml) {
+                sendRequestDash();
+              } else {
+                sendRequestMPAy();
+              }
             } else {
               toast.error('Error con el documento de identidad', {
                 position: 'top-center',
@@ -314,12 +320,11 @@ const Activity = (props) => {
       require.expires === '' ||
       require.dateOfBirth === '' ||
       require.nationality === '' ||
-      require.placeOfBirth === '' ||
+      require.placeBirth === '' ||
       require.gender === '' ||
-      require.selfie === '' ||
-      require.document === '' ||
-      require.activity === '' ||
-      require.requestImage.length === 0
+      require.urlSelfie === '' ||
+      require.urlIdentificationDocument === '' ||
+      require.activity === ''
     ) {
       toast.error('Información incompleta', {
         position: 'top-center',
@@ -331,12 +336,41 @@ const Activity = (props) => {
         closeButton: false,
       });
     } else {
-      sendOCR(require.document);
+      sendOCR(require.urlIdentificationDocument);
     }
   };
-  // const find = (word) => {
+  const economicActivity = () => {
+    setLoading(true);
+    fetch(`${api.domainServer}/api/utils/economicActivity/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return response.text().then((text) => {
+          throw new Error(text);
+        });
+      })
+      .then((res) => {
+        setLoading(false);
+
+        setOption(res);
+      })
+      .catch((err) => {
+        setLoading(false);
+
+        setOption([]);
+        console.log(err);
+      });
+  };
+  // const PEP = () => {
   //   setLoading(true);
-  //   fetch(`${domainServer}/api/utils/economicActivity/`, {
+  //   fetch(`${api.domainServer}/api/utils/pep`, {
   //     method: 'GET',
   //     headers: {
   //       Accept: 'application/json',
@@ -354,19 +388,19 @@ const Activity = (props) => {
   //     .then((res) => {
   //       setLoading(false);
 
-  //       setOption(res);
+  //       setOptionPEP(res);
   //     })
   //     .catch((err) => {
   //       setLoading(false);
 
-  //       setOption([]);
+  //       setOptionPEP([]);
   //       console.log(err);
   //     });
   // };
-
-  // React.useEffect(() => {
-  //   find();
-  // }, []);
+  React.useEffect(() => {
+    economicActivity();
+    // PEP();
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -397,17 +431,13 @@ const Activity = (props) => {
                   });
                 }}
               >
-                <MenuItem value={100}>Ama de casa</MenuItem>
-                <MenuItem value={101}>Asalariado Gubernamental</MenuItem>
-                <MenuItem value={102}>Asalariado Privado</MenuItem>
-                <MenuItem value={103}>Empleada Doméstica</MenuItem>
-                <MenuItem value={104}>Empleo Informal</MenuItem>
-                <MenuItem value={105}>Estudiantes</MenuItem>
-                <MenuItem value={106}>Independiente</MenuItem>
-                <MenuItem value={107}>Jubilados o Pensionados</MenuItem>
-                <MenuItem value={108}>Técnicos</MenuItem>
-                <MenuItem value={109}>Planes Sociales</MenuItem>
-                <MenuItem value={110}>Emprendedores</MenuItem>
+                {option?.map((econ, i) => {
+                  return (
+                    <MenuItem value={econ.id} key="econo">
+                      {econ.descriptionEs}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
           </div>

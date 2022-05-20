@@ -182,7 +182,7 @@ const Info = (props) => {
             </div>
             <div className="label">
               <p>Lugar de Nac.</p>
-              <p className="data">{require.placeOfBirth}</p>
+              <p className="data">{require.placeBirth}</p>
             </div>
             <div className="label">
               <p>Sexo</p>

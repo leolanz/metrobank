@@ -9,7 +9,7 @@ import TakePhotoIOS from '../../../Containers/TakePhoto/IOs/TakePhotoIOs';
 import TakePicture from '../../../Containers/TakePhoto/Android/TakePicture';
 
 import PlaceHolder from '../../../Assets/placeholder-document-v3.svg';
-import { domainServer, domainPython } from '../../../Connection/Connection';
+import { api } from '../../../Connection/Connection';
 
 const Document = (props) => {
   const [require, setRequire] = React.useContext(RequireContext); // Llamamos el contexto de require
@@ -20,7 +20,7 @@ const Document = (props) => {
   const face = (img1, img2) => {
     setLoading(true);
 
-    fetch(`${domainPython}/face/`, {
+    fetch(`${api.domainPython}/face/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -77,7 +77,7 @@ const Document = (props) => {
   const list = (name, img) => {
     setLoading(true);
 
-    fetch(`${domainPython}/lists/`, {
+    fetch(`${api.domainPython}/lists/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -99,19 +99,19 @@ const Document = (props) => {
       .then((res) => {
         setLoading(false);
 
-        if (res === '200_OK_no results found') {
-          face(require.selfie, img); // hacemos la comparacion de rostros
-        } else {
-          toast.error('Comuníquese con el banco', {
-            position: 'top-center',
-            autoClose: 3000,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            hideProgressBar: true,
-            closeButton: false,
+        if (res !== '200_OK_no results found') {
+          // esto quiere decir que la lista retorno coincidencia
+          setRequire((prevState) => {
+            return {
+              ...prevState,
+              ...{
+                aml: true,
+                responseAml: JSON.stringify(res),
+              },
+            };
           });
         }
+        face(require.urlSelfie, img); // hacemos la comparacion de rostros
       })
       .catch((err) => {
         setLoading(false);
@@ -121,7 +121,7 @@ const Document = (props) => {
   const sendOCR = (img) => {
     setLoading(true);
 
-    fetch(`${domainPython}/ocr/`, {
+    fetch(`${api.domainPython}/ocr/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -130,7 +130,7 @@ const Document = (props) => {
       },
       body: JSON.stringify({
         faceselfie: img,
-        ocrident: 'myawsbucketface',
+        ocrident: api.bucket,
       }),
     })
       .then((response) => {
@@ -161,7 +161,7 @@ const Document = (props) => {
                     lastName: res[0].Apellidos,
                     dateOfBirth: res[0].Fecha_de_Nacimiento,
                     nationality: res[0].Nacionalidad,
-                    placeOfBirth: res[0].Lugar_de_Nacimiento,
+                    placeBirth: res[0].Lugar_de_Nacimiento,
                     gender: res[0].Genero,
                   },
                 };
@@ -180,7 +180,7 @@ const Document = (props) => {
                   lastName: '',
                   dateOfBirth: '',
                   nationality: '',
-                  placeOfBirth: '',
+                  placeBirth: '',
                   gender: '',
                 },
               };
@@ -220,69 +220,45 @@ const Document = (props) => {
       });
   };
 
-  const uploadPhoto = (img) => {
-    let endpoint = `${domainServer}/api/file/upload/`;
-    let config = {};
+  const uploadPhoto = async (img) => {
+    // props.onChange(file);
 
+    const formData = new FormData();
+    formData.append('upload', img);
     setLoading(true);
+    const endpoint = `${api.domainServer}/api/file/upload/`;
+    const config = {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData,
+    };
 
-    if (typeof img === 'string') {
-      // si la imagen es base64 cambiamos el endpoint
-      endpoint = `${domainServer}/api/file/upload/image`;
-      config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ upload: img }),
-      };
-    } else {
-      const formData = new FormData();
-      formData.append('upload', img);
-      config = {
-        method: 'POST',
-        body: formData,
-      };
-    }
-
-    fetch(endpoint, config)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return response.text().then((text) => {
-          throw new Error(text);
-        });
-      })
-      .then((res) => {
-        setLoading(false);
-
-        setRequire((prevState) => {
-          return { ...prevState, document: res.image };
-        });
-
-        const aux = require.requestImage;
-        aux.push({ image: { id: res.id } });
-
-        setRequire((prevState) => {
-          return { ...prevState, requestImage: aux };
-        });
-        sendOCR(res.image);
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(`Ocurrio un error ${err}`, {
-          toastId: 'custom-id-error',
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          closeButton: false,
-        });
+    try {
+      const response = await fetch(endpoint, config);
+      const res = await response.json();
+      setSuccessfulUpload(true);
+      setLoading(false);
+      setRequire((prevState) => {
+        return { ...prevState, urlIdentificationDocument: res.image };
       });
+      sendOCR(res.image);
+    } catch (err) {
+      setSuccessfulUpload(false);
+      setLoading(false);
+      toast.error(`Ocurrio un error ${err}`, {
+        toastId: 'custom-id-error',
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        closeButton: false,
+      });
+
+      console.log(err);
+    }
   };
 
   if (loading) {

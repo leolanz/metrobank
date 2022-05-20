@@ -4,7 +4,7 @@ import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import Footer from '../Footer/Footer';
 import Button from '../../Components/Button/Button';
 import Camera from '../../Components/Camera/Camera';
-import { domainServer } from '../../Connection/Connection';
+import { api } from '../../Connection/Connection';
 import './newcamera.scss';
 import Loading from '../Loading/Loading';
 import { RequireContext } from '../../Context/Require/Require';
@@ -16,14 +16,14 @@ const Newcamera = (props) => {
   const [success, setSuccess] = React.useState(false);
 
   const uploadPhoto = (img) => {
-    let endpoint = `${domainServer}/api/aws/upload/`;
+    let endpoint = `${api.domainServer}/api/aws/upload/`;
     let config = {};
 
     setLoading(true);
 
     if (typeof img === 'string') {
       // si la imagen es base64 cambiamos el endpoint
-      endpoint = `${domainServer}/api/aws/upload/image`;
+      endpoint = `${api.domainServer}/api/aws/upload/image`;
       config = {
         method: 'POST',
         headers: {

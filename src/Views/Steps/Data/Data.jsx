@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Input, Button } from '../../../Components';
 import { Footer, Loading } from '../../../Containers';
 import { RequireContext } from '../../../Context';
-import { domainServer, domainPython } from '../../../Connection/Connection';
+import { api } from '../../../Connection/Connection';
 import './data.scss';
 
 const Data = (props) => {
@@ -92,7 +92,7 @@ const Data = (props) => {
     reqClone.issued = new Date(issued);
     reqClone.expires = new Date(expires);
     reqClone.dateOfBirth = new Date(dateOfBirth);
-    fetch(`${domainServer}/api/request/save`, {
+    fetch(`${api.domainServer}/api/request/save`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -138,7 +138,7 @@ const Data = (props) => {
     // data.expires = convertDateMpay(data.expires);
     // data.dateOfBirth = convertDateMpay(data.dateOfBirth);
 
-    fetch('https://walletws.banconal.com.pa:8443/bnpswitch2v2/onboarding/verification', {
+    fetch(`${api.mpay}`, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ const Data = (props) => {
   const sendOCR = (img) => {
     setLoading(true);
 
-    fetch(`${domainPython}/ocr/`, {
+    fetch(`${api.domainPython}/ocr/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -204,7 +204,7 @@ const Data = (props) => {
       },
       body: JSON.stringify({
         faceselfie: img,
-        ocrident: 'myawsbucketface',
+        ocrident: 'buckface',
       }),
     })
       .then((response) => {
@@ -228,7 +228,7 @@ const Data = (props) => {
               require.lastName === res[0].Apellidos &&
               require.dateOfBirth === res[0].Fecha_de_Nacimiento &&
               require.nationality === res[0].Nacionalidad &&
-              require.placeOfBirth === res[0].Lugar_de_Nacimiento &&
+              require.placeBirth === res[0].Lugar_de_Nacimiento &&
               require.gender === res[0].Genero
             ) {
               sendRequestMPAy();
@@ -334,7 +334,7 @@ const Data = (props) => {
         require.expires === '' ||
         require.dateOfBirth === '' ||
         require.nationality === '' ||
-        require.placeOfBirth === '' ||
+        require.placeBirth === '' ||
         require.gender === '' ||
         require.selfie === '' ||
         require.document === '' ||

@@ -8,9 +8,9 @@ import TakePhotoIOS from '../../../Containers/TakePhoto/IOs/TakePhotoIOs';
 import { RequireContext } from '../../../Context';
 import placeHolder from '../../../Assets/placeholder-selfie.svg';
 import placeHolderBen from '../../../Assets/selfie-placeholder-V3.svg';
-import { domainServer } from '../../../Connection/Connection';
 import useToBase64 from '../../../Hooks/File/useToBase64';
 import { toast } from 'react-toastify';
+import { api } from '../../../Connection/Connection';
 
 const Selfie = (props) => {
   const [require, setRequire] = React.useContext(RequireContext); // Llamamos el contexto de require
@@ -18,70 +18,46 @@ const Selfie = (props) => {
   const [loading, setLoading] = React.useState(false);
   const [convert] = useToBase64();
 
-  const uploadPhoto = (img) => {
-    let endpoint = `${domainServer}/api/file/upload/`;
-    let config = {};
+  const uploadPhoto = async (img) => {
+    // props.onChange(file);
 
+    const formData = new FormData();
+    formData.append('upload', img);
     setLoading(true);
-    if (typeof img === 'string') {
-      // si la imagen es base64 cambiamos el endpoint
-      endpoint = `${domainServer}/api/file/upload/image`;
-      config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ upload: img }),
-      };
-    } else {
-      const formData = new FormData();
-      formData.append('upload', img);
-      config = {
-        method: 'POST',
-        body: formData,
-      };
-    }
+    const endpoint = `${api.domainServer}/api/file/upload/`;
+    const config = {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData,
+    };
 
-    fetch(endpoint, config)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return response.text().then((text) => {
-          throw new Error(text);
-        });
-      })
-      .then((res) => {
-        setLoading(false);
-        setSuccessfulUpload(true);
-
-        setRequire((prevState) => {
-          return { ...prevState, selfie: res.image };
-        });
-
-        const aux = require.requestImage;
-        aux.push({ image: { id: res.id } });
-
-        setRequire((prevState) => {
-          return { ...prevState, requestImage: aux };
-        });
-      })
-      .catch((err) => {
-        setSuccessfulUpload(false);
-        setLoading(false);
-        toast.error(`Ocurrio un error ${err}`, {
-          toastId: 'custom-id-error',
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: 0,
-          closeButton: false,
-        });
+    try {
+      const response = await fetch(endpoint, config);
+      const res = await response.json();
+      setSuccessfulUpload(true);
+      setLoading(false);
+      setRequire((prevState) => {
+        return { ...prevState, urlSelfie: res.image };
       });
+    } catch (err) {
+      setSuccessfulUpload(false);
+      setLoading(false);
+      toast.error(`Ocurrio un error ${err}`, {
+        toastId: 'custom-id-error',
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        closeButton: false,
+      });
+
+      console.log(err);
+    }
   };
+
   React.useEffect(() => {
     // Con esta funcion capturamos la plataforma donde se esta consumiendo
     if (navigator.userAgent.indexOf('iPhone') > -1) {
