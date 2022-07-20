@@ -16,7 +16,7 @@ const Newcamera = (props) => {
   const [success, setSuccess] = React.useState(false);
 
   const uploadPhoto = (img) => {
-    let endpoint = `${api.domainServer}/api/aws/upload/`;
+    let endpoint = `https://localhost:3000/api/aws/upload/`;
     let config = {};
 
     setLoading(true);

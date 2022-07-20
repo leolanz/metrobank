@@ -7,8 +7,8 @@ const prod = {
   mpay: 'https://walletws.banconal.com.pa:8443/bnpswitch2v3/onboarding/verification',
 };
 const dev = {
-  domainServer: 'https://newtech.com.pa', // https://app.developerpa.co estos dos dominios apuntan a la misma BD
-  domainPython: `https://app.developerpa.com`,
+  domainServer: 'https://app.developerpa.com', // https://app.developerpa.co estos dos dominios apuntan a la misma BD
+  domainPython: 'https://app.developerpa.com',
   bucket: 'myawsbucketface',
   mpay: 'https://onboardingbnp.mpaycenter.com/onboarding/verification',
 };
