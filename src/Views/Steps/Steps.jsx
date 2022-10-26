@@ -15,7 +15,7 @@ import { RequireContext } from '../../Context';
 import './steps.scss';
 
 const Steps = (props) => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(1);
   const [lastStep, setLastStep] = React.useState(0);
   const [, setRequire] = React.useContext(RequireContext); // Llamamos el contexto de require
 

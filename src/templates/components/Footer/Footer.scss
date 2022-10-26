@@ -1,0 +1,86 @@
+.camera-footer {
+  width: 100%;
+  height: 100px;
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+  &.background {
+    background-color: white;
+  }
+  .sendButtons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    button {
+      height: 48px;
+      border-radius: 16px;
+      border: none;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 44px;
+      &.grey {
+        background-color: var(--ion-color-blue_gray_200);
+        color:#334155
+      }
+      &.green {
+        background-color: #00796c;
+        color: white;
+      }
+    }
+  }
+
+  .greybutton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(179, 179, 179);
+    input {
+      display: none;
+    }
+    &.big {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(0, 150, 135);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    &.grey {
+      width: 40px;
+      height: 40px;
+      background-color: black;
+      &:hover {
+        background-color: #3b3b3b;
+      }
+      &:active {
+        background-color: #7a7a7a;
+      }
+    }
+
+    &:hover {
+      background-color: rgb(0, 128, 115);
+    }
+    &:active {
+      background-color: rgb(0, 188, 169);
+    }
+  }
+}

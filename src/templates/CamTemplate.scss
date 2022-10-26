@@ -1,0 +1,32 @@
+.cam-body {
+  overflow: hidden;
+  .back-nav {
+    position: absolute;
+    top: 15px;
+    color: white;
+    z-index: 500;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-align: center;
+    width: 100%;
+    .icon {
+      position: absolute;
+      left: 20px;
+      top: 2px;
+      img {
+        color: white;
+      }
+    }
+  }
+  .camera {
+    width: 100%;
+    background-color: rgba(61, 61, 61, 0.714);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* video {
+      height: calc(100vh - 100px);
+    } */
+  }
+}

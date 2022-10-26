@@ -1,15 +1,19 @@
-import './App.css';
-import React from 'react';
+import "./App.css";
+import React from "react";
 
-import { ToastContainer } from 'react-toastify';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { Landing, Steps } from './Views';
-import theme from './Theme/theme';
+import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Landing, Steps } from "./Views";
+import theme from "./Theme/theme";
 
-import './Theme/global.scss';
-import './Theme/reset.scss';
-import { RequireProvider } from './Context';
+import "./Theme/global.scss";
+import "./Theme/reset.scss";
+import { RequireProvider } from "./Context";
+import Selfie from "./Views/Selfie/selfie";
+import SelfiePreview from "./Views/DocIdPreview/DocIdPreview";
+import DocId from "./Views/DocId/DocId";
+import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
 
 function App() {
   return (
@@ -40,6 +44,12 @@ function App() {
             <Route path="/BEN/selfie">
               <Steps channel="BEN" />
             </Route>
+            
+            <Route path="/selfie-picture" component={Selfie} />
+            <Route path="/selfie-preview" component={SelfiePreview} />
+            <Route path="/docID" component={DocId} />
+            <Route path="/docID-preview" component={DocIdPreview} />
+
             <Route path="/BEN">
               <Landing channel="BEN" />
             </Route>
