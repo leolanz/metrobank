@@ -1,29 +1,17 @@
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
   .page-docid {
     .camMask {
-      background-image: url("../../resources/others/blur-photo-document.svg");
-      background-position: center;
+      background-image: url("../../resources/others/bigDocMask.svg");
       background-repeat: no-repeat;
+      background-position: center;
       background-size: cover;
-      width: 100%;
-      height: 100vh;
-      position: absolute;
+      @media (max-width: 768px) {
+        background-image: url("../../resources/others/largeDocMask.svg");
+      }
+      @media (max-width: 540px) {
+        background-image: url("../../resources/others/regularDocMask.svg");
+      }
+      @media (max-width: 374px) {
+        background-image: url("../../resources/others/smallDocMask.svg");
+      }
     }
   }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .page-docid {
-    .camMask {
-      background-image: url("../../resources/others/blur-photo-document.svg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 100%;
-      height: 100vh;
-      position: absolute;
-    }
-  }
-}

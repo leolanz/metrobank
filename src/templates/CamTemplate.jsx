@@ -65,6 +65,7 @@ const CamTemplate = memo(
           </div>
           {title}
         </div>
+
         <div id="webcam" className="camera">
           {children}
         </div>
