@@ -32,7 +32,9 @@ const Footer = memo(
     const handleFile = (e) => {
       if (handleClickUploadFile) handleClickUploadFile(e.target.files);
     };
-
+    console.log(url);
+    console.log(urlPreview);
+    console.log(nextUrl);
     const ActionsButtons = () => {
       return (
         <Fragment>
@@ -141,13 +143,14 @@ const Footer = memo(
           >
             Reintentar <img src={Again} alt="Again" />
           </button>
-          <button disabled={loading} className="green" onClick={handleContinue}>
+          <button disabled={loading} className="blue" onClick={handleContinue}>
             {loading ? "Cargando foto..." : "Continuar"}
           </button>
         </div>
       );
     };
     <Toast />;
+
     return (
       <div
         className={`camera-footer ${

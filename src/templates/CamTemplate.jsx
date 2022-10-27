@@ -3,6 +3,7 @@ import "./CamTemplate.scss";
 import Footer from "./components/Footer/Footer";
 import BackArrow from "../resources/icons/whiteBack.svg";
 import { useHistory, useLocation, useParams } from "react-router-dom";
+import { ProgressBar } from "../Components";
 
 const CamTemplate = memo(
   ({
@@ -15,6 +16,7 @@ const CamTemplate = memo(
     setVideoConstraits,
     setImage,
     nextUrl,
+    progressCount = 1,
   }) => {
     const history = useHistory();
     const { pathname } = useLocation();
@@ -23,7 +25,8 @@ const CamTemplate = memo(
       if (webcamRef !== null && webcamRef.current && setImage) {
         const imageSrc = webcamRef.current.getScreenshot();
         setImage({ imagePrev: imageSrc, image: imageSrc, file: "" });
-        history.push(`${urlPreview}/${params?.id}`);
+        /* history.push(`${urlPreview}/${params?.id}`); */
+        history.push(`${urlPreview}`);
       }
     }, [webcamRef]);
 
@@ -63,7 +66,10 @@ const CamTemplate = memo(
           <div className="icon" onClick={handleBack}>
             <img src={BackArrow} alt="backArrow" />
           </div>
-          {title}
+          <div className="title">{title}</div>
+          <div className={`numbers-container`}>
+            <ProgressBar items={2} cont={progressCount} />
+          </div>
         </div>
 
         <div id="webcam" className="camera">

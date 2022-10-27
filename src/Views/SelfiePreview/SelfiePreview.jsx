@@ -23,6 +23,7 @@ const SelfiePreview = () => {
         url="/selfie-picture"
         urlPreview="/selfie-preview"
         nextUrl="/docID"
+        progressCount={1}
       >
         <img src={imagePrev} alt="preview" />
       </CamTemplate>

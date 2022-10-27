@@ -8,10 +8,8 @@ import store from "./redux/store";
 // "start": "set HTTPS=true&&set SSL_CRT_FILE=cert.pem&&set SSL_KEY_FILE=key.pem&& react-scripts start",
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App></App>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById("root")
 );

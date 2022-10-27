@@ -11,7 +11,7 @@ import "./Theme/global.scss";
 import "./Theme/reset.scss";
 import { RequireProvider } from "./Context";
 import Selfie from "./Views/Selfie/selfie";
-import SelfiePreview from "./Views/DocIdPreview/DocIdPreview";
+import SelfiePreview from "./Views/SelfiePreview/SelfiePreview";
 import DocId from "./Views/DocId/DocId";
 import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
 

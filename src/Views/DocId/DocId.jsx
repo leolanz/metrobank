@@ -33,6 +33,7 @@ const Selfie = () => {
         title="Escanea tu documento ID"
         url="/docID"
         urlPreview="/docID-preview"
+        progressCount={2}
       >
         <div className="camMask"></div>
         <Webcam

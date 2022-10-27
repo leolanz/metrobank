@@ -32,6 +32,7 @@ const Selfie = () => {
         title="Tómate una foto Selfie"
         url="/selfie-picture"
         urlPreview="/selfie-preview"
+        progressCount={1}
       >
         <div className="camMask"></div>
         <Webcam

@@ -9,19 +9,22 @@
     position: absolute;
     color: white;
     z-index: 500;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
-    text-align: center;
+    
     width: 100%;
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    padding-bottom: 10px;
+    .title{
+      text-align: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
     .icon {
       position: absolute;
       left: 20px;
-      bottom: 10px;
+      bottom: 20px;
       img {
         color: white;
       }
@@ -29,14 +32,17 @@
   }
   .camera {
     width: 100%;
-    background-color: rgba(61, 61, 61, 0.714);
+    background-color: white;
     margin-top: 82px;//tamaño del header
     height: calc(100vh - 83px - 100px); // header and footer
     display: flex;
     justify-content: center;
-    /* video {
-      height: calc(100vh - 100px);
-    } */
+    video {
+      height: calc(100vh - 83px - 100px);
+    }
+    img{
+      width: 100%;
+    }
   }
 
   .camMask {
