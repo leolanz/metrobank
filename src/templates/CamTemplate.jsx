@@ -18,6 +18,7 @@ const CamTemplate = memo(
     nextUrl,
     progressCount = 1,
     noFooter = false,
+    noCam = false,
   }) => {
     const history = useHistory();
     const { pathname } = useLocation();
@@ -68,7 +69,8 @@ const CamTemplate = memo(
       return history.push(`/selfie/${params?.id}`); */
       history.goBack();
     };
-
+    let ClassName = "camera";
+    if (noCam) ClassName = "content-camera";
     return (
       <div className="cam-body">
         <div className="back-nav">
@@ -81,7 +83,7 @@ const CamTemplate = memo(
           </div>
         </div>
 
-        <div id="webcam" className="camera">
+        <div id="webcam" className={ClassName}>
           {children}
         </div>
         {!noFooter && (

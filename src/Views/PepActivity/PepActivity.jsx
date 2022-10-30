@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import CamTemplate from "../../templates/CamTemplate";
 import { setPreviewImage } from "../../redux/features/cam";
 import { useQuery } from "../../Hooks/useQuery";
-import "./Info.scss";
-import UserData from "./UserData/UserData";
+import "./PepActivity.scss";
+import Activity from "./Activity/Activity";
 
 const initialRef = null;
 
-const Info = () => {
+const PepActivity = () => {
   const dispatch = useDispatch();
   const query = useQuery();
   console.log(query);
@@ -25,19 +25,20 @@ const Info = () => {
     dispatch(setPreviewImage(file));
   };
   return (
-    <div className="page-info">
+    <div className="page-pepactivy">
       <CamTemplate
         webcamRef={webcamRef}
         setImage={handleReduxImage}
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
-        title="Confirmación de datos"
+        title="Información adicional"
         url="/BEN/selfie/take-photo"
         urlPreview="/BEN/selfie/preview"
-        progressCount={3}
+        progressCount={4}
         noFooter
+        noCam
       >
-        <UserData
+        <Activity
           channel="BEN"
           active={3}
           /* next={handleNext}
@@ -49,4 +50,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default PepActivity;

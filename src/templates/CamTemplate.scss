@@ -44,7 +44,14 @@
       width: 100%;
     }
   }
-
+  .content-camera {
+    width: 100%;
+    background-color: white;
+    margin-top: 82px;//tamaño del header
+    height: calc(100vh - 83px - 100px); // header and footer
+    display: flex;
+    justify-content: center;
+  }
   .camMask {
     width: 100%;
     height: calc(100vh - 83px - 100px);

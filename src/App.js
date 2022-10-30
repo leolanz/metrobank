@@ -20,6 +20,8 @@ import SelfiePreview from "./Views/SelfiePreview/SelfiePreview";
 import DocId from "./Views/DocId/DocId";
 import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
 import Info from "./Views/Info/Info";
+import PepActivity from "./Views/PepActivity/PepActivity";
+
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
             <Route path="/BEN/docID/take-photo" component={DocId} />
             <Route path="/BEN/docID/preview" component={DocIdPreview} />
             <Route path="/BEN/info" component={Info} />
+            <Route path="/BEN/activity" component={PepActivity} />
+
 
             <Route path="/BEN/selfie">
               <Landing channel="BEN" />
