@@ -17,6 +17,7 @@ const CamTemplate = memo(
     setImage,
     nextUrl,
     progressCount = 1,
+    noFooter = false,
   }) => {
     const history = useHistory();
     const { pathname } = useLocation();
@@ -76,21 +77,23 @@ const CamTemplate = memo(
           </div>
           <div className="title">{title}</div>
           <div className={`numbers-container`}>
-            <ProgressBar items={2} cont={progressCount} />
+            <ProgressBar items={3} cont={progressCount} />
           </div>
         </div>
 
         <div id="webcam" className="camera">
           {children}
         </div>
-        <Footer
-          url={url}
-          urlPreview={urlPreview}
-          nextUrl={nextUrl}
-          handleClickCapture={capture}
-          handleClickChangeCamera={changeVideoConstraints}
-          handleClickUploadFile={uploadFile}
-        />
+        {!noFooter && (
+          <Footer
+            url={url}
+            urlPreview={urlPreview}
+            nextUrl={nextUrl}
+            handleClickCapture={capture}
+            handleClickChangeCamera={changeVideoConstraints}
+            handleClickUploadFile={uploadFile}
+          />
+        )}
       </div>
     );
   }

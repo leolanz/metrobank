@@ -1,53 +1,44 @@
-import React from 'react';
+import React from "react";
 
-import { Stepper, Step, StepLabel } from '@material-ui/core';
-import { useLocation, useHistory } from 'react-router-dom';
-import { Button, ProgressBar } from '../../Components';
-import { Header, Sidebar } from '../../Containers';
-import Selfie from './Selfie/Selfie';
-import Document from './Document/Document';
-import Info from './Info/Info';
-import Activity from './Activity/Activity';
-import Data from './Data/Data';
-import Finish from './Finish/Finish';
-import { RequireContext } from '../../Context';
+import { Stepper, Step, StepLabel } from "@material-ui/core";
+import { useLocation, useHistory } from "react-router-dom";
+import { Button, ProgressBar } from "../../Components";
+import { Header, Sidebar } from "../../Containers";
+import Selfie from "./Selfie/Selfie";
+import Document from "./Document/Document";
+import Info from "./Info/Info";
+import Activity from "./Activity/Activity";
+import Data from "./Data/Data";
+import Finish from "./Finish/Finish";
+import { RequireContext } from "../../Context";
 
-import './steps.scss';
+import "./steps.scss";
 
 const Steps = (props) => {
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [lastStep, setLastStep] = React.useState(0);
   const [, setRequire] = React.useContext(RequireContext); // Llamamos el contexto de require
 
-  const steps = [
-    'Foto selfie',
-    'Foto de la cédula',
-    'Confirmación de datos',
-    'Actividad Económica',
-  ];
+  const steps = ["Confirmación de datos", "Actividad Económica"];
   const stepsBen = [
-    'Foto selfie',
-    'Foto de la cédula',
-    'Confirmación de datos',
-    'Información adicional',
-    '!Registro completado!',
+    "Confirmación de datos",
+    "Información adicional",
+    "!Registro completado!",
   ];
   const stepsDesk = [
-    'Selfie',
-    'Escanear Cédula',
-    'Confirmar Datos',
-    'Actividad Económica',
-    'Datos personales',
-    'Confirmación',
+    "Confirmar Datos",
+    "Actividad Económica",
+    "Datos personales",
+    "Confirmación",
   ];
 
   const { search } = useLocation();
   const query = new URLSearchParams(search);
 
   React.useEffect(() => {
-    if (props?.channel === 'BEN') {
+    if (props?.channel === "BEN") {
       // revisamos sessionStorage para saber si hay variables almacenadas
-      let data = sessionStorage.getItem('data');
+      let data = sessionStorage.getItem("data");
       if (data) {
         data = JSON.parse(data);
 
@@ -66,13 +57,13 @@ const Steps = (props) => {
         } else {
           setRequire((prevState) => {
             const obj = {
-              requestId: query.get('requestId'),
-              returnUrl: query.get('returnUrl'),
-              phone: query.get('phone'),
-              email: query.get('email'),
+              requestId: query.get("requestId"),
+              returnUrl: query.get("returnUrl"),
+              phone: query.get("phone"),
+              email: query.get("email"),
             };
 
-            sessionStorage.setItem('data', JSON.stringify(obj));
+            sessionStorage.setItem("data", JSON.stringify(obj));
 
             return {
               ...prevState,
@@ -83,13 +74,13 @@ const Steps = (props) => {
       } else {
         setRequire((prevState) => {
           const obj = {
-            requestId: query.get('requestId'),
-            returnUrl: query.get('returnUrl'),
-            phone: query.get('phone'),
-            email: query.get('email'),
+            requestId: query.get("requestId"),
+            returnUrl: query.get("returnUrl"),
+            phone: query.get("phone"),
+            email: query.get("email"),
           };
 
-          sessionStorage.setItem('data', JSON.stringify(obj));
+          sessionStorage.setItem("data", JSON.stringify(obj));
 
           return {
             ...prevState,
@@ -134,16 +125,16 @@ const Steps = (props) => {
   };
 
   React.useEffect(() => {
-    if (props?.channel === 'BEN') {
+    if (props?.channel === "BEN") {
       setRequire((prevState) => {
-        return { ...prevState, channel: 'BEN' };
+        return { ...prevState, channel: "BEN" };
       });
     }
   }, []);
 
   return (
     <>
-      <Sidebar>
+      {/* <Sidebar>
         <Stepper activeStep={activeStep} orientation="vertical">
           {window.innerWidth < 1200
             ? steps?.map((label, i) => (
@@ -157,24 +148,34 @@ const Steps = (props) => {
                 </Step>
               ))}
         </Stepper>
-      </Sidebar>
+      </Sidebar> */}
       <Header
-        title={props?.channel === 'BEN' ? stepsBen[activeStep] : steps[activeStep]}
+        title={
+          props?.channel === "BEN" ? stepsBen[activeStep] : steps[activeStep]
+        }
         channel={props?.channel}
         back={handleBack}
       />
       <div className="stepper-box">
-        <div className={`numbers-container ${props?.channel === 'BEN' ? 'ben' : ''}`}>
+        <div
+          className={`numbers-container ${
+            props?.channel === "BEN" ? "ben" : ""
+          }`}
+        >
           <ProgressBar items={stepsDesk.length} cont={lastStep + 2} />
         </div>
 
         {activeStep === steps.length ? (
           <div>
-            <Finish channel={props?.channel} next={handleNext} back={handleBack} />
+            <Finish
+              channel={props?.channel}
+              next={handleNext}
+              back={handleBack}
+            />
           </div>
         ) : (
           <div>
-            <div hidden={!(activeStep === 0)}>
+            {/* <div hidden={!(activeStep === 0)}>
               <Selfie
                 channel={props?.channel}
                 active={activeStep === 0}
@@ -191,10 +192,10 @@ const Steps = (props) => {
                 back={handleBack}
                 delete={() => setLastStep(1)}
               />
-            </div>
+            </div> */}
             <div hidden={!(activeStep === 2)}>
               <Info
-                channel={props?.channel}
+                channel={"BEN"}
                 active={activeStep === 2}
                 next={handleNext}
                 back={handleBack}
@@ -202,7 +203,11 @@ const Steps = (props) => {
               />
             </div>
             <div hidden={!(activeStep === 3)}>
-              <Activity channel={props?.channel} next={handleNext} back={handleBack} />
+              <Activity
+                channel={props?.channel}
+                next={handleNext}
+                back={handleBack}
+              />
             </div>
             {/* <div hidden={!(activeStep === 4)}>
               <Data channel={props?.channel} next={handleNext} back={handleBack} />

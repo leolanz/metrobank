@@ -19,6 +19,8 @@ import Selfie from "./Views/Selfie/selfie";
 import SelfiePreview from "./Views/SelfiePreview/SelfiePreview";
 import DocId from "./Views/DocId/DocId";
 import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
+import Info from "./Views/Info/Info";
+
 
 function App() {
   return (
@@ -43,16 +45,18 @@ function App() {
             <Route exact path="/BEN/selfie/preview" component={SelfiePreview} />
             <Route path="/BEN/docID/take-photo" component={DocId} />
             <Route path="/BEN/docID/preview" component={DocIdPreview} />
+            <Route path="/BEN/info" component={Info} />
 
             <Route path="/BEN/selfie">
               <Landing channel="BEN" />
             </Route>
 
 
-            <Route path="/BEN/selfie">
+            {/* <Route path="/BEN/selfie">
               <Steps channel="BEN" />
               <Landing channel="BEN" />
-            </Route>
+            </Route> */}
+
             {/* <Route path="/BEN">
               <Landing channel="BEN" />
             </Route>

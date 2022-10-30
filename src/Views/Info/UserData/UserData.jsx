@@ -5,18 +5,17 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { Button, Modal } from "../../../Components";
 import { Footer } from "../../../Containers";
 import { RequireContext } from "../../../Context";
-import "./info.scss";
+import "./UserData.scss";
 
-const Info = (props) => {
+const UserData = (props) => {
   const [modal, setModal] = React.useState(false);
   const [require, setRequire] = React.useContext(RequireContext); // Llamamos el contexto de require
 
   return (
     <>
-      <div className="info-container">
+      <div className="user-info-container">
         <Modal
           show={modal}
-          ben={props?.channel === "BEN"}
           title="Editar"
           close={() => {
             setModal(false);
@@ -180,6 +179,16 @@ const Info = (props) => {
         ) : null}
         <div className="info-row">
           <div className="info-col">
+            <Button
+              color="tertiary"
+              onClick={() => {
+                setModal(true);
+              }}
+            >
+              <EditOutlinedIcon />
+            </Button>
+          </div>
+          <div className="info-col">
             <div className="label">
               <p>ID Documento</p>
               <p className="data">{require.identificationDocument}</p>
@@ -221,64 +230,31 @@ const Info = (props) => {
           </div>
         </div>
 
-        {props?.channel === "BEN" ? (
-          <Footer align="center" column>
-            <Button
-              full
-              ben
-              color="tertiary"
-              onClick={() => {
-                props?.back(true);
-                setRequire((prevState) => {
-                  return { ...prevState, ...{ document: "::REPETIR::" } };
-                });
-              }}
-              icon={<EditOutlinedIcon />}
-            >
-              Editar foto de la cédula
-            </Button>
-            <Button
-              ben
-              full
-              color="primary"
-              onClick={() => {
-                props?.next();
-              }}
-            >
-              Confirmar
-            </Button>
-          </Footer>
-        ) : (
-          <Footer align="center" full>
-            <Button
-              color="tertiary"
-              onClick={() => {
-                setModal(true);
-              }}
-            >
-              <EditOutlinedIcon />
-            </Button>
-            <Button
-              color="tertiary"
-              onClick={() => {
-                console.log("click");
-              }}
-            >
-              Cancelar
-            </Button>
-            <Button
-              color="primary"
-              onClick={() => {
-                props?.next();
-              }}
-              icon={<CheckOutlinedIcon />}
-            >
-              Sí, confirmar
-            </Button>
-          </Footer>
-        )}
+        <Footer align="center" column>
+          <Button
+            ben
+            full
+            color="primary"
+            onClick={() => {
+              props?.next();
+            }}
+            icon={<CheckOutlinedIcon />}
+          >
+            Confirmar
+          </Button>
+          <Button
+            full
+            ben
+            color="tertiary"
+            onClick={() => {
+              console.log("click");
+            }}
+          >
+            Cancelar
+          </Button>
+        </Footer>
       </div>
     </>
   );
 };
-export default Info;
+export default UserData;

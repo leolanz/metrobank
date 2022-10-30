@@ -1,0 +1,18 @@
+.page-selfie {
+  
+  .camMask {
+    background-image: url("../../resources/others/bigSelfieMask.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    @media (max-width: 767px) {
+      background-image: url("../../resources/others/largeSelfieMask.svg");
+    }
+    @media (max-width: 540px) {
+      background-image: url("../../resources/others/regularSelfieMask.svg");
+    }
+    @media (max-width: 374px) {
+      background-image: url("../../resources/others/smallSelfieMask.svg");
+    }
+  }
+}
