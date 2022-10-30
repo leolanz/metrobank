@@ -1,8 +1,9 @@
-import React from 'react';
-import './button.scss';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "./button.scss";
+import { Link, useHistory } from "react-router-dom";
 
 const Button = (props) => {
+  const history = useHistory();
   return (
     <>
       {props?.as ? (
@@ -30,7 +31,7 @@ const Button = (props) => {
               props?.onClick();
             }
           }}
-          to={{ pathname: props?.href }}
+          to={{ pathname: props?.href, search: history.location.search }}
         >
           <div className="btn-content">
             {props?.icon ? <i>{props.icon}</i> : null}

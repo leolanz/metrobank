@@ -20,9 +20,9 @@ const SelfiePreview = () => {
     <div className="page-selfie-preview">
       <CamTemplate
         title="Tómate una foto Selfie"
-        url="/selfie-picture"
-        urlPreview="/selfie-preview"
-        nextUrl="/docID"
+        url="/BEN/selfie/take-photo"
+        urlPreview="/BEN/selfie/preview"
+        nextUrl="/BEN/docID/take-photo"
         progressCount={1}
       >
         <img src={imagePrev} alt="preview" />

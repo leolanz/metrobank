@@ -2,7 +2,12 @@ import "./App.css";
 import React from "react";
 
 import { ToastContainer } from "react-toastify";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Landing, Steps } from "./Views";
 import theme from "./Theme/theme";
@@ -33,32 +38,31 @@ function App() {
           pauseOnHover
         />
         <Router>
-          {/*
-              A <Switch> looks through all its children <Route>
-              elements and renders the first one whose path
-              matches the current URL. Use a <Switch> any time
-              you have multiple routes, but you want only one
-              of them to render at a time
-            */}
           <Switch>
+            <Route path="/BEN/selfie/take-photo" component={Selfie} />
+            <Route exact path="/BEN/selfie/preview" component={SelfiePreview} />
+            <Route path="/BEN/docID/take-photo" component={DocId} />
+            <Route path="/BEN/docID/preview" component={DocIdPreview} />
+
+            <Route path="/BEN/selfie">
+              <Landing channel="BEN" />
+            </Route>
+
+
             <Route path="/BEN/selfie">
               <Steps channel="BEN" />
+              <Landing channel="BEN" />
             </Route>
-            
-            <Route path="/selfie-picture" component={Selfie} />
-            <Route path="/selfie-preview" component={SelfiePreview} />
-            <Route path="/docID" component={DocId} />
-            <Route path="/docID-preview" component={DocIdPreview} />
-
-            <Route path="/BEN">
+            {/* <Route path="/BEN">
               <Landing channel="BEN" />
             </Route>
 
             <Route path="/selfie">
               <Steps />
-            </Route>
-            <Route path="/">
-              <Landing />
+            </Route> */}
+
+            <Route exact path="/">
+              <Redirect to="/BEN/selfie" />
             </Route>
           </Switch>
         </Router>

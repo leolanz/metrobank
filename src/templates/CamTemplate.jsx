@@ -26,7 +26,10 @@ const CamTemplate = memo(
         const imageSrc = webcamRef.current.getScreenshot();
         setImage({ imagePrev: imageSrc, image: imageSrc, file: "" });
         /* history.push(`${urlPreview}/${params?.id}`); */
-        history.push(`${urlPreview}`);
+        history.push({
+          pathname: urlPreview,
+          search: history.location.search,
+        });
       }
     }, [webcamRef]);
 
@@ -49,7 +52,12 @@ const CamTemplate = memo(
           image: "",
           file: files[0],
         });
-        history.push(`${urlPreview}/${params?.id}`);
+        history.push(
+          history.push({
+            pathname: urlPreview,
+            search: history.location.search,
+          })
+        );
       }
     };
 

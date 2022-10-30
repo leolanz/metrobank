@@ -31,8 +31,8 @@ const Selfie = () => {
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
         title="Escanea tu documento ID"
-        url="/docID"
-        urlPreview="/docID-preview"
+        url="/BEN/docID/take-photo"
+        urlPreview="/BEN/docID/preview"
         progressCount={2}
       >
         <div className="camMask"></div>

@@ -19,8 +19,8 @@ const SelfiePreview = () => {
     <div className="page-docID-preview">
       <CamTemplate
         title="Escanea tu documento ID"
-        url="/docID"
-        urlPreview="/docID-preview"
+        url="/BEN/docID/take-photo"
+        urlPreview="/BEN/docID/preview"
         nextUrl="/confirmation-onboarding"
         progressCount={2}
       >

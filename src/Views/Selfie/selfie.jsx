@@ -3,14 +3,16 @@ import Webcam from "react-webcam";
 import { useDispatch } from "react-redux";
 import CamTemplate from "../../templates/CamTemplate";
 import { setPreviewImage } from "../../redux/features/cam";
+import { useQuery } from "../../Hooks/useQuery";
 import "./selfie.scss";
 
 const initialRef = null;
 
 const Selfie = () => {
   const dispatch = useDispatch();
+  const query = useQuery();
+  console.log(query);
   const webcamRef = React.useRef(initialRef);
-
   const [videoConstraints, setVideoConstraits] = useState({
     facingMode: "environment",
   });
@@ -30,8 +32,8 @@ const Selfie = () => {
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
         title="Tómate una foto Selfie"
-        url="/selfie-picture"
-        urlPreview="/selfie-preview"
+        url="/BEN/selfie/take-photo"
+        urlPreview="/BEN/selfie/preview"
         progressCount={1}
       >
         <div className="camMask"></div>

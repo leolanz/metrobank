@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+   height: calc(100vh - 82px);;
   max-width: 375px;
   margin: auto;
   display: flex;

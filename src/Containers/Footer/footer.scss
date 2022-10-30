@@ -14,7 +14,6 @@
   .footer-content {
     display: flex;
     width: 100%;
-    max-width: 428px;
     &.full-width {
       padding: 20px 5px;
     }
@@ -62,7 +61,7 @@
 }
 
 //desktop
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .footer-box {
     width: calc(100% - 270px);
     height: 100px;
@@ -74,4 +73,4 @@
       width: 700px;
     }
   }
-}
+} */

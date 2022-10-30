@@ -78,7 +78,11 @@ const Footer = memo(
           const trackInfo = response.data;
           /* dispatch(setTrackInfo({ trackInfo })); */
           setloading(false);
-          if (nextUrl) history.push(`${nextUrl}/${params?.id}`);
+          if (nextUrl)
+            history.push({
+              pathname: nextUrl,
+              search: history.location.search,
+            });
         })
         .catch(function (Error) {
           //handle error
@@ -115,6 +119,7 @@ const Footer = memo(
           history.push({
             pathname: `/confirmation-onboarding/${params?.id}`,
             state: { trackInfo },
+            search: history.location.search,
           });
         })
         .catch(function (Error) {
@@ -129,9 +134,10 @@ const Footer = memo(
           }
         });
     };
+
     const handleContinue = () => {
-      if (pathname.includes("selfie-preview")) sendSelfie();
-      if (pathname.includes("docID-preview")) sendDocID();
+      if (pathname.includes("selfie/preview")) sendSelfie();
+      if (pathname.includes("docID/preview")) sendDocID();
     };
 
     const DoneButtons = () => {
@@ -139,7 +145,10 @@ const Footer = memo(
         <div className="sendButtons">
           <button
             className="grey"
-            onClick={() => history.push(`${url}/${params?.id}`)}
+            /* onClick={() => history.push(`${url}/${params?.id}`)} */
+            onClick={() =>
+              history.push({ pathname: url, search: history.location.search })
+            }
           >
             Reintentar <img src={Again} alt="Again" />
           </button>
