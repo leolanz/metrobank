@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer";
 import BackArrow from "../resources/icons/whiteBack.svg";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { ProgressBar } from "../Components";
+import ChangeCam from "../resources/icons/changecam.svg";
 
 const CamTemplate = memo(
   ({
@@ -19,6 +20,7 @@ const CamTemplate = memo(
     progressCount = 1,
     noFooter = false,
     noCam = false,
+    noProgress = false,
   }) => {
     const history = useHistory();
     const { pathname } = useLocation();
@@ -74,13 +76,24 @@ const CamTemplate = memo(
     return (
       <div className="cam-body">
         <div className="back-nav">
-          <div className="icon" onClick={handleBack}>
-            <img src={BackArrow} alt="backArrow" />
-          </div>
+          {!pathname.includes("success") && (
+            <div className="icon" onClick={handleBack}>
+              <img src={BackArrow} alt="backArrow" />
+            </div>
+          )}
+
           <div className="title">{title}</div>
-          <div className={`numbers-container`}>
-            <ProgressBar items={3} cont={progressCount} />
-          </div>
+          {pathname.includes("selfie") ||
+            (pathname.includes("docID") && (
+              <div className="changeCam" onClick={changeVideoConstraints}>
+                <img src={ChangeCam} alt="ChangeCam" />
+              </div>
+            ))}
+          {!noProgress && (
+            <div className={`numbers-container`}>
+              <ProgressBar items={3} cont={progressCount} />
+            </div>
+          )}
         </div>
 
         <div id="webcam" className={ClassName}>

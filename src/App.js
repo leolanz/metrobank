@@ -21,6 +21,7 @@ import DocId from "./Views/DocId/DocId";
 import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
 import Info from "./Views/Info/Info";
 import PepActivity from "./Views/PepActivity/PepActivity";
+import SuccessPage from "./Views/SuccessPage/SuccessPage";
 
 
 
@@ -43,15 +44,19 @@ function App() {
         />
         <Router>
           <Switch>
-            <Route path="/BEN/selfie/take-photo" component={Selfie} />
+            <Route exact path="/BEN/selfie" component={Selfie} />
             <Route exact path="/BEN/selfie/preview" component={SelfiePreview} />
-            <Route path="/BEN/docID/take-photo" component={DocId} />
-            <Route path="/BEN/docID/preview" component={DocIdPreview} />
+            <Route exact path="/BEN/docID" component={DocId} />
+            <Route exact path="/BEN/docID/preview" component={DocIdPreview} />
             <Route path="/BEN/info" component={Info} />
             <Route path="/BEN/activity" component={PepActivity} />
+            <Route path="/BEN/success" component={SuccessPage} />
+
+
 
 
             <Route path="/BEN/selfie">
+            <Steps channel="BEN" />
               <Landing channel="BEN" />
             </Route>
 

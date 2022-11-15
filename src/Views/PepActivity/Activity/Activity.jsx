@@ -408,136 +408,91 @@ const Activity = (props) => {
     return <Loading />;
   }
   return (
-    <>
-      <div className="pepactivity-wrapper">
-        <div className="row-activity">
-          <h3 className="title">
-            Escriba y seleccione su{" "}
-            <span className="text-bold ben-color"> actividad económica</span>.
-          </h3>
-        </div>
+    <div className="pepactivity-wrapper">
+      <div className="row-activity">
+        <h3 className="title">
+          Seleccione su{" "}
+          <span className="text-bold ben-color">
+            {" "}
+            actividad económica / Fuente de ingresos
+          </span>
+        </h3>
+      </div>
+      <div className="row-activity">
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Seleccione</InputLabel>
+
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={data}
+            label="Age"
+            onChange={(e) => {
+              setData(e.target.value);
+              setRequire((prevState) => {
+                return { ...prevState, activity: { id: e.target.value } };
+              });
+            }}
+          >
+            {option.map((econ, i) => {
+              return (
+                <MenuItem value={econ.id} key="econo">
+                  {econ.descriptionEs}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+      </div>
+
+      {props?.channel === "BEN" ? (
         <div className="row-activity">
           <h4 className="title">
-            Seleccione su actividad económica{" "}
+            ¿Es usted una persona políticamente expuesta{" "}
             <span
               className={
                 props?.channel === "BEN" ? "ben-color text-bold" : "text-blue"
               }
             >
-              (Fuente de ingresos)
+              (PEP)?
             </span>
           </h4>
-
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Seleccione</InputLabel>
-
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={data}
-              label="Age"
+              value={value}
               onChange={(e) => {
-                setData(e.target.value);
+                setValue(e.target.value);
                 setRequire((prevState) => {
-                  return { ...prevState, activity: { id: e.target.value } };
+                  return { ...prevState, pep: e.target.value };
                 });
               }}
             >
-              {option.map((econ, i) => {
-                return (
-                  <MenuItem value={econ.id} key="econo">
-                    {econ.descriptionEs}
-                  </MenuItem>
-                );
-              })}
+              <MenuItem value="si">Sí</MenuItem>
+              <MenuItem value="familiar">Soy familiar de PEP</MenuItem>
+              <MenuItem value="cercano">
+                Tengo cercana colaboración con PEP
+              </MenuItem>
+              <MenuItem value="no">No</MenuItem>
             </Select>
           </FormControl>
         </div>
+      ) : null}
 
-        {props?.channel === "BEN" ? (
-          <div className="row-activity">
-            <h4 className="title">
-              ¿Es usted una persona políticamente expuesta{" "}
-              <span
-                className={
-                  props?.channel === "BEN" ? "ben-color text-bold" : "text-blue"
-                }
-              >
-                (PEP)?
-              </span>
-            </h4>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Seleccione</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={value}
-                onChange={(e) => {
-                  setValue(e.target.value);
-                  setRequire((prevState) => {
-                    return { ...prevState, pep: e.target.value };
-                  });
-                }}
-              >
-                <MenuItem value="si">Sí</MenuItem>
-                <MenuItem value="familiar">Soy familiar de PEP</MenuItem>
-                <MenuItem value="cercano">
-                  Tengo cercana colaboración con PEP
-                </MenuItem>
-                <MenuItem value="no">No</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        ) : null}
-
-        {props?.channel === "BEN" ? (
-          <Footer align="center">
-            <Button
-              ben
-              full
-              disabled={data === "" || value === ""}
-              color="primary"
-              onClick={() => {
-                validation();
-              }}
-            >
-              Enviar solicitud
-            </Button>
-          </Footer>
-        ) : (
-          <Footer
-            column={window.innerWidth < 1200}
-            align={window.innerWidth < 1200 ? "left" : "center"}
-          >
-            <div className="buttons">
-              <Button
-                full
-                color="tertiary"
-                onClick={() => {
-                  if (
-                    window.confirm("¿Seguro que desea abandonar el proceso?")
-                  ) {
-                    window.location.href = require.returnUrlCancel;
-                  }
-                }}
-              >
-                Cancelar
-              </Button>
-              <Button
-                disabled={data === ""}
-                full
-                icon={<CheckIcon />}
-                onClick={() => {
-                  props.next();
-                }}
-              >
-                Siguiente
-              </Button>
-            </div>
-          </Footer>
-        )}
-      </div>
-    </>
+      <Button
+        ben
+        full
+        /* disabled={data === "" || value === ""} */
+        color="primary"
+        onClick={() => {
+          validation();
+        }}
+      >
+        Enviar solicitud
+      </Button>
+    </div>
   );
 };
 export default Activity;

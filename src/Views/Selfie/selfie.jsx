@@ -32,7 +32,7 @@ const Selfie = () => {
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
         title="Tómate una foto Selfie"
-        url="/BEN/selfie/take-photo"
+        url="/BEN/selfie"
         urlPreview="/BEN/selfie/preview"
         progressCount={1}
       >

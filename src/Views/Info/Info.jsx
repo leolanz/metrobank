@@ -36,6 +36,7 @@ const Info = () => {
         urlPreview="/BEN/selfie/preview"
         progressCount={3}
         noFooter
+        noCam
       >
         <UserData
           channel="BEN"

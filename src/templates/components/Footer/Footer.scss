@@ -1,16 +1,46 @@
 .camera-footer {
   width: 100%;
-  height: 100px;
+  height: 214px;
   background-color: transparent;
   position: absolute;
   bottom: 0;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 20px;
-  &.background {
-    background-color: white;
+  background-image: url("../../../Assets/footer.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  h1 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+    color: white;
+    margin: 4px;
+    &.loading{
+      opacity: 0.5;
+    }
+    &.done{
+    margin-bottom: 64px;
+
+    }
+    span {
+    font-weight: 700;
+
+      color: #26a69a;
+    }
   }
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   .sendButtons {
     display: flex;
     justify-content: space-around;
@@ -26,42 +56,43 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 44px;
+      &:disabled{
+        opacity: 0.5;
+      }
       &.grey {
-        background-color: transparent;
-        border: 1px solid #E7E7ED;
-        color:#818999;
+        background: #FFFFFF;
+        border: 2px solid #E7E7ED;
+        color: #364156;
       }
       &.blue {
-        background-color: #023E7C;
-        color: #FFFFFF;
+        background-color: #26A69A;
+        color: #ffffff;
       }
     }
   }
 
   .greybutton {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(179, 179, 179);
+    background-color: rgba(179, 179, 179, 0.479);
     input {
       display: none;
     }
     &.big {
-      width: 60px;
-      height: 60px;
+      width: 74px;
+      height: 74px;
     }
   }
 
   .circle {
-    width: 50px;
-    height: 50px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: #023E7C;
-
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;

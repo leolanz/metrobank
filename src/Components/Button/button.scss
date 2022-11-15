@@ -1,6 +1,6 @@
 @import '../../Theme/variables.scss';
 
-@mixin button($bg-color: $primary-dark, $color: #fff) {
+@mixin button($bg-color: #26A69A, $color: #fff) {
   min-width: 72px;
   max-width: 256px;
   height: 48px;
@@ -15,7 +15,7 @@
   padding: 10px 15px;
   border: 0;
   outline: 0;
-  background-color: $bg-color;
+  background-color: #26A69A;
   color: $color;
 
   a {
@@ -30,11 +30,11 @@
   &.ben {
     border-radius: 22px;
     margin: 6px 0;
-    background-color: #023e7c;
+    background-color: #26A69A;
 
     &.btn-tertiary {
       background-color: #fff;
-      color: #023e7c;
+      color: #26A69A;
     }
   }
   @media (min-width: 992px) {
@@ -45,9 +45,6 @@
 
 .btn-primary {
   @include button();
-
-  box-shadow: 0px 0px 0px 4px rgba(40, 53, 147, 0.1);
-
   &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -60,9 +57,7 @@
 
 .btn-secondary {
   @include button($surface-color, $primary-dark);
-
   border: 1px solid $primary-dark;
-  box-shadow: 0px 0px 0px 4px rgba(40, 53, 147, 0.1);
 }
 
 .btn-tertiary {

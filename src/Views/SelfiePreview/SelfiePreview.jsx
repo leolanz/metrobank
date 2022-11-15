@@ -14,13 +14,24 @@ const SelfiePreview = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const { imagePrev } = useSelector((store) => store.camera);
-  if (imagePrev === null) return null;
+  if (imagePrev === null)
+    return (
+      <div className="page-selfie-preview">
+        <CamTemplate
+          title="Tómate una foto Selfie"
+          url="/BEN/selfie"
+          urlPreview="/BEN/selfie/preview"
+          nextUrl="/BEN/docID/take-photo"
+          progressCount={1}
+        ></CamTemplate>
+      </div>
+    );
 
   return (
     <div className="page-selfie-preview">
       <CamTemplate
         title="Tómate una foto Selfie"
-        url="/BEN/selfie/take-photo"
+        url="/BEN/selfie"
         urlPreview="/BEN/selfie/preview"
         nextUrl="/BEN/docID/take-photo"
         progressCount={1}

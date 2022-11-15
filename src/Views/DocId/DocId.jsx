@@ -31,7 +31,7 @@ const Selfie = () => {
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
         title="Escanea tu documento ID"
-        url="/BEN/docID/take-photo"
+        url="/BEN/docID"
         urlPreview="/BEN/docID/preview"
         progressCount={2}
       >
