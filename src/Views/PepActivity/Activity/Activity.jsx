@@ -18,6 +18,18 @@ import { api } from "../../../Connection/Connection";
 import { RequireContext } from "../../../Context";
 
 import "./activity.scss";
+import SelectInput from "../SelectInput/SelectInput";
+
+const optionesPep = [
+  { label: "Sí", value: "si", id: "si" },
+  { label: "Soy familiar de PEP", value: "familiar", id: "family_pep" },
+  {
+    label: "Tengo cercana colaboración con PEP",
+    value: "cercano",
+    id: "near_pep",
+  },
+  { label: "No", value: "no", id: "no" },
+];
 
 const Activity = (props) => {
   const [data, setData] = React.useState("");
@@ -197,6 +209,7 @@ const Activity = (props) => {
         });
       });
   };
+
   const sendOCR = (img) => {
     setLoading(true);
 
@@ -342,6 +355,7 @@ const Activity = (props) => {
       sendOCR(require.urlIdentificationDocument);
     }
   };
+
   const economicActivity = () => {
     setLoading(true);
     fetch(`${api.domainServer}/api/utils/economicActivity/`, {
@@ -370,116 +384,63 @@ const Activity = (props) => {
         setLoading(false);
       });
   };
-  // const PEP = () => {
-  //   setLoading(true);
-  //   fetch(`${api.domainServer}/api/utils/pep`, {
-  //     method: 'GET',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json();
-  //       }
-  //       return response.text().then((text) => {
-  //         throw new Error(text);
-  //       });
-  //     })
-  //     .then((res) => {
-  //       setLoading(false);
 
-  //       setOptionPEP(res);
-  //     })
-  //     .catch((err) => {
-  //       setLoading(false);
-
-  //       setOptionPEP([]);
-  //       console.log(err);
-  //     });
-  // };
   React.useEffect(() => {
     economicActivity();
-    // PEP();
   }, []);
 
+  const handleChangeSelect = (value) => {
+    setData(value);
+  };
   if (loading) {
     return <Loading />;
   }
   return (
     <div className="pepactivity-wrapper">
-      <div className="row-activity">
-        <h3 className="title">
-          Seleccione su{" "}
-          <span className="text-bold ben-color">
-            {" "}
-            actividad económica / Fuente de ingresos
-          </span>
-        </h3>
-      </div>
-      <div className="row-activity">
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Seleccione</InputLabel>
-
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={data}
-            label="Age"
-            onChange={(e) => {
-              setData(e.target.value);
-              setRequire((prevState) => {
-                return { ...prevState, activity: { id: e.target.value } };
-              });
-            }}
-          >
-            {option.map((econ, i) => {
-              return (
-                <MenuItem value={econ.id} key="econo">
-                  {econ.descriptionEs}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </div>
-
-      {props?.channel === "BEN" ? (
+      <div className="div">
         <div className="row-activity">
-          <h4 className="title">
-            ¿Es usted una persona políticamente expuesta{" "}
-            <span
-              className={
-                props?.channel === "BEN" ? "ben-color text-bold" : "text-blue"
-              }
-            >
-              (PEP)?
+          <h3 className="title">
+            Seleccione su{" "}
+            <span className="text-bold ben-color">
+              {" "}
+              actividad económica / Fuente de ingresos
             </span>
-          </h4>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Seleccione</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                setRequire((prevState) => {
-                  return { ...prevState, pep: e.target.value };
-                });
-              }}
-            >
-              <MenuItem value="si">Sí</MenuItem>
-              <MenuItem value="familiar">Soy familiar de PEP</MenuItem>
-              <MenuItem value="cercano">
-                Tengo cercana colaboración con PEP
-              </MenuItem>
-              <MenuItem value="no">No</MenuItem>
-            </Select>
-          </FormControl>
+          </h3>
         </div>
-      ) : null}
+        <div className="row-activity">
+          <SelectInput
+            options={option}
+            handleChangeSelect={handleChangeSelect}
+            selectedOption={data}
+          />
+        </div>
+        <div className="row-activity">
+          <h4 className="radioTitle">
+            ¿Es usted una persona políticamente expuesta
+            <span className={"ben-color text-bold"}> (PEP)?</span>
+          </h4>
+          {optionesPep.map((item, key) => {
+            return (
+              <div key={key} className="radioButton">
+                <input
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                    setRequire((prevState) => {
+                      return { ...prevState, pep: e.target.value };
+                    });
+                  }}
+                  type="radio"
+                  id={item.id}
+                  name="pep"
+                  value={item.value}
+                />
+                <span></span>
+                <label for={item.id}>{item.label}</label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
       <Button
         ben

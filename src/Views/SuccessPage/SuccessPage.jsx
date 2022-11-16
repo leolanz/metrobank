@@ -15,7 +15,7 @@ const SuccessPage = () => {
     <div className="page-SuccessPage">
       <CamTemplate
         webcamRef={webcamRef}
-        title="Confirmación de datos"
+        title="!Registro completado!"
         url="/BEN/selfie/take-photo"
         urlPreview="/BEN/selfie/preview"
         noFooter

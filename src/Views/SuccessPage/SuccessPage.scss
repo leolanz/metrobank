@@ -1,0 +1,17 @@
+.page-SuccessPage{
+    .body-success{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        justify-content: space-between;
+        .completed, .succeed{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        img{
+            margin-top: 92px;
+        }
+    }
+}
