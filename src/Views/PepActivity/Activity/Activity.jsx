@@ -154,6 +154,9 @@ const Activity = (props) => {
             <span className={"ben-color text-bold"}> (PEP)?</span>
           </h4>
           {optionsPep.map((item, key) => {
+            const description =
+              item.description.charAt(0).toUpperCase() +
+              item.description.slice(1).toLowerCase();
             return (
               <div
                 onClick={() => setPep(item)}
@@ -168,10 +171,7 @@ const Activity = (props) => {
                   checked={pep.idPep === item.idPep}
                 />
                 <span></span>
-                <label for={item.idPed}>
-                  {item.description.charAt(0).toUpperCase() +
-                    item.description.slice(1)}
-                </label>
+                <label for={item.idPed}>{description}</label>
               </div>
             );
           })}

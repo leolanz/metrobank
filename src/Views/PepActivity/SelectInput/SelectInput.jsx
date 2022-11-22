@@ -31,7 +31,10 @@ const SelectInput = memo(({ options, handleChangeSelect, selectedOption }) => {
         onClick={() => setshowOptions(true)}
         placeholder="Seleccione Actividad Económica"
         readOnly
-        defaultValue={selectedOption.name}
+        defaultValue={
+          selectedOption.name.charAt(0).toUpperCase() +
+          selectedOption.name.slice(1).toLowerCase()
+        }
       />
       <svg
         onClick={() => setshowOptions(true)}
@@ -50,6 +53,9 @@ const SelectInput = memo(({ options, handleChangeSelect, selectedOption }) => {
         data-variation={showOptions ? "show" : ""}
       >
         {options.map((econ, i) => {
+          const name =
+            econ.name.charAt(0).toUpperCase() +
+            econ.name.slice(1).toLowerCase();
           return (
             <div
               onClick={() => onChange(econ)}
@@ -57,7 +63,7 @@ const SelectInput = memo(({ options, handleChangeSelect, selectedOption }) => {
               key={`econ-${i}`}
               data-variation={econ.id === selectedOption.id ? "selected" : ""}
             >
-              {econ.name}
+              {name}
             </div>
           );
         })}
