@@ -2,21 +2,16 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import CamTemplate from "../../templates/CamTemplate";
 import { setPreviewImage } from "../../redux/features/cam";
-import { useQuery } from "../../Hooks/useQuery";
 import "./Info.scss";
 import UserData from "./UserData/UserData";
-
 const initialRef = null;
 
 const Info = () => {
   const dispatch = useDispatch();
-  const query = useQuery();
-  console.log(query);
   const webcamRef = React.useRef(initialRef);
   const [videoConstraints, setVideoConstraits] = useState({
     facingMode: "environment",
   });
-
   const handleChangeVideoConstraits = (config) => {
     setVideoConstraits(config);
   };
@@ -38,13 +33,7 @@ const Info = () => {
         noFooter
         noCam
       >
-        <UserData
-          channel="BEN"
-          active={3}
-          /* next={handleNext}
-                back={handleBack}
-                goTo={(step) => goToBack(step)} */
-        />
+        <UserData channel="BEN" active={3} />
       </CamTemplate>
     </div>
   );

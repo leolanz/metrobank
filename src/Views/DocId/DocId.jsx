@@ -30,7 +30,7 @@ const Selfie = () => {
         setImage={handleReduxImage}
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
-        title="Escanea tu documento ID"
+        title="Foto de la Cédula"
         url="/BEN/docID"
         urlPreview="/BEN/docID/preview"
         progressCount={2}

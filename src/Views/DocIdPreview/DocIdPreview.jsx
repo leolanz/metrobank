@@ -29,7 +29,7 @@ const SelfiePreview = () => {
   return (
     <div className="page-docID-preview">
       <CamTemplate
-        title="Escanea tu documento ID"
+        title="Foto de la Cédula"
         url="/BEN/docID"
         urlPreview="/BEN/docID/preview"
         nextUrl="/confirmation-onboarding"

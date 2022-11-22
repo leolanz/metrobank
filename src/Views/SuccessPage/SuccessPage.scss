@@ -5,6 +5,9 @@
         align-items: center;
         padding: 20px;
         justify-content: space-between;
+        h3{
+            text-align: center;
+        }
         .completed, .succeed{
             display: flex;
             flex-direction: column;

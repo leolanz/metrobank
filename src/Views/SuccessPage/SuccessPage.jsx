@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import CamTemplate from "../../templates/CamTemplate";
 import BlueCheck from "../../Assets/BlueCheck.svg";
 import Person from "../../Assets/Person.svg";
 import { Button } from "../../Components";
-
+import { useHistory } from "react-router-dom";
 import "./SuccessPage.scss";
 
 const initialRef = null;
 
 const SuccessPage = () => {
   const webcamRef = React.useRef(initialRef);
-  const [valid, setvalid] = useState(true);
+  const history = useHistory();
+  const RESPONSE = history?.location?.state?.trackInfo?.data;
+
   return (
     <div className="page-SuccessPage">
       <CamTemplate
@@ -23,15 +25,17 @@ const SuccessPage = () => {
         noProgress
       >
         <div className="body-success">
-          {valid ? (
+          {RESPONSE.resolution === "APPROVAL" ? (
             <>
               <div className="completed">
                 <img src={Person} alt="person" />
-                <h3>¡user_name, hemos validado su identidad correctamente!</h3>
+                <h3>
+                  ¡{RESPONSE.name}, hemos validado su identidad correctamente!
+                </h3>
                 <p>
                   Recibirá un mensaje de texto en su celular con un{" "}
-                  <span>código de verificación</span> y podrá configurar su PIN
-                  y foto de Perfil.
+                  <strong>código de verificación</strong> y podrá configurar su
+                  PIN y foto de Perfil.
                 </p>
               </div>
               <Button
@@ -50,7 +54,7 @@ const SuccessPage = () => {
             <>
               <div className="succeed">
                 <img src={BlueCheck} alt="BlueCheck" />
-                <h3>¡user_name, hemos recibido su solicitud!</h3>
+                <h3>¡{RESPONSE.name}, hemos recibido su solicitud!</h3>
                 <p>
                   Nuestra Área de Atención al cliente estará evaluando su
                   solicitud y próximamente será contactado.

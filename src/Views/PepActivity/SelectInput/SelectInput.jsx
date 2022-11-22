@@ -31,7 +31,7 @@ const SelectInput = memo(({ options, handleChangeSelect, selectedOption }) => {
         onClick={() => setshowOptions(true)}
         placeholder="Seleccione Actividad Económica"
         readOnly
-        defaultValue={selectedOption.descriptionEs}
+        defaultValue={selectedOption.name}
       />
       <svg
         onClick={() => setshowOptions(true)}
@@ -57,7 +57,7 @@ const SelectInput = memo(({ options, handleChangeSelect, selectedOption }) => {
               key={`econ-${i}`}
               data-variation={econ.id === selectedOption.id ? "selected" : ""}
             >
-              {econ.descriptionEs}
+              {econ.name}
             </div>
           );
         })}

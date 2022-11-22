@@ -18,10 +18,10 @@ const SelfiePreview = () => {
     return (
       <div className="page-selfie-preview">
         <CamTemplate
-          title="Tómate una foto Selfie"
+          title="Foto selfie"
           url="/BEN/selfie"
           urlPreview="/BEN/selfie/preview"
-          nextUrl="/BEN/docID/take-photo"
+          nextUrl="/BEN/docID"
           progressCount={1}
         ></CamTemplate>
       </div>
@@ -30,10 +30,10 @@ const SelfiePreview = () => {
   return (
     <div className="page-selfie-preview">
       <CamTemplate
-        title="Tómate una foto Selfie"
+        title="Foto selfie"
         url="/BEN/selfie"
         urlPreview="/BEN/selfie/preview"
-        nextUrl="/BEN/docID/take-photo"
+        nextUrl="/BEN/docID"
         progressCount={1}
       >
         <img src={imagePrev} alt="preview" />

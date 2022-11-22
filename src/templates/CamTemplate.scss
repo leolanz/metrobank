@@ -16,10 +16,10 @@
     flex-direction: column;
     .title {
       text-align: center;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       font-size: 18px;
-      letter-spacing: 2px;
+      letter-spacing: 0;
       margin-bottom: 9px;
+      font-family: 'Roboto';
     }
     .icon {
       position: absolute;

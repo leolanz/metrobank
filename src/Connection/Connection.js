@@ -11,6 +11,7 @@ const dev = {
   domainPython: `https://app.developerpa.com`,
   bucket: 'myawsbucketface',
   mpay: 'https://walletws.banconal.com.pa:8443/bnpswitch2v3/onboarding/verification',
+  REACT_DOMAIN_BACK: 'https://app3.developerpa.com/request/bnp'
 };
 
 // servidor para QA https://app.developerpa.com
@@ -22,4 +23,4 @@ module.exports = { api };
 //https://newtechapp.net/
 
 
-// /BEN/selfie?requestId=e729cc41-500e-41a2-8750-53b445801a94&returnUrl=https://onboardingbnp.mpaycenter.com/onboarding/verification&phone=61503002
+// /BEN/selfie?requestId=e729cc41-500e-41a2-8750-53b445801a94&returnUrl=https://onboardingbnp.mpaycenter.com/onboarding/verification&phone=61503002&email=capram94@gmail.com

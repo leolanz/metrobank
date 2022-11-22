@@ -76,19 +76,18 @@ const CamTemplate = memo(
     return (
       <div className="cam-body">
         <div className="back-nav">
-          {!pathname.includes("success") && (
+          {!pathname.includes("success") && !pathname.includes("info") && (
             <div className="icon" onClick={handleBack}>
               <img src={BackArrow} alt="backArrow" />
             </div>
           )}
-
           <div className="title">{title}</div>
-          {pathname.includes("selfie") ||
-            (pathname.includes("docID") && (
-              <div className="changeCam" onClick={changeVideoConstraints}>
-                <img src={ChangeCam} alt="ChangeCam" />
-              </div>
-            ))}
+          {(pathname.includes("selfie") || pathname.includes("docID")) && (
+            <div className="changeCam" onClick={changeVideoConstraints}>
+              <img src={ChangeCam} alt="ChangeCam" />
+            </div>
+          )}
+
           {!noProgress && (
             <div className={`numbers-container`}>
               <ProgressBar items={3} cont={progressCount} />
