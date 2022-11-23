@@ -30,18 +30,7 @@ function App() {
     // eslint-disable-next-line react/jsx-filename-extension
     <ThemeProvider theme={theme}>
       <RequireProvider>
-        <ToastContainer
-          limit={1}
-          position="top-right"
-          // autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          arrastrable
-          pauseOnHover
-        />
+      <ToastContainer />
         <Router>
           <Switch>
             <Route exact path="/BEN/selfie" component={Selfie} />
@@ -79,7 +68,6 @@ function App() {
             </Route>
           </Switch>
         </Router>
-        <ToastContainer />
       </RequireProvider>
     </ThemeProvider>
   );

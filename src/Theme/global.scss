@@ -107,3 +107,34 @@ span {
 .ben-color {
   color: #26A69A;
 }
+
+
+
+.Toastify__toast-container {
+  margin-top: 95px;
+  width: calc(100% - 40px);
+  @media (max-width: 480px) {
+  margin-left: 20px;
+    
+  }
+}
+
+.Toastify__toast--error {
+  background: #F9E2E2;
+  border: 2px solid #EEB9B9;
+  color: #364156;
+  border-radius: 8px;
+}
+
+.Toastify__progress-bar {
+  display: none;
+}
+
+.Toastify__close-button {
+  color: #364156 ;
+ & > svg{
+  margin-top: 7px;
+  height: 30px;
+  width: 30px;
+ }
+}
