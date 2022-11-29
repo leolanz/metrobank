@@ -44,10 +44,10 @@ function App() {
 
 
 
-            <Route path="/BEN/selfie">
+           {/*  <Route path="/BEN/selfie">
             <Steps channel="BEN" />
               <Landing channel="BEN" />
-            </Route>
+            </Route> */}
 
 
             {/* <Route path="/BEN/selfie">

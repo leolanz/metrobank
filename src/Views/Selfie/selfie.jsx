@@ -32,13 +32,20 @@ const Selfie = () => {
   };
 
   useEffect(() => {
+    const email = query.email;
+    const phone = query.phone;
+    let url = `${api.REACT_DOMAIN_BACK}/track?`;
+    if (email) url += `email=${query.email}`;
+    if (phone) url += `phone=${query.phone}`;
+    if (email === undefined || phone === undefined) return;
     axios({
       method: "get",
-      url: `${api.REACT_DOMAIN_BACK}/track?email=${query.email}&phone=${query.phone}`,
+      url,
     })
       .then(function (response) {
         const trackInfo = response.data;
         let url = "/BEN";
+        console.log("trackInfo", trackInfo);
         if (trackInfo.track === "0") {
           setLoading(false);
           return;

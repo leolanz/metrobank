@@ -25,16 +25,20 @@ const SelectInput = memo(({ options, handleChangeSelect, selectedOption }) => {
     };
   }, [modalRef]);
 
+  let selectedValue = "";
+  if (selectedOption && selectedOption.name) {
+    selectedValue =
+      selectedOption.name.charAt(0).toUpperCase() +
+      selectedOption.name.slice(1).toLowerCase();
+  }
+
   return (
     <div className="select-input">
       <input
         onClick={() => setshowOptions(true)}
         placeholder="Seleccione Actividad Económica"
         readOnly
-        defaultValue={
-          selectedOption.name.charAt(0).toUpperCase() +
-          selectedOption.name.slice(1).toLowerCase()
-        }
+        defaultValue={selectedValue}
       />
       <svg
         onClick={() => setshowOptions(true)}

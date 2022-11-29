@@ -1,12 +1,14 @@
 .cam-body {
   overflow: hidden;
+  background-color: black;
   .back-nav {
-    background-image: url("../Assets/bg-header-ben.png");
+
+    background-image: url("../Assets/bg-header-ben.svg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 82px;
-    position: absolute;
+    position: fixed;
     color: white;
     z-index: 9;
 
