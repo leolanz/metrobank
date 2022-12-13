@@ -166,7 +166,7 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
         setloading(false);
         /* dispatch(setTrackInfo({ trackInfo })); */
         history.push({
-          pathname: `/confirmation-onboarding/${params?.id}`,
+          pathname: nextUrl,
           state: { trackInfo },
           search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
         });

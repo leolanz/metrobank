@@ -32,7 +32,7 @@ const SelfiePreview = () => {
         title="Foto de la Cédula"
         url="/BEN/docID"
         urlPreview="/BEN/docID/preview"
-        nextUrl="/confirmation-onboarding"
+        nextUrl="/BEN/info"
         progressCount={2}
       >
         <img src={imagePrev} alt="preview" />

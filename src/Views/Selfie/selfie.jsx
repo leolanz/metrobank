@@ -19,7 +19,7 @@ const Selfie = () => {
   const [loading, setLoading] = useState(true);
   const webcamRef = React.useRef(initialRef);
   const [videoConstraints, setVideoConstraits] = useState({
-    facingMode: "environment",
+    facingMode: "user",
   });
   console.log(history.location);
 
