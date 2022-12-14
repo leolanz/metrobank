@@ -37,6 +37,8 @@ const Selfie = () => {
       >
         <div className="camMask"></div>
         <Webcam
+          onError={(e) => console.log("on error", e)}
+          onUserMediaError={(e) => console.log("on user media error", e)}
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
