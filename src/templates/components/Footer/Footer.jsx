@@ -120,7 +120,7 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
           history.push({
             pathname: nextUrl,
             state: { trackInfo },
-            search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
+            search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
           });
       })
       .catch(function (Error) {
@@ -136,11 +136,13 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
         }
         history.push({
           pathname: url,
-          //state: { trackInfo },
-          //search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
+          state: {},
+          search: `?email=${query.email}&phone=${query.phone}`,
         });
       });
   };
+
+  console.log(history, "query", query);
 
   const sendDocID = async () => {
     setloading(true);
@@ -168,7 +170,8 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
         history.push({
           pathname: nextUrl,
           state: { trackInfo },
-          search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
+          /* search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`, */
+          search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
         });
       })
       .catch(function (Error) {
@@ -183,8 +186,9 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
         }
         history.push({
           pathname: url,
-          //state: { trackInfo },
-          //search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
+          state: {},
+          /*  search: `${history.location.search}&requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`, */
+          search: `?requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`,
         });
       });
   };
