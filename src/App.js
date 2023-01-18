@@ -23,14 +23,12 @@ import Info from "./Views/Info/Info";
 import PepActivity from "./Views/PepActivity/PepActivity";
 import SuccessPage from "./Views/SuccessPage/SuccessPage";
 
-
-
 function App() {
   return (
     // eslint-disable-next-line react/jsx-filename-extension
     <ThemeProvider theme={theme}>
       <RequireProvider>
-      <ToastContainer />
+        <ToastContainer />
         <Router>
           <Switch>
             <Route exact path="/BEN/selfie" component={Selfie} />
@@ -40,29 +38,6 @@ function App() {
             <Route path="/BEN/info" component={Info} />
             <Route path="/BEN/activity" component={PepActivity} />
             <Route path="/BEN/success" component={SuccessPage} />
-
-
-
-
-           {/*  <Route path="/BEN/selfie">
-            <Steps channel="BEN" />
-              <Landing channel="BEN" />
-            </Route> */}
-
-
-            {/* <Route path="/BEN/selfie">
-              <Steps channel="BEN" />
-              <Landing channel="BEN" />
-            </Route> */}
-
-            {/* <Route path="/BEN">
-              <Landing channel="BEN" />
-            </Route>
-
-            <Route path="/selfie">
-              <Steps />
-            </Route> */}
-
             <Route exact path="/">
               <Redirect to="/BEN/selfie" />
             </Route>
@@ -74,3 +49,27 @@ function App() {
 }
 
 export default App;
+
+{
+  /*  <Route path="/BEN/selfie">
+            <Steps channel="BEN" />
+              <Landing channel="BEN" />
+            </Route> */
+}
+
+{
+  /* <Route path="/BEN/selfie">
+              <Steps channel="BEN" />
+              <Landing channel="BEN" />
+            </Route> */
+}
+
+{
+  /* <Route path="/BEN">
+              <Landing channel="BEN" />
+            </Route>
+
+            <Route path="/selfie">
+              <Steps />
+            </Route> */
+}

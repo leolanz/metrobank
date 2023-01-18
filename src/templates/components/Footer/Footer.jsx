@@ -147,6 +147,8 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
   const sendDocID = async () => {
     setloading(true);
     var formData = new FormData();
+    console.log("file", image);
+
     formData.append("image", image);
     /* formData.append("file", file); 
       formData.append("id_product", params?.id);*/

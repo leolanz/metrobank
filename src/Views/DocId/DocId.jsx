@@ -7,7 +7,7 @@ import { setPreviewDoc } from "../../redux/features/cam";
 
 const initialRef = null;
 
-const Selfie = () => {
+const DocID = () => {
   const dispatch = useDispatch();
   const webcamRef = React.useRef(initialRef);
 
@@ -40,8 +40,11 @@ const Selfie = () => {
           onError={(e) => console.log("on error", e)}
           onUserMediaError={(e) => console.log("on user media error", e)}
           audio={false}
+          forceScreenshotSourceSize={false}
           ref={webcamRef}
-          screenshotFormat="image/jpeg"
+          imageSmoothing={false}
+          screenshotFormat="image/png"
+          screenshotQuality={1}
           videoConstraints={videoConstraints}
         />
       </CamTemplate>
@@ -49,4 +52,4 @@ const Selfie = () => {
   );
 };
 
-export default Selfie;
+export default DocID;
