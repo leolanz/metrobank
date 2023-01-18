@@ -2,7 +2,6 @@
   overflow: hidden;
   background-color: black;
   .back-nav {
-
     background-image: url("../Assets/bg-header-ben.svg");
     background-position: center;
     background-size: cover;
@@ -54,6 +53,7 @@
     justify-content: center;
     video {
       height: calc(100vh - 83px - 214px);
+      width: auto;
     }
     img {
       margin-top: 0;

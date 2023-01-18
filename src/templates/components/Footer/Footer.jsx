@@ -142,8 +142,6 @@ const Footer = memo(({ handleClickCapture, url, urlPreview, nextUrl }) => {
       });
   };
 
-  console.log(history, "query", query);
-
   const sendDocID = async () => {
     setloading(true);
     var formData = new FormData();

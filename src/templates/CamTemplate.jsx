@@ -21,20 +21,26 @@ const CamTemplate = memo(
     noFooter = false,
     noCam = false,
     noProgress = false,
+    takePhoto,
   }) => {
     const history = useHistory();
     const { pathname } = useLocation();
     const params = useParams();
+
     const capture = React.useCallback(() => {
+      if (takePhoto) {
+        takePhoto();
+      }
       if (webcamRef !== null && webcamRef.current && setImage) {
         const imageSrc = webcamRef.current.getScreenshot();
+        console.log("imageSrc", imageSrc);
         setImage({ imagePrev: imageSrc, image: imageSrc, file: "" });
         /* history.push(`${urlPreview}/${params?.id}`); */
-        history.push({
-          pathname: urlPreview,
-          search: history.location.search,
-        });
       }
+      history.push({
+        pathname: urlPreview,
+        search: history.location.search,
+      });
     }, [webcamRef]);
 
     const changeVideoConstraints = () => {
@@ -71,8 +77,11 @@ const CamTemplate = memo(
       return history.push(`/selfie/${params?.id}`); */
       history.goBack();
     };
+
     let ClassName = "camera";
+
     if (noCam) ClassName = "content-camera";
+
     return (
       <div className="cam-body">
         <div className="back-nav">
