@@ -31,17 +31,20 @@ const DocID = () => {
       "mediaDevices" in navigator &&
       "getUserMedia" in navigator.mediaDevices
     ) {
+      const { facingMode } = videoConstraints;
       navigator.mediaDevices
         .getUserMedia({
           video: {
             width: 1920,
             height: 1080,
-            facingMode: videoConstraints.facingMode,
+            facingMode,
           },
         })
         .then((stream) => {
+          console.log(facingMode);
           let video = videoRef.current;
           video.srcObject = stream;
+          console.log(stream);
           video.play();
         })
         .catch((err) => {
@@ -72,7 +75,7 @@ const DocID = () => {
 
   useEffect(() => {
     getVideo(videoConstraints);
-  }, [videoRef, videoConstraints]);
+  }, [videoRef, videoConstraints.facingMode, videoConstraints]);
 
   return (
     <div className="page-docid">
