@@ -26,19 +26,28 @@ const DocID = () => {
   const videoRef = useRef(null);
   const photoRef = useRef(null);
 
-  const getVideo = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: { width: 1920, height: 1080 },
-      })
-      .then((stream) => {
-        let video = videoRef.current;
-        video.srcObject = stream;
-        video.play();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getVideo = (videoConstraints) => {
+    if (
+      "mediaDevices" in navigator &&
+      "getUserMedia" in navigator.mediaDevices
+    ) {
+      navigator.mediaDevices
+        .getUserMedia({
+          video: {
+            width: 1920,
+            height: 1080,
+            facingMode: videoConstraints.facingMode,
+          },
+        })
+        .then((stream) => {
+          let video = videoRef.current;
+          video.srcObject = stream;
+          video.play();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const takePhoto = () => {
@@ -62,8 +71,8 @@ const DocID = () => {
   };
 
   useEffect(() => {
-    getVideo();
-  }, [videoRef]);
+    getVideo(videoConstraints);
+  }, [videoRef, videoConstraints]);
 
   return (
     <div className="page-docid">
