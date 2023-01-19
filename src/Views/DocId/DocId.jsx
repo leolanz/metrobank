@@ -27,6 +27,7 @@ const DocID = () => {
   const photoRef = useRef(null);
 
   const getVideo = (videoConstraints) => {
+    console.log(videoRef);
     if (
       "mediaDevices" in navigator &&
       "getUserMedia" in navigator.mediaDevices
@@ -38,13 +39,14 @@ const DocID = () => {
             width: 1920,
             height: 1080,
             facingMode,
+            frameRate: { min: 30, ideal: 60 },
           },
         })
         .then((stream) => {
-          console.log(facingMode);
           let video = videoRef.current;
           video.srcObject = stream;
-          console.log(stream);
+          video.autofocus = true;
+          /*  console.log(video); */
           video.play();
         })
         .catch((err) => {
@@ -69,8 +71,6 @@ const DocID = () => {
     dispatch(
       setPreviewDoc({ imagePrev: imageBase64, image: imageBase64, file: "" })
     );
-
-    console.log(imageBase64);
   };
 
   useEffect(() => {

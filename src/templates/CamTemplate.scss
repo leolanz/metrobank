@@ -55,8 +55,9 @@
     background-position: center;
     background-repeat: no-repeat;
     video {
-      height: calc(100vh - 83px - 214px);
-      width: auto;
+      /* height: calc(100vh - 83px - 214px); */
+    /*   height: 100vh; */
+    width: 100vh;
     }
     img {
       margin-top: 0;
