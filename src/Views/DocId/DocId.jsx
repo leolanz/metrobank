@@ -36,15 +36,28 @@ const DocID = () => {
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            width: 1920,
-            height: 1080,
+            width: {
+              min: 1280,
+              ideal: 1920,
+              max: 2560,
+            },
+            height: {
+              min: 720,
+              ideal: 1080,
+              max: 1440,
+            },
             facingMode,
             frameRate: { min: 30, ideal: 60 },
           },
         })
         .then((stream) => {
           let video = videoRef.current;
-          video.srcObject = stream;
+          if ("srcObject" in video) {
+            video.srcObject = stream;
+          } else {
+            // Avoid using this in new browsers
+            video.src = window.URL.createObjectURL(stream);
+          }
           video.autofocus = true;
           /*  console.log(video); */
           video.play();
@@ -92,7 +105,12 @@ const DocID = () => {
       >
         <div className="camMask"></div>
         <div className="camera2">
-          <video ref={videoRef}></video>
+          <video
+            autoPlay={true}
+            playsInline={true}
+            muted={true}
+            ref={videoRef}
+          ></video>
         </div>
 
         <div style={{ position: "absolute", zIndex: "-12" }}>
