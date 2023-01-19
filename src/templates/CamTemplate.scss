@@ -51,6 +51,9 @@
     height: calc(100vh - 83px - 214px); // header and footer
     display: flex;
     justify-content: center;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
     video {
       height: calc(100vh - 83px - 214px);
       width: auto;

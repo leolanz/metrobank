@@ -3,9 +3,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
-    
-    /* background-image: url("../../resources/others/bigDocMask.svg");
-     @media (max-width: 768px) {
+    background-image: url("../../resources/others/bigDocMask.svg");
+    @media (max-width: 768px) {
       background-image: url("../../resources/others/largeDocMask.svg");
     }
     @media (max-width: 540px) {
@@ -13,7 +12,6 @@
     }
     @media (max-width: 374px) {
       background-image: url("../../resources/others/smallDocMask.svg");
-    } */
-
+    }
   }
 }

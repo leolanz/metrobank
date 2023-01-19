@@ -4,10 +4,15 @@ import CamTemplate from "../../templates/CamTemplate";
 import "./selfiePreview.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setPreviewImage } from "../../redux/features/cam";
+import { useHistory } from "react-router-dom";
 
 const SelfiePreview = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
+    if (imagePrev === null) history.goBack();
+    const element = document.getElementById("webcam");
+    element.style.backgroundImage = `url(${imagePrev})`;
     return () => {
       dispatch(setPreviewImage({ imagePrev: null }));
     };
@@ -36,7 +41,7 @@ const SelfiePreview = () => {
         nextUrl="/BEN/docID"
         progressCount={1}
       >
-        <img src={imagePrev} alt="preview" />
+        {/*  <img src={imagePrev} alt="preview" /> */}
       </CamTemplate>
     </div>
   );

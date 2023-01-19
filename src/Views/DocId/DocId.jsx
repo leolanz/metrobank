@@ -51,7 +51,7 @@ const DocID = () => {
   };
 
   const takePhoto = () => {
-    const width = 1920;
+    const width = 1440;
     const height = width / (16 / 9);
     let video = videoRef.current;
     let photo = photoRef.current;
@@ -87,7 +87,7 @@ const DocID = () => {
         urlPreview="/BEN/docID/preview"
         progressCount={2}
       >
-        {/* <div className="camMask"></div> */}
+        <div className="camMask"></div>
         <div className="camera2">
           <video ref={videoRef}></video>
         </div>
