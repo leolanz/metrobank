@@ -129,7 +129,7 @@ const DocID = () => {
           idealFacingMode="environment"
           isImageMirror={false}
         />
-        <div className="camMask"></div>
+        <div className="camMask version react html5"></div>
         {/* <div id="camera-v2.3" className="video-container">
           <video ref={videoRef}></video>
         </div>
