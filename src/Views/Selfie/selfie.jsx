@@ -8,6 +8,8 @@ import { useQuery } from "../../Hooks/useQuery";
 import "./selfie.scss";
 import { api } from "../../Connection/Connection";
 import { useHistory } from "react-router-dom";
+import { setPreviewDoc } from "../../redux/features/cam";
+import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 
 const initialRef = null;
 
@@ -82,6 +84,10 @@ const Selfie = () => {
       </CamTemplate>
     </div>;
   }
+  function handleTakePhoto(dataUri) {
+    console.log(dataUri);
+    dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" }));
+  }
 
   return (
     <div className="page-selfie">
@@ -94,15 +100,22 @@ const Selfie = () => {
         url="/BEN/selfie"
         urlPreview="/BEN/selfie/preview"
         progressCount={1}
+        takePhoto={handleTakePhoto}
       >
         <div className="camMask"></div>
-        <Webcam
+        {/* <Webcam
           onError={(e) => console.log("on error", e)}
           onUserMediaError={(e) => console.log("on user media error", e)}
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
+        /> */}
+        <Camera
+          onTakePhoto={handleTakePhoto}
+          idealFacingMode="environment"
+          isImageMirror={false}
+          imageType={IMAGE_TYPES.JPG}
         />
       </CamTemplate>
     </div>

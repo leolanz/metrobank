@@ -4,7 +4,7 @@ import Webcam from "react-webcam";
 import "./DocId.scss";
 import { useDispatch } from "react-redux";
 import { setPreviewDoc } from "../../redux/features/cam";
-import Camera from "react-html5-camera-photo";
+import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 
 const initialRef = null;
 
@@ -108,6 +108,7 @@ const DocID = () => {
   }, [videoRef, videoConstraints.facingMode, videoConstraints]);
 
   function handleTakePhoto(dataUri) {
+    console.log(dataUri);
     dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" }));
   }
 
@@ -128,6 +129,7 @@ const DocID = () => {
           onTakePhoto={handleTakePhoto}
           idealFacingMode="environment"
           isImageMirror={false}
+          imageType={IMAGE_TYPES.JPG}
         />
         <div className="camMask version react html5"></div>
         {/* <div id="camera-v2.3" className="video-container">
