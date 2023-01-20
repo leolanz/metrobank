@@ -14,4 +14,10 @@
       background-image: url("../../resources/others/smallDocMask.svg");
     } */
   }
+  .video-container{
+    video{
+      height: 100%;
+      height: calc(100vh - 83px - 214px); // header and footer
+    }
+  }
 }
