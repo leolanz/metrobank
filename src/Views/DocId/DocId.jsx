@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import "./DocId.scss";
 import { useDispatch } from "react-redux";
 import { setPreviewDoc } from "../../redux/features/cam";
+import Camera from "react-html5-camera-photo";
 
 const initialRef = null;
 
@@ -106,6 +107,10 @@ const DocID = () => {
     getVideo(videoConstraints);
   }, [videoRef, videoConstraints.facingMode, videoConstraints]);
 
+  function handleTakePhoto(dataUri) {
+    dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" }));
+  }
+
   return (
     <div className="page-docid">
       <CamTemplate
@@ -113,20 +118,25 @@ const DocID = () => {
         setImage={handleReduxImage}
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
-        takePhoto={takePhoto}
+        takePhoto={handleTakePhoto}
         title="Foto de la Cédula"
         url="/BEN/docID"
         urlPreview="/BEN/docID/preview"
         progressCount={2}
       >
+        <Camera
+          onTakePhoto={handleTakePhoto}
+          idealFacingMode="environment"
+          isImageMirror={false}
+        />
         <div className="camMask"></div>
-        <div id="camera-v2.3" className="video-container">
+        {/* <div id="camera-v2.3" className="video-container">
           <video ref={videoRef}></video>
         </div>
 
         <div style={{ position: "absolute", zIndex: "-12" }}>
           <canvas ref={photoRef} />
-        </div>
+        </div> */}
       </CamTemplate>
     </div>
   );

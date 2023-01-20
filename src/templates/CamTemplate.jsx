@@ -30,6 +30,8 @@ const CamTemplate = memo(
     const capture = React.useCallback(() => {
       if (takePhoto) {
         takePhoto();
+        const button = document.getElementById("outer-circle");
+        button.click();
       }
       if (webcamRef !== null && webcamRef.current && setImage) {
         const imageSrc = webcamRef.current.getScreenshot();
