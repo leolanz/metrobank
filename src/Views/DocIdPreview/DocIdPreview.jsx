@@ -10,8 +10,8 @@ const SelfiePreview = () => {
   const history = useHistory();
   useEffect(() => {
     if (imagePrev === null) history.goBack();
-    const element = document.getElementById("webcam");
-    element.style.backgroundImage = `url(${imagePrev})`;
+    /*  const element = document.getElementById("webcam");
+    element.style.backgroundImage = `url(${imagePrev})`; */
     return () => {
       dispatch(setPreviewImage({ imagePrev: null }));
     };
@@ -41,7 +41,7 @@ const SelfiePreview = () => {
         nextUrl="/BEN/info"
         progressCount={2}
       >
-        {/* <img src={imagePrev} alt="preview" /> */}
+        <img style={{ width: "auto" }} src={imagePrev} alt="preview" />
       </CamTemplate>
     </div>
   );
