@@ -81,6 +81,7 @@ const DocID = () => {
         });
     }
   };
+
   const takePhoto = () => {
     let video = videoRef.current;
     let photo = photoRef.current;
@@ -127,7 +128,7 @@ const DocID = () => {
       >
         <Camera
           onTakePhoto={handleTakePhoto}
-          idealFacingMode="environment"
+          idealFacingMode={videoConstraints.facingMode}
           isImageMirror={false}
           imageType={IMAGE_TYPES.JPG}
         />

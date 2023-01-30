@@ -23,7 +23,6 @@ const Selfie = () => {
   const [videoConstraints, setVideoConstraits] = useState({
     facingMode: "user",
   });
-  console.log(history.location);
 
   const handleChangeVideoConstraits = (config) => {
     setVideoConstraits(config);
@@ -103,17 +102,9 @@ const Selfie = () => {
         takePhoto={handleTakePhoto}
       >
         <div className="camMask"></div>
-        {/* <Webcam
-          onError={(e) => console.log("on error", e)}
-          onUserMediaError={(e) => console.log("on user media error", e)}
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          videoConstraints={videoConstraints}
-        /> */}
         <Camera
           onTakePhoto={handleTakePhoto}
-          idealFacingMode="environment"
+          idealFacingMode={videoConstraints.facingMode}
           isImageMirror={false}
           imageType={IMAGE_TYPES.JPG}
         />
