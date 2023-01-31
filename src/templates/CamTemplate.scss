@@ -65,9 +65,8 @@
   }
   .content-camera {
     width: 100%;
-    background-color: white;
-    margin-top: 82px; //tamaño del header
-    height: calc(100vh - 83px); // header and footer
+    padding-top: 83px;
+    height: 100vh; // header and footer
     display: flex;
     justify-content: center;
   }

@@ -109,6 +109,7 @@ const CamTemplate = memo(
         <div id="webcam" className={ClassName}>
           {children}
         </div>
+
         {!noFooter && (
           <Footer
             url={url}

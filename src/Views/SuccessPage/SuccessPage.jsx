@@ -25,12 +25,12 @@ const SuccessPage = () => {
         noProgress
       >
         <div className="body-success">
-          {RESPONSE.resolution === "APPROVAL" ? (
+          {RESPONSE?.resolution === "APPROVAL" ? (
             <>
               <div className="completed">
                 <img src={Person} alt="person" />
                 <h3>
-                  ¡{RESPONSE.name}, hemos validado su identidad correctamente!
+                  ¡{RESPONSE?.name}, hemos validado su identidad correctamente!
                 </h3>
                 <p>
                   Recibirá un mensaje de texto en su celular con un{" "}
@@ -54,7 +54,7 @@ const SuccessPage = () => {
             <>
               <div className="succeed">
                 <img src={BlueCheck} alt="BlueCheck" />
-                <h3>¡{RESPONSE.name}, hemos recibido su solicitud!</h3>
+                <h3>¡{RESPONSE?.name}, hemos recibido su solicitud!</h3>
                 <p>
                   Nuestra Área de Atención al cliente estará evaluando su
                   solicitud y próximamente será contactado.

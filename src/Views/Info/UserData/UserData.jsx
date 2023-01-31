@@ -7,8 +7,8 @@ import { error } from "../../../Hooks/File/useToast";
 
 const UserData = (props) => {
   const history = useHistory();
-  const userData = history.location.state.trackInfo.data;
-  const trackInfo = history.location.state.trackInfo;
+  const userData = history.location.state?.trackInfo?.data;
+  const trackInfo = history.location.state?.trackInfo;
   const [loading, setloading] = useState(false);
 
   const validateInfo = (type) => {
@@ -27,7 +27,7 @@ const UserData = (props) => {
         history.push({
           pathname: urlPath,
           state: { trackInfo },
-          search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
+          search: `${history.location.search}&requestNumber=${trackInfo?.requestNumber}`,
         });
       })
       .catch(function (Error) {
@@ -50,45 +50,46 @@ const UserData = (props) => {
           Confirme que todos{" "}
           <span className="text-bold ben-color"> los datos sean correctos</span>
         </h3>
-        <div className="info-row">
+
+        <div className="info-rows">
           <div className="info-col">
             <div className="label">
               <p>ID Documento</p>
-              <p className="data">{userData.idDocument}</p>
+              <p className="data">{userData?.idDocument}</p>
             </div>
             <div className="label">
               <p>Expedida</p>
-              <p className="data">{userData.expeditionDate}</p>
+              <p className="data">{userData?.expeditionDate}</p>
             </div>
             <div className="label">
               <p>Expira</p>
-              <p className="data">{userData.expirationDate}</p>
+              <p className="data">{userData?.expirationDate}</p>
             </div>
             <div className="label">
               <p>Nombres</p>
-              <p className="data">{userData.names}</p>
+              <p className="data">{userData?.names}</p>
             </div>
             <div className="label">
               <p>Apellidos</p>
-              <p className="data">{userData.lastNames}</p>
+              <p className="data">{userData?.lastNames}</p>
             </div>
           </div>
           <div className="info-col">
             <div className="label">
               <p>F. Nacimiento</p>
-              <p className="data">{userData.birthday}</p>
+              <p className="data">{userData?.birthday}</p>
             </div>
             <div className="label">
               <p>Nacionalidad</p>
-              <p className="data">{userData.nationality}</p>
+              <p className="data">{userData?.nationality}</p>
             </div>
             <div className="label">
               <p>Lugar de Nac.</p>
-              <p className="data">{userData.placeOfBirth}</p>
+              <p className="data">{userData?.placeOfBirth}</p>
             </div>
             <div className="label">
               <p>Sexo</p>
-              <p className="data">{userData.gender}</p>
+              <p className="data">{userData?.gender}</p>
             </div>
           </div>
         </div>

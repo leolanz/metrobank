@@ -1,25 +1,26 @@
 @import "../../../Theme/variables.scss";
 .user-info-container {
-  height: calc(100vh - 83px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
- 
-
+  justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
   .titleInfo {
     width: calc(100vw - 20px);
     padding: 20px;
     margin: 0;
   }
-  .info-row {
+
+  .info-rows {
+    overflow: auto;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
     padding: 0 20px;
     color: #818999;
-    
+
     .info-col {
       display: flex;
       flex-direction: column;
@@ -35,15 +36,14 @@
         font-size: 15px;
         p.data {
           font-weight: 600;
-        color:#364156; 
-
+          color: #364156;
         }
       }
     }
   }
   .buttons {
     padding: 20px;
-    margin-bottom: 44px;
+
     display: flex;
     gap: 16px;
     button {
