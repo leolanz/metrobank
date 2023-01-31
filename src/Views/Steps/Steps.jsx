@@ -23,7 +23,7 @@ const Steps = (props) => {
   const stepsBen = [
     "Confirmación de datos",
     "Información adicional",
-    "!Registro completado!",
+    "¡Registro completado!",
   ];
   const stepsDesk = [
     "Confirmar Datos",
