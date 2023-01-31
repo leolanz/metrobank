@@ -41,7 +41,7 @@ const SelfiePreview = () => {
         nextUrl="/BEN/info"
         progressCount={2}
       >
-        <img style={{ width: "auto" }} src={imagePrev} alt="preview" />
+        <img /* style={{ width: "auto" }}  */ src={imagePrev} alt="preview" />
       </CamTemplate>
     </div>
   );
