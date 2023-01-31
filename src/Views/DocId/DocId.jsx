@@ -126,13 +126,13 @@ const DocID = () => {
         urlPreview="/BEN/docID/preview"
         progressCount={2}
       >
+        <div className="camMask"></div>
         <Camera
           onTakePhoto={handleTakePhoto}
           idealFacingMode={videoConstraints.facingMode}
-          isImageMirror={false}
+          isImageMirror={true}
           imageType={IMAGE_TYPES.JPG}
         />
-        <div className="camMask version react html5"></div>
         {/* <div id="camera-v2.3" className="video-container">
           <video ref={videoRef}></video>
         </div>
