@@ -10,7 +10,6 @@
     position: fixed;
     color: white;
     z-index: 9;
-
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -49,17 +48,18 @@
     background-color: #39363d;
     margin-top: 82px; //tamaño del header
     height: calc(100vh - 83px - 214px); // header and footer
-    display: flex;
-    justify-content: center;
-    /*
-    background-size:cover;
-    */
+    /* display: flex;
+    justify-content: center; */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
  
     img {
       margin-top: 0;
+      width: auto;
+      height: 100%;
+    }
+    video{
       width: 100%;
     }
   }
