@@ -129,8 +129,10 @@ const DocID = () => {
         <div className="camMask"></div>
         <Camera
           onTakePhoto={handleTakePhoto}
-          idealFacingMode={videoConstraints.facingMode}
-          isImageMirror={true}
+          idealFacingMode={
+            videoConstraints.facingMode === "user" ? true : false
+          }
+          isImageMirror={false}
           imageType={IMAGE_TYPES.JPG}
         />
         {/* <div id="camera-v2.3" className="video-container">

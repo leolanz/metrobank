@@ -81,7 +81,19 @@ const UserData = (props) => {
             </div>
             <div className="label">
               <p>Nacionalidad</p>
-              <p className="data">{userData?.nationality}</p>
+              {userData?.nationality.includes("ñ") ? (
+                <p
+                  className="data upper"
+                  dangerouslySetInnerHTML={{
+                    __html: `${userData?.nationality.replaceAll(
+                      "Ñ",
+                      "&ntilde"
+                    )}`,
+                  }}
+                ></p>
+              ) : (
+                <p className="data">{userData?.nationality} </p>
+              )}
             </div>
             <div className="label">
               <p>Lugar de Nac.</p>

@@ -35,6 +35,9 @@
         margin: 6px 0;
         font-size: 15px;
         p.data {
+          &.upper{
+            text-transform: uppercase;
+          }
           font-weight: 600;
           color: #364156;
         }

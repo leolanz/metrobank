@@ -105,7 +105,7 @@ const Selfie = () => {
         <Camera
           onTakePhoto={handleTakePhoto}
           idealFacingMode={videoConstraints.facingMode}
-          isImageMirror={true}
+          isImageMirror={videoConstraints.facingMode === "user" ? true : false}
           imageType={IMAGE_TYPES.JPG}
         />
       </CamTemplate>
