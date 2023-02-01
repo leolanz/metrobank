@@ -1,11 +1,7 @@
 import React, { Fragment, memo, useState } from "react";
 import "./Footer.scss";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { useQuery } from "../../../Hooks/useQuery";
-import { api } from "../../../Connection/Connection";
-import { error } from "../../../Hooks/File/useToast";
 import Toast from "../../../Components/Toast/toast";
 import Loader from "../../../Components/Loader/Loader";
 const repitImage = () => {
@@ -31,14 +27,12 @@ const Footer = memo(
     uploadPhoto,
     url,
     urlPreview,
-    nextUrl,
     componentsHeight,
     handleSendPhoto,
     loadingUploadPhoto,
   }) => {
     const { pathname } = useLocation();
     const history = useHistory();
-    const query = useQuery();
     const { image, file } = useSelector((store) => store.camera);
     const [loading, setloading] = useState(false);
     const ActionsButtons = () => {
@@ -91,57 +85,6 @@ const Footer = memo(
       );
     };
 
-    const sendDocID = async () => {
-      setloading(true);
-      var formData = new FormData();
-      console.log("file", image);
-
-      formData.append("image", image);
-      /* formData.append("file", file); 
-      formData.append("id_product", params?.id);*/
-      formData.append("email", query.email);
-      formData.append("phone", query.phone);
-      formData.append("requestNumber", query.requestNumber);
-
-      axios({
-        method: "post",
-        url: `${api.REACT_DOMAIN_BACK}/document`,
-        data: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          /* Authorization: `Bearer ${token}`, */
-        },
-      })
-        .then(function (response) {
-          const trackInfo = response.data;
-          setloading(false);
-          /* dispatch(setTrackInfo({ trackInfo })); */
-          history.push({
-            pathname: nextUrl,
-            state: { trackInfo },
-            /* search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`, */
-            search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
-          });
-        })
-        .catch(function (Error) {
-          //handle error
-          setloading(false);
-          const data = Error.response.data;
-          const result = Array.isArray(data);
-          if (result) {
-            error(data[0].coincidencia);
-          } else {
-            error(data.message);
-          }
-          history.push({
-            pathname: url,
-            state: {},
-            /*  search: `${history.location.search}&requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`, */
-            search: `?requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`,
-          });
-        });
-    };
-
     const DoneButtons = () => {
       return (
         <Fragment>
@@ -173,12 +116,13 @@ const Footer = memo(
       );
     };
     <Toast />;
+
+    let actualHeightRest = componentsHeight;
+    if (pathname.includes("preview")) actualHeightRest = actualHeightRest - 6;
     return (
       <div
-        style={{ height: `calc(100vh - ${componentsHeight}px)` }}
-        className={`camera-footer ${
-          pathname.includes(urlPreview) ? "background" : ""
-        }`}
+        style={{ height: `calc(100vh - ${actualHeightRest}px)` }}
+        className={`camera-footer`}
       >
         {handleClickCapture && <ActionsButtons />}
         {handleSendPhoto && <DoneButtons />}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../templates/components/Navbar/Navbar";
 import CamTemplate from "../../templates/CamTemplate";
-import "./selfiePreview.scss";
+import "./DocIdPreview.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setPreviewImage } from "../../redux/features/cam";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Footer from "../../templates/components/Footer2/Footer";
 import axios from "axios";
 import { useQuery } from "../../Hooks/useQuery";
@@ -19,9 +19,8 @@ const SelfiePreview = () => {
   const { imagePrev } = useSelector((store) => store.camera);
   const NAVBAR_HEIGHT = 82;
 
-  const { pathname } = useLocation();
   const query = useQuery();
-  const { image, file } = useSelector((store) => store.camera);
+  const { image } = useSelector((store) => store.camera);
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
@@ -46,27 +45,32 @@ const SelfiePreview = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const sendSelfie = async () => {
+  const sendDocID = async () => {
     setloading(true);
     var formData = new FormData();
+    console.log("file", image);
     formData.append("image", image);
     formData.append("email", query.email);
     formData.append("phone", query.phone);
+    formData.append("requestNumber", query.requestNumber);
+
     axios({
       method: "post",
-      url: `${api.REACT_DOMAIN_BACK}/selfie`,
+      url: `${api.REACT_DOMAIN_BACK}/document`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
+        /* Authorization: `Bearer ${token}`, */
       },
     })
       .then(function (response) {
-        //handle success
         const trackInfo = response.data;
         setloading(false);
+        /* dispatch(setTrackInfo({ trackInfo })); */
         history.push({
-          pathname: "/BEN/docID",
+          pathname: "/BEN/info",
           state: { trackInfo },
+          /* search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`, */
           search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
         });
       })
@@ -76,15 +80,15 @@ const SelfiePreview = () => {
         const data = Error.response.data;
         const result = Array.isArray(data);
         if (result) {
-          console.log("hizo esta");
           error(data[0].coincidencia);
         } else {
           error(data.message);
         }
         history.push({
-          pathname: "/BEN/selfie",
+          pathname: "/BEN/docID",
           state: {},
-          search: `?email=${query.email}&phone=${query.phone}`,
+          /*  search: `${history.location.search}&requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`, */
+          search: `?requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`,
         });
       });
   };
@@ -97,21 +101,21 @@ const SelfiePreview = () => {
           url="/BEN/selfie"
           urlPreview="/BEN/selfie/preview"
           nextUrl="/BEN/docID"
-          progressCount={1}
+          progressCount={2}
         ></CamTemplate>
       </div>
     );
-  console.log(imagePrev);
+
   return (
     <div className="show-photo-container">
-      <Navbar title="Foto selfie" progressCount={1} />
+      <Navbar title="Foto de la Cédula" progressCount={2} />
       <div id="image-preview-container">
         <img id="image" src={imagePrev} alt="preview" />
       </div>
       <Footer
-        url="/BEN/selfie"
+        url="/BEN/docID"
         loadingUploadPhoto={loading}
-        handleSendPhoto={sendSelfie}
+        handleSendPhoto={sendDocID}
         componentsHeight={imageHeight + NAVBAR_HEIGHT}
       />
     </div>

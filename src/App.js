@@ -9,28 +9,21 @@ import {
   Redirect,
 } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { Landing, Steps } from "./Views";
 import theme from "./Theme/theme";
 
 import "./Theme/global.scss";
 import "./Theme/reset.scss";
 import { RequireProvider } from "./Context";
+
 /* viejas */
-import Selfie from "./Views/Selfie/selfie";
-import SelfiePreview from "./Views/SelfiePreview/SelfiePreview";
-import DocId from "./Views/DocId/DocId";
-import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
 import Info from "./Views/Info/Info";
 import PepActivity from "./Views/PepActivity/PepActivity";
 import SuccessPage from "./Views/SuccessPage/SuccessPage";
-
-
 /* Experimentales */
 import Selfie2 from "./Views/Selfie/Selfie2";
 import SelfiePrev from "./Views/SelfiePreview/SelfiePreview2";
-
-
-
+import DocId2 from "./Views/DocId/DocId2";
+import DocIdPreview2 from "./Views/DocIdPreview/DocIdPreview2";
 
 function App() {
   return (
@@ -40,14 +33,10 @@ function App() {
         <ToastContainer />
         <Router>
           <Switch>
-          <Route exact path="/selfie" component={Selfie} />
-          <Route exact path="/selfie/preview" component={SelfiePreview} />
-
-
             <Route exact path="/BEN/selfie" component={Selfie2} />
             <Route exact path="/BEN/selfie/preview" component={SelfiePrev} />
-            <Route exact path="/BEN/docID" component={DocId} />
-            <Route exact path="/BEN/docID/preview" component={DocIdPreview} />
+            <Route exact path="/BEN/docID" component={DocId2} />
+            <Route exact path="/BEN/docID/preview" component={DocIdPreview2} />
             <Route path="/BEN/info" component={Info} />
             <Route path="/BEN/activity" component={PepActivity} />
             <Route path="/BEN/success" component={SuccessPage} />
