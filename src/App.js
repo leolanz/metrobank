@@ -16,6 +16,8 @@ import "./Theme/global.scss";
 import "./Theme/reset.scss";
 import { RequireProvider } from "./Context";
 import Selfie from "./Views/Selfie/selfie";
+import Selfie2 from "./Views/Selfie/Selfie2";
+
 import SelfiePreview from "./Views/SelfiePreview/SelfiePreview";
 import DocId from "./Views/DocId/DocId";
 import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
@@ -31,6 +33,8 @@ function App() {
         <ToastContainer />
         <Router>
           <Switch>
+          <Route exact path="/selfie" component={Selfie2} />
+
             <Route exact path="/BEN/selfie" component={Selfie} />
             <Route exact path="/BEN/selfie/preview" component={SelfiePreview} />
             <Route exact path="/BEN/docID" component={DocId} />

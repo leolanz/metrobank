@@ -32,6 +32,10 @@ const Selfie = () => {
     dispatch(setPreviewImage(file));
   };
 
+  function handleTakePhoto(dataUri) {
+    dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" }));
+  }
+
   useEffect(() => {
     const email = query.email;
     const phone = query.phone;
@@ -82,10 +86,6 @@ const Selfie = () => {
         ...loading
       </CamTemplate>
     </div>;
-  }
-  function handleTakePhoto(dataUri) {
-    console.log(dataUri);
-    dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" }));
   }
 
   return (
