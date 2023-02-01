@@ -20,7 +20,7 @@ const Navbar = memo(({ title, changeVideoConstraints, progressCount = 1 }) => {
         </div>
       )}
       <div className="title">{title}</div>
-      {(pathname.includes("selfie") || pathname.includes("docID")) && (
+      {changeVideoConstraints && (
         <div className="changeCam" onClick={changeVideoConstraints}>
           <img src={ChangeCam} alt="ChangeCam" />
         </div>

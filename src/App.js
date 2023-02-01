@@ -15,15 +15,22 @@ import theme from "./Theme/theme";
 import "./Theme/global.scss";
 import "./Theme/reset.scss";
 import { RequireProvider } from "./Context";
+/* viejas */
 import Selfie from "./Views/Selfie/selfie";
-import Selfie2 from "./Views/Selfie/Selfie2";
-
 import SelfiePreview from "./Views/SelfiePreview/SelfiePreview";
 import DocId from "./Views/DocId/DocId";
 import DocIdPreview from "./Views/DocIdPreview/DocIdPreview";
 import Info from "./Views/Info/Info";
 import PepActivity from "./Views/PepActivity/PepActivity";
 import SuccessPage from "./Views/SuccessPage/SuccessPage";
+
+
+/* Experimentales */
+import Selfie2 from "./Views/Selfie/Selfie2";
+import SelfiePrev from "./Views/SelfiePreview/SelfiePreview2";
+
+
+
 
 function App() {
   return (
@@ -33,10 +40,12 @@ function App() {
         <ToastContainer />
         <Router>
           <Switch>
-          <Route exact path="/selfie" component={Selfie2} />
+          <Route exact path="/selfie" component={Selfie} />
+          <Route exact path="/selfie/preview" component={SelfiePreview} />
 
-            <Route exact path="/BEN/selfie" component={Selfie} />
-            <Route exact path="/BEN/selfie/preview" component={SelfiePreview} />
+
+            <Route exact path="/BEN/selfie" component={Selfie2} />
+            <Route exact path="/BEN/selfie/preview" component={SelfiePrev} />
             <Route exact path="/BEN/docID" component={DocId} />
             <Route exact path="/BEN/docID/preview" component={DocIdPreview} />
             <Route path="/BEN/info" component={Info} />

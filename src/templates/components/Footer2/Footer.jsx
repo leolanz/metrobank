@@ -33,6 +33,8 @@ const Footer = memo(
     urlPreview,
     nextUrl,
     componentsHeight,
+    handleSendPhoto,
+    loadingUploadPhoto,
   }) => {
     const { pathname } = useLocation();
     const history = useHistory();
@@ -89,53 +91,6 @@ const Footer = memo(
       );
     };
 
-    const sendSelfie = async () => {
-      setloading(true);
-      var formData = new FormData();
-      formData.append("image", image);
-      /* formData.append("file", file); 
-      formData.append("id_product", params?.id);*/
-      formData.append("email", query.email);
-      formData.append("phone", query.phone);
-      axios({
-        method: "post",
-        url: `${api.REACT_DOMAIN_BACK}/selfie`,
-        data: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          /* Authorization: `Bearer ${token}`, */
-        },
-      })
-        .then(function (response) {
-          //handle success
-          const trackInfo = response.data;
-          setloading(false);
-          if (nextUrl)
-            history.push({
-              pathname: nextUrl,
-              state: { trackInfo },
-              search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
-            });
-        })
-        .catch(function (Error) {
-          //handle error
-          setloading(false);
-          const data = Error.response.data;
-          const result = Array.isArray(data);
-          if (result) {
-            console.log("hizo esta");
-            error(data[0].coincidencia);
-          } else {
-            error(data.message);
-          }
-          history.push({
-            pathname: url,
-            state: {},
-            search: `?email=${query.email}&phone=${query.phone}`,
-          });
-        });
-    };
-
     const sendDocID = async () => {
       setloading(true);
       var formData = new FormData();
@@ -187,15 +142,10 @@ const Footer = memo(
         });
     };
 
-    const handleContinue = () => {
-      if (pathname.includes("selfie/preview")) sendSelfie();
-      if (pathname.includes("docID/preview")) sendDocID();
-    };
-
     const DoneButtons = () => {
       return (
         <Fragment>
-          <h1 className={`done ${loading ? "loading" : ""}`}>
+          <h1 className={`done ${loadingUploadPhoto ? "loading" : ""}`}>
             ¡Captura <span>Exitosa!</span>
           </h1>
 
@@ -206,24 +156,23 @@ const Footer = memo(
               onClick={() =>
                 history.push({ pathname: url, search: history.location.search })
               }
-              disabled={loading}
+              disabled={loadingUploadPhoto}
             >
               {repitImage()}
               Repetir foto
             </button>
             <button
-              disabled={loading}
+              disabled={loadingUploadPhoto}
               className="blue"
-              onClick={handleContinue}
+              onClick={handleSendPhoto}
             >
-              {loading ? <Loader /> : <div>Siguiente</div>}
+              {loadingUploadPhoto ? <Loader /> : <div>Siguiente</div>}
             </button>
           </div>
         </Fragment>
       );
     };
     <Toast />;
-    console.log(`calc(100vh - ${componentsHeight}px)`);
     return (
       <div
         style={{ height: `calc(100vh - ${componentsHeight}px)` }}
@@ -232,7 +181,7 @@ const Footer = memo(
         }`}
       >
         {handleClickCapture && <ActionsButtons />}
-        {uploadPhoto && <DoneButtons />}
+        {handleSendPhoto && <DoneButtons />}
       </div>
     );
   }

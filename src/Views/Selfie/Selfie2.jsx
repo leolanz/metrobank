@@ -94,6 +94,7 @@ const Selfie2 = memo(() => {
       <Camera
         onCameraStart={() => {
           const vids = document.getElementsByTagName("video");
+
           setvideoHeight(vids[0].offsetHeight);
         }}
         onTakePhoto={onTakePhoto}
