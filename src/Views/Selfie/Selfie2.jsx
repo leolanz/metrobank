@@ -91,15 +91,16 @@ const Selfie2 = memo(() => {
         changeVideoConstraints={handleChangeVideoConstraits}
         progressCount={1}
       />
+      <div className="camMask-selfie"></div>
       <Camera
         onCameraStart={() => {
           const vids = document.getElementsByTagName("video");
-
           setvideoHeight(vids[0].offsetHeight);
         }}
         onTakePhoto={onTakePhoto}
         idealFacingMode={videoConstraints}
-        isImageMirror={videoConstraints === "user" ? true : false}
+        /*  isImageMirror={videoConstraints === "user" ? true : false} */
+        isImageMirror={false}
         imageType={IMAGE_TYPES.JPG}
         isMaxResolution={true}
       />
