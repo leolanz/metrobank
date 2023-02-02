@@ -102,8 +102,8 @@ const Selfie2 = memo(() => {
         }}
         onTakePhoto={onTakePhoto}
         idealFacingMode={videoConstraints}
-        /*  isImageMirror={videoConstraints === "user" ? true : false} */
-        isImageMirror={false}
+        isImageMirror={videoConstraints === "user" ? true : false}
+        /* isImageMirror={false} */
         imageType={IMAGE_TYPES.JPG}
         isMaxResolution={true}
       />

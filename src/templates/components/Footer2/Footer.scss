@@ -1,9 +1,10 @@
 .camera-footer {
   width: 100%;
   /* height: 216px; */
+  min-height: 216px;
   background-color: black;
-  position: fixed;
-  bottom: 0;
+  /*   position: fixed;
+  bottom: 0; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,15 +20,14 @@
     line-height: 130%;
     color: white;
     margin: 4px;
-    &.loading{
+    &.loading {
       opacity: 0.5;
     }
-    &.done{
-    margin-bottom: 64px;
-
+    &.done {
+      margin-bottom: 64px;
     }
     span {
-    font-weight: 700;
+      font-weight: 700;
 
       color: #26a69a;
     }
@@ -57,16 +57,16 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
-      &:disabled{
+      &:disabled {
         opacity: 0.5;
       }
       &.grey {
-        background: #FFFFFF;
-        border: 2px solid #E7E7ED;
+        background: #ffffff;
+        border: 2px solid #e7e7ed;
         color: #364156;
       }
       &.blue {
-        background-color: #26A69A;
+        background-color: #26a69a;
         color: #ffffff;
       }
     }
