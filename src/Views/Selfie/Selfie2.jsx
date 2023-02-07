@@ -91,10 +91,7 @@ const Selfie2 = memo(() => {
         changeVideoConstraints={handleChangeVideoConstraits}
         progressCount={1}
       />
-      <div
-        className="camMask-selfie"
-        style={{ height: `calc(100vh - ${videoHeight + NAVBAR_HEIGHT}px)` }}
-      ></div>
+      <div className="camMask-selfie"></div>
       <Camera
         onCameraStart={() => {
           const vids = document.getElementsByTagName("video");

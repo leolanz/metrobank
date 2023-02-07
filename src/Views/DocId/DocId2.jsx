@@ -50,6 +50,8 @@ const DocID = memo(() => {
         changeVideoConstraints={handleChangeVideoConstraits}
         progressCount={2}
       />
+      <div className="camMask-doc"></div>
+
       <Camera
         onCameraStart={() => {
           const vids = document.getElementsByTagName("video");

@@ -1,15 +1,17 @@
 .take-photo-container {
   
   .camMask-selfie {
-    
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: fixed;
+
     background-image: url("../../resources/others/bigSelfieMask.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
     @media (max-width: 767px) {
       background-image: url("../../resources/others/largeSelfieMask.svg");
     }
