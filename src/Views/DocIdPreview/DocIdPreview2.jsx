@@ -48,12 +48,10 @@ const SelfiePreview = () => {
   const sendDocID = async () => {
     setloading(true);
     var formData = new FormData();
-    console.log("file", image);
     formData.append("image", image);
     formData.append("email", query.email);
     formData.append("phone", query.phone);
     formData.append("requestNumber", query.requestNumber);
-
     axios({
       method: "post",
       url: `${api.REACT_DOMAIN_BACK}/document`,
@@ -71,7 +69,7 @@ const SelfiePreview = () => {
           pathname: "/BEN/info",
           state: { trackInfo },
           /* search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`, */
-          search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
+          search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}&requestId=${query.requestId}`,
         });
       })
       .catch(function (Error) {

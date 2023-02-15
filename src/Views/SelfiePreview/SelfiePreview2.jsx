@@ -67,7 +67,7 @@ const SelfiePreview = () => {
         history.push({
           pathname: "/BEN/docID",
           state: { trackInfo },
-          search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`,
+          search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}&requestId=${query.requestId}`,
         });
       })
       .catch(function (Error) {

@@ -8,7 +8,7 @@ import { api } from "../../../Connection/Connection";
 import "./activity.scss";
 import SelectInput from "../SelectInput/SelectInput";
 import axios from "axios";
-
+import { useQuery } from "../../../Hooks/useQuery";
 const LoadingModal = lazy(
   async () => await import("../../../Components/LoadingModal/LoadingModal")
 );
@@ -23,6 +23,7 @@ const Activity = (props) => {
   const trackInfo = history?.location?.state?.trackInfo;
 
   const [sentLoading, setSentLoading] = React.useState(false);
+  const query = useQuery();
 
   const economicActivity = () => {
     setLoading(true);
@@ -91,6 +92,7 @@ const Activity = (props) => {
       idRiskActivity: activity.idActivity,
       idPep: pep.idPep,
       term_and_condition: 1,
+      mpayId: query.requestId,
     };
     axios({
       method: "post",
@@ -104,7 +106,7 @@ const Activity = (props) => {
         history.push({
           pathname: "/BEN/success",
           state: { trackInfo },
-          search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}`,
+          search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&requestId=${query.requestId}`,
         });
       })
       .catch(function (Error) {

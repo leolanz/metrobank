@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CamTemplate from "../../templates/CamTemplate";
 import BlueCheck from "../../Assets/BlueCheck.svg";
 import Person from "../../Assets/Person.svg";
 import { Button } from "../../Components";
 import { useHistory } from "react-router-dom";
+import { api } from "../../Connection/Connection";
+import axios from "axios";
+
 import "./SuccessPage.scss";
 
 const initialRef = null;
@@ -12,6 +15,33 @@ const SuccessPage = () => {
   const webcamRef = React.useRef(initialRef);
   const history = useHistory();
   const RESPONSE = history?.location?.state?.trackInfo?.data;
+  const [redirectUrl, setredirectUrl] = useState("");
+
+  const sendRequestMPAy = () => {
+    console.log("RESPONSE.body", RESPONSE.body);
+    axios({
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-Api-key": "a30a003d-0ec5-45c3-a585-d05507a90eef",
+      },
+      url: `${api.mpay}`,
+      body: JSON.stringify(RESPONSE.body),
+    })
+      .then(function (response) {
+        setredirectUrl(response.data.url);
+      })
+      .catch(function (Error) {
+        console.log(Error);
+      });
+  };
+
+  useEffect(() => {
+    if (RESPONSE?.resolution === "APPROVAL") {
+      sendRequestMPAy();
+    }
+  }, [RESPONSE]);
 
   return (
     <div className="page-SuccessPage">
@@ -43,9 +73,7 @@ const SuccessPage = () => {
                 full
                 /* disabled={data === "" || value === ""} */
                 color="primary"
-                /* onClick={() => {
-          validation();
-        }} */
+                onClick={() => window.location.replace(redirectUrl)}
               >
                 Siguiente
               </Button>
@@ -65,9 +93,9 @@ const SuccessPage = () => {
                 full
                 /* disabled={data === "" || value === ""} */
                 color="primary"
-                /* onClick={() => {
-          validation();
-        }} */
+                onClick={() => {
+                  window.history.go(-1); // regresa a la pagina anterior
+                }}
               >
                 Ok, entendido
               </Button>

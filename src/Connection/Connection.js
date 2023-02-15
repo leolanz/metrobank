@@ -1,15 +1,18 @@
 // const env = 'qa';
 const env = "dev";
 // const env = 'prod';
-
+const mpay = 'https://walletws.banconal.com.pa:8443/bnpswitch2v3/onboarding/verification'
 const prod = {
   REACT_DOMAIN_BACK: "https://newtechapp.net/api/request/bnp",
+  mpay
 };
 const dev = {
   REACT_DOMAIN_BACK: "https://test.developerpa.com/api/request/bnp",
+  mpay
 };
 const qa = {
   REACT_DOMAIN_BACK: "https://app.developerpa.com/api/request/bnp",
+  mpay
 };
 
 let api = "";
@@ -22,7 +25,7 @@ module.exports = { api };
 //https://newtechapp.net/
 // servidor para QA https://app.developerpa.com
 
-// /BEN/selfie?requestId=e729cc41-500e-41a2-8750-53b445801a94&returnUrl=https://onboardingbnp.mpaycenter.com/onboarding/verification&phone=61503002&email=capram94@gmail.com
+// /BEN/selfie?requestId=94b9e5ad-7c0d-4a07-97b1-a1aaadab172d&returnUrl=https://onboardingbnp.mpaycenter.com/onboarding/verification&phone=02504004&email=prueba666@gmail.com
 
 /* const prod = {
   domainServer: 'https://newtechapp.net',

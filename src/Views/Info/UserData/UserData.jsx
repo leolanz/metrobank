@@ -4,13 +4,14 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { api } from "../../../Connection/Connection";
 import { error } from "../../../Hooks/File/useToast";
+import { useQuery } from "../../../Hooks/useQuery";
 
 const UserData = (props) => {
   const history = useHistory();
   const userData = history.location.state?.trackInfo?.data;
   const trackInfo = history.location.state?.trackInfo;
   const [loading, setloading] = useState(false);
-
+  const query = useQuery();
   const validateInfo = (type) => {
     let url = `${api.REACT_DOMAIN_BACK}/ocr?requestNumber=${trackInfo.requestNumber}`;
     if (type === "bad") url += "&validation=0";
@@ -27,7 +28,7 @@ const UserData = (props) => {
         history.push({
           pathname: urlPath,
           state: { trackInfo },
-          search: `${history.location.search}&requestNumber=${trackInfo?.requestNumber}`,
+          search: `${history.location.search}&requestNumber=${trackInfo?.requestNumber}&requestId=${query.requestId}`,
         });
       })
       .catch(function (Error) {
