@@ -11,7 +11,7 @@ const DocID = memo(() => {
   const dispatch = useDispatch();
   const NAVBAR_HEIGHT = 82;
   const history = useHistory();
-  const [videoConstraints, setVideoConstraits] = useState("user");
+  const [videoConstraints, setVideoConstraits] = useState("environment");
   const [videoHeight, setvideoHeight] = useState(0);
   const handleChangeVideoConstraits = () => {
     videoConstraints === "user"
