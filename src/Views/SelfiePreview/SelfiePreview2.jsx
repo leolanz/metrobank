@@ -73,14 +73,15 @@ const SelfiePreview = () => {
       .catch(function (Error) {
         //handle error
         setloading(false);
-        const data = Error.response.data;
+        error(Error);
+        /* const data = Error.response.data;
         const result = Array.isArray(data);
         if (result) {
           console.log("hizo esta");
           error(data[0].coincidencia);
         } else {
           error(data.message);
-        }
+        } */
         history.push({
           pathname: "/BEN/selfie",
           state: {},

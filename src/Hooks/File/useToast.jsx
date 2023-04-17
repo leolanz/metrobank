@@ -68,7 +68,7 @@ const warning = (
   );
 };
 const error = (
-  title = "",
+  err = "",
   msg = "",
   short = false,
   config = {
@@ -77,8 +77,12 @@ const error = (
     closeButton: true,
   }
 ) => {
+  const Error = err?.response?.data?.message;
+  const Error2 = err?.response?.data?.error;
+  const Error3 = err?.message;
+  const Error4 = err?.response?.data[0]?.coincidencia;
+  const title = Error4 ?? Error3 ?? Error2 ?? Error;
   config.className = short ? "toast-short" : "";
-  console.log("click");
   toast.error(
     <div
       style={{ display: "flex", alignItems: "center", gap: "10px" }}

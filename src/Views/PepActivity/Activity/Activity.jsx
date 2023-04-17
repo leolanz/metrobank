@@ -112,13 +112,15 @@ const Activity = (props) => {
       .catch(function (Error) {
         //handle error
         setSentLoading(false);
-        const data = Error.response.data;
+        error(Error);
+
+        /* const data = Error.response.data;
         const result = Array.isArray(data);
         if (result) {
           error(data[0].coincidencia);
         } else {
           error(data.message);
-        }
+        } */
       });
   };
 
