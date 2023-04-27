@@ -15,41 +15,35 @@ const SelfiePreview = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [imageHeight, setimageHeight] = useState(200);
-
+  /* 
   const { imagePrev } = useSelector((store) => store.camera);
+  const { image, file } = useSelector((store) => store.camera); */
   const NAVBAR_HEIGHT = 82;
-
-  const { pathname } = useLocation();
   const query = useQuery();
-  const { image, file } = useSelector((store) => store.camera);
   const [loading, setloading] = useState(false);
+  const sessionImage = sessionStorage.getItem("img-preview");
 
   useEffect(() => {
     const IMAGE = document.getElementById("image-preview-container");
     const handleChangesize = () => {
       setimageHeight(IMAGE.offsetHeight);
     };
-    if (imagePrev !== null) handleChangesize();
-    if (imagePrev !== null) {
+    if (sessionImage === null) history.goBack();
+    if (sessionImage !== null) handleChangesize();
+    if (sessionImage !== null) {
       window.addEventListener("resize", handleChangesize);
     }
     return () => {
       window.removeEventListener("resize", handleChangesize);
+      /*   dispatch(setPreviewImage({ imagePrev: null })); */
+      sessionStorage.removeItem("img-preview");
     };
-  }, [imagePrev]);
-
-  useEffect(() => {
-    if (imagePrev === null) history.goBack();
-    return () => {
-      dispatch(setPreviewImage({ imagePrev: null }));
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sendSelfie = async () => {
     setloading(true);
     var formData = new FormData();
-    formData.append("image", image);
+    formData.append("image", sessionImage);
     formData.append("email", query.email);
     formData.append("phone", query.phone);
     axios({
@@ -90,7 +84,7 @@ const SelfiePreview = () => {
       });
   };
 
-  if (imagePrev === null)
+  if (sessionImage === null)
     return (
       <div className="show-photo-container">
         <CamTemplate
@@ -102,12 +96,11 @@ const SelfiePreview = () => {
         ></CamTemplate>
       </div>
     );
-  console.log(imagePrev);
   return (
     <div className="show-photo-container">
       <Navbar title="Foto selfie" progressCount={1} />
       <div id="image-preview-container">
-        <img id="image" src={imagePrev} alt="preview" />
+        <img id="image" src={sessionImage} alt="preview" />
       </div>
       <Footer
         url="/BEN/selfie"

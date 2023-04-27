@@ -26,7 +26,8 @@ const Selfie2 = memo(() => {
   };
 
   const onTakePhoto = React.useCallback((dataUri) => {
-    dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" }));
+    sessionStorage.setItem("img-preview", dataUri);
+    /* dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" })); */
     const button = document.getElementById("outer-circle");
     button.click();
     history.push({
@@ -83,6 +84,7 @@ const Selfie2 = memo(() => {
         console.log(Error);
       });
   }, []);
+
   return (
     <div className="take-photo-container">
       <Navbar
