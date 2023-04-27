@@ -83,7 +83,6 @@ const Selfie2 = memo(() => {
         console.log(Error);
       });
   }, []);
-
   return (
     <div className="take-photo-container">
       <Navbar
@@ -92,18 +91,32 @@ const Selfie2 = memo(() => {
         progressCount={1}
       />
       <div className="camMask-selfie"></div>
-      <Camera
-        onCameraStart={() => {
-          const vids = document.getElementsByTagName("video");
-          setvideoHeight(vids[0].offsetHeight);
-        }}
-        onTakePhoto={onTakePhoto}
-        idealFacingMode={videoConstraints}
-        isImageMirror={videoConstraints === "user" ? true : false}
-        /* isImageMirror={false} */
-        imageType={IMAGE_TYPES.JPG}
-        isMaxResolution={true}
-      />
+      {videoConstraints === "user" ? (
+        <Camera
+          onCameraStart={() => {
+            const vids = document.getElementsByTagName("video");
+            setvideoHeight(vids[0].offsetHeight);
+          }}
+          onTakePhoto={onTakePhoto}
+          idealFacingMode={"user"}
+          isImageMirror={videoConstraints === "user"}
+          imageType={IMAGE_TYPES.JPG}
+          isMaxResolution={true}
+        />
+      ) : (
+        <Camera
+          onCameraStart={() => {
+            const vids = document.getElementsByTagName("video");
+            setvideoHeight(vids[0].offsetHeight);
+          }}
+          onTakePhoto={onTakePhoto}
+          idealFacingMode={"environment"}
+          isImageMirror={videoConstraints === "user"}
+          imageType={IMAGE_TYPES.JPG}
+          isMaxResolution={true}
+        />
+      )}
+
       <Footer
         handleClickCapture={onTakePhoto}
         componentsHeight={videoHeight + NAVBAR_HEIGHT}
