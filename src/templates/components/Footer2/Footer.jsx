@@ -30,6 +30,7 @@ const Footer = memo(
     componentsHeight,
     handleSendPhoto,
     loadingUploadPhoto,
+    preview,
   }) => {
     const { pathname } = useLocation();
     const history = useHistory();
@@ -122,7 +123,7 @@ const Footer = memo(
     return (
       <div
         style={{ height: `calc(100vh - ${actualHeightRest}px)` }}
-        className={`camera-footer`}
+        className={`camera-footer ${preview ? "preview" : ""}`}
       >
         {handleClickCapture && <ActionsButtons />}
         {handleSendPhoto && <DoneButtons />}

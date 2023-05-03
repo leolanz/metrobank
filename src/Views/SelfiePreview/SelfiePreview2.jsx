@@ -107,6 +107,7 @@ const SelfiePreview = () => {
         loadingUploadPhoto={loading}
         handleSendPhoto={sendSelfie}
         componentsHeight={imageHeight + NAVBAR_HEIGHT}
+        preview
       />
     </div>
   );

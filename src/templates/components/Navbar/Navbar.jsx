@@ -20,11 +20,11 @@ const Navbar = memo(({ title, changeVideoConstraints, progressCount = 1 }) => {
         </div>
       )}
       <div className="title">{title}</div>
-      {changeVideoConstraints && (
+      {/* {changeVideoConstraints && (
         <div className="changeCam" onClick={changeVideoConstraints}>
           <img src={ChangeCam} alt="ChangeCam" />
         </div>
-      )}
+      )} */}
 
       <div className={`numbers-container`}>
         <ProgressBar items={3} cont={progressCount} />

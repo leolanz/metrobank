@@ -2,6 +2,9 @@
   width: 100%;
   /* height: 216px; */
   min-height: 216px;
+  &.preview{
+    max-height: 216px;
+  }
   background-color: black;
   z-index: 4;
     position: fixed;
