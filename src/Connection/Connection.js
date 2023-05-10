@@ -1,5 +1,5 @@
- //const env = 'qa';
-const env = "dev";
+const env = 'qa';
+//const env = "dev";
 // const env = 'prod';
 const mpay = 'https://walletws.banconal.com.pa:8443/bnpswitch2v3/onboarding/verification'
 const prod = {
