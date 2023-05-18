@@ -10,8 +10,12 @@ import { setPreviewDoc } from "../../redux/features/cam";
 import Camera, { IMAGE_TYPES } from "react-html5-camera-photo";
 import Navbar from "../../templates/components/Navbar/Navbar";
 import Footer from "../../templates/components/Footer2/Footer";
+import Webcam from "react-webcam";
+const initialRef = null;
 
 const Selfie2 = memo(() => {
+  const webcamRef = React.useRef(initialRef);
+
   const dispatch = useDispatch();
   const query = useQuery();
   const NAVBAR_HEIGHT = 82;
@@ -25,11 +29,9 @@ const Selfie2 = memo(() => {
       : setVideoConstraits("user");
   };
 
-  const onTakePhoto = React.useCallback((dataUri) => {
+  const onTakePhoto = React.useCallback(() => {
+    const dataUri = webcamRef.current.getScreenshot();
     sessionStorage.setItem("img-preview", dataUri);
-    /* dispatch(setPreviewDoc({ imagePrev: dataUri, image: dataUri, file: "" })); */
-    const button = document.getElementById("outer-circle");
-    button.click();
     history.push({
       pathname: "/BEN/selfie/preview",
       search: history.location.search,
@@ -93,7 +95,16 @@ const Selfie2 = memo(() => {
         progressCount={1}
       />
       <div className="camMask-selfie"></div>
-      {videoConstraints === "user" ? (
+      <Webcam
+        onError={(e) => console.log("on error", e)}
+        onUserMediaError={(e) => console.log("on user media error", e)}
+        audio={false}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        videoConstraints={videoConstraints}
+        mirrored
+      />
+      {/* {videoConstraints === "user" ? (
         <Camera
           onCameraStart={() => {
             const vids = document.getElementsByTagName("video");
@@ -117,7 +128,7 @@ const Selfie2 = memo(() => {
           imageType={IMAGE_TYPES.JPG}
           isMaxResolution={true}
         />
-      )}
+      )} */}
 
       <Footer
         handleClickCapture={onTakePhoto}

@@ -77,11 +77,14 @@ const error = (
     closeButton: true,
   }
 ) => {
+  console.log(err);
   const Error = err?.response?.data?.message;
   const Error2 = err?.response?.data?.error;
   const Error3 = err?.message;
   const Error4 = err?.response?.data[0]?.coincidencia;
-  const title = Error4 ?? Error3 ?? Error2 ?? Error;
+  const Error5 = err?.response?.data?.message;
+
+  const title = Error5 ?? Error4 ?? Error3 ?? Error2 ?? Error;
   config.className = short ? "toast-short" : "";
   toast.error(
     <div
