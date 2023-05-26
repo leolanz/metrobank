@@ -3,7 +3,7 @@ const env = 'dev';
 const prod = {
   domainServer: 'https://newtechapp.net',
   domainPython: 'https://newtechapp.net',
-  bucket: 'bucket-getapp-t',
+  bucket: 'onboarding-repo',
   mpay: 'https://walletws.banconal.com.pa:8443/bnpswitch2v3/onboarding/verification',
 };
 const dev = {
