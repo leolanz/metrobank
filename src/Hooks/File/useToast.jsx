@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import "../../Components/Toast/toast.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 // import warningIc from "../assets/icon/warning-icon.svg";
 // import errorI from "../assets/icon/error-light.svg";
@@ -67,7 +67,7 @@ const warning = (
     config
   );
 };
-const error = (
+/* const error = (
   err = "",
   msg = "",
   short = false,
@@ -108,6 +108,25 @@ const error = (
     </div>,
     config
   );
+}; */
+
+const error = (err) => {
+  const Error = err?.response?.data?.message;
+  const Error2 = err?.response?.data?.error;
+  const Error3 = err?.message;
+  const Error4 = err?.response?.data[0]?.coincidencia;
+  const Error5 = err?.response?.data?.message;
+  const title = Error5 ?? Error4 ?? Error3 ?? Error2 ?? Error;
+  toast.error(title, {
+    position: "top-right",
+    autoClose: 3500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
 };
 
 export { info, success, warning, error };
