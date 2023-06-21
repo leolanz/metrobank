@@ -1,46 +1,56 @@
+@import "../../../Theme/variables.scss";
+
 .camera-footer {
   width: 100%;
   /* height: 216px; */
   min-height: 216px;
-  &.preview{
+
+  &.preview {
     max-height: 216px;
   }
+
   background-color: black;
   z-index: 4;
-    position: fixed;
-    bottom: 0;
+  position: fixed;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   padding: 0 20px;
-  background-image: url("../../../Assets/footer.svg");
+  background-color: $metrobank;
+  // background-image: url("../../../Assets/footer.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
   h1 {
     font-weight: 700;
     font-size: 20px;
     line-height: 130%;
-    color: white;
+    color: $blue_gray_900;
     margin: 4px;
+
     &.loading {
       opacity: 0.5;
     }
+
     &.done {
       margin-bottom: 64px;
     }
+
     span {
       font-weight: 700;
 
       color: #26a69a;
     }
   }
+
   p {
     font-weight: 400;
     font-size: 15px;
     line-height: 140%;
-    color: white;
+    color: $blue_gray_900;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -51,6 +61,7 @@
     align-items: center;
     width: 100%;
     gap: 16px;
+
     button {
       font-size: 15px;
       height: 44px;
@@ -61,14 +72,17 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
+
       &:disabled {
         opacity: 0.5;
       }
+
       &.grey {
         background: #ffffff;
         border: 2px solid #e7e7ed;
         color: #364156;
       }
+
       &.blue {
         background-color: #26a69a;
         color: #ffffff;
@@ -84,9 +98,11 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(179, 179, 179, 0.479);
+
     input {
       display: none;
     }
+
     &.big {
       width: 74px;
       height: 74px;
@@ -102,13 +118,16 @@
     justify-content: center;
     align-items: center;
     color: white;
+
     &.grey {
       width: 40px;
       height: 40px;
       background-color: black;
+
       &:hover {
         background-color: #3b3b3b;
       }
+
       &:active {
         background-color: #7a7a7a;
       }
@@ -117,6 +136,7 @@
     &:hover {
       background-color: rgb(0, 128, 115);
     }
+
     &:active {
       background-color: rgb(0, 188, 169);
     }

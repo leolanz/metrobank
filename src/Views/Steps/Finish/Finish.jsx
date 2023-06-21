@@ -66,7 +66,7 @@ const Finish = (props) => {
               />
             </div>
 
-            <h3 className="title blue">¡Hemos recibido su solicitud!</h3>
+            <h3 className="title blue">¡Hemos validado su identidad <span>correctamente</span></h3>
 
             <p>
               Nuestra Área de Atención al cliente estará evaluando su solicitud y próximamente será

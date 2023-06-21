@@ -1,11 +1,50 @@
 @import "../../../Theme/variables.scss";
+
 .user-info-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
+  padding: 20px;
+
+
+
+.div-listas {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 10px;
+  
+  
+    .title {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+  
+    .text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      text-align: right;
+      letter-spacing: -0.02em;
+  
+    }
+  
+  
+
+
+  }
+
   .titleInfo {
     width: calc(100vw - 20px);
     padding: 20px;
@@ -13,42 +52,74 @@
   }
 
   .info-rows {
-    overflow: auto;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    margin-bottom: 20px;
     align-items: center;
-    padding: 0 20px;
+    padding: 20px 20px;
     color: #818999;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+
+    .result {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+      color: $blue_gray_800;
+
+      padding: 12px 0px;
+      letter-spacing: -0.02em;
+      border-bottom: 1px solid #e2e8f0;
+      width: 100%;
+
+      text-align: left;
+      justify-content: left;
+      display: flex;
+      align-items: flex-start;
+    }
 
     .info-col {
       display: flex;
       flex-direction: column;
       flex-basis: 100%;
       align-items: center;
+
       .label {
-        width: calc(100vw - 20px);
+        width: calc(85vw - 20px);
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px solid #e7e7ed;
+
         padding-bottom: 5px;
         margin: 6px 0;
         font-size: 15px;
+
+        .button-result {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          color: #218380;
+          border: none;
+          background-color: transparent;
+        }
+
         p.data {
-          &.upper{
+          &.upper {
             text-transform: uppercase;
           }
+
           font-weight: 600;
           color: #364156;
         }
       }
     }
   }
+
   .buttons {
     padding: 20px;
-width: 100%;
+    width: 100%;
     display: flex;
     gap: 16px;
+
     button {
       width: 50%;
       height: 48px;
@@ -59,6 +130,7 @@ width: 100%;
       font-size: 16px;
       line-height: 24px;
       color: #364156;
+
       &.green {
         background: #26a69a;
         border: none;
@@ -67,6 +139,16 @@ width: 100%;
     }
   }
 }
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 /* @media (min-width: 1200px) {
   .info-container {
     height: 88vh;

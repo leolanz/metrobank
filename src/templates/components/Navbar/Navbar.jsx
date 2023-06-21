@@ -14,11 +14,11 @@ const Navbar = memo(({ title, changeVideoConstraints, progressCount = 1 }) => {
 
   return (
     <div className="back-nav">
-      {!pathname.includes("success") && !pathname.includes("info") && (
+      {/* {!pathname.includes("success") && !pathname.includes("info") && (
         <div className="icon" onClick={handleBack}>
           <img src={BackArrow} alt="backArrow" />
         </div>
-      )}
+      )} */}
       <div className="title">{title}</div>
       {/* {changeVideoConstraints && (
         <div className="changeCam" onClick={changeVideoConstraints}>
@@ -26,9 +26,9 @@ const Navbar = memo(({ title, changeVideoConstraints, progressCount = 1 }) => {
         </div>
       )} */}
 
-      <div className={`numbers-container`}>
+      {/* <div className={`numbers-container`}>
         <ProgressBar items={3} cont={progressCount} />
-      </div>
+      </div> */}
     </div>
   );
 });

@@ -4,6 +4,7 @@ import CamTemplate from "../../templates/CamTemplate";
 import { setPreviewImage } from "../../redux/features/cam";
 import "./Info.scss";
 import UserData from "./UserData/UserData";
+import TemplateArrow from "../../templates/TemplateArrow";
 const initialRef = null;
 
 const Info = () => {
@@ -21,12 +22,14 @@ const Info = () => {
   };
   return (
     <div className="page-info">
-      <CamTemplate
+
+
+      <TemplateArrow
         webcamRef={webcamRef}
         setImage={handleReduxImage}
         videoConstraints={videoConstraints}
         setVideoConstraits={handleChangeVideoConstraits}
-        title="Confirmación de datos"
+        title="Información Privada"
         url="/BEN/selfie/take-photo"
         urlPreview="/BEN/selfie/preview"
         progressCount={3}
@@ -34,7 +37,7 @@ const Info = () => {
         noCam
       >
         <UserData channel="BEN" active={3} />
-      </CamTemplate>
+      </TemplateArrow>
     </div>
   );
 };

@@ -1,14 +1,17 @@
+@import "../Theme/variables.scss";
+
 .cam-body {
   overflow: hidden;
   background-color: black;
   .back-nav {
-    background-image: url("../Assets/bg-header-ben.svg");
+    background-color: #D0CDCD;
+    // background-image: url("../Assets/bg-header-ben.svg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 82px;
     position: fixed;
-    color: white;
+    color: $blue_gray_900;
     z-index: 9;
     width: 100%;
     display: flex;
@@ -16,9 +19,11 @@
     flex-direction: column;
     .title {
       text-align: center;
-      font-size: 18px;
       letter-spacing: 0;
       margin-bottom: 9px;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
       font-family: "Roboto";
     }
     .icon {

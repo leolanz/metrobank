@@ -1,6 +1,6 @@
 @import '../../Theme/variables.scss';
 
-.modal-wrapper {
+.modalNew-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -35,11 +35,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: $primary-dark;
+      background-color: $metrobank;
       padding: 0px 20px;
       color: $text-white;
       .title-header{
-        font-size: 18px;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: $blue_gray_900;
+        margin-left: 42%;
+    
+
       }
       &.ben {
         background-color: #D0CDCD;
@@ -47,7 +56,7 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        color: #fff;
+        color: red;
   
       }
     }
@@ -55,12 +64,12 @@
       min-height: calc(300px - 65px);
     }
     .ic-close {
-      width: 40px;
-      height: 40px;
+      width: 14px;
+      height: 14px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgba($color: #ffffff, $alpha: 0.8);
+    
       border-radius: 30px;
       color: $text-dark;
       cursor: pointer;

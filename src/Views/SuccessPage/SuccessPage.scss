@@ -1,21 +1,74 @@
-.page-SuccessPage{
-    .body-success{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        background: #f7f8fb;
-        justify-content: space-between;
-        h3{
-            text-align: center;
-        }
-        .completed, .succeed{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        img{
-            margin-top: 92px;
-        }
+@import "../../Theme/variables.scss";
+
+.page-SuccessPage {
+  .body-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #f7f8fb;
+    justify-content: space-between;
+    h3 {
+      text-align: center;
     }
+    .completed,
+    .succeed {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      span {
+        color: #218380;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 28px;
+      }
+      .menssage {
+        width: 353px;
+        color: $blue_gray_900;
+        font-size: 15px;
+        .negrita {
+          font-weight: 600;
+          line-height: 150%;
+        }
+      }
+    }
+    .button-private {
+        background: #FFFFFF;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+        gap: 4px;
+        text-decoration: none;
+        width: 335px;
+        height: 48px;
+        color: $blue_gray_900;
+        border-radius: 24px;
+        border: 2px solid #E2E8F0;
+        margin-bottom: -75%;
+    }
+    .button-next {
+        background-color: #218380;
+        color: #FFFFFF;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+        gap: 4px;
+        text-decoration: none;
+        width: 335px;
+        height: 48px;
+        border-radius: 24px;
+
+
+    }
+    
+    img {
+      margin-top: 92px;
+    }
+  }
 }

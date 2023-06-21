@@ -1,44 +1,52 @@
-.back-nav {
-    background-image: url("../../../Assets/bg-header-ben.svg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 82px;
-    color: white;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-   /*  position: relative; */
-position:fixed;
-top: 0;
-z-index: 4;
-    .title {
-      text-align: center;
-      font-size: 18px;
-      letter-spacing: 0;
-      margin-bottom: 9px;
-      font-family: "Roboto";
-    }
-    .icon {
-      position: absolute;
-      left: 20px;
-      bottom: 15px;
-      img {
-        color: white;
-      }
-    }
+@import "../../../Theme/variables.scss";
 
-    .changeCam {
-      position: absolute;
-      right: 20px;
-      background: #26a69a;
-      bottom: 8px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
+.back-nav {
+  background-color: #d0cdcd;
+  // background-image: url("../../../Assets/bg-header-ben.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 82px;
+  color: $blue_gray_900;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  /*  position: relative; */
+  position: fixed;
+  top: 0;
+  z-index: 4;
+
+  .title {
+    text-align: center;
+    letter-spacing: 0;
+    margin-bottom: 9px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    font-family: "Roboto";
+  }
+
+  .icon {
+    position: absolute;
+    left: 20px;
+    bottom: 15px;
+
+    img {
+      color: white;
     }
   }
+
+  .changeCam {
+    position: absolute;
+    right: 20px;
+    background: #26a69a;
+    bottom: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+}

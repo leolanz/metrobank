@@ -11,7 +11,8 @@ const dev = {
   mpay
 };
 const qa = {
-  REACT_DOMAIN_BACK: "https://app.developerpa.com/api/request/bnp",
+  REACT_DOMAIN_BACK: "https://app.developerpa.com/api/request",
+  // REACT_DOMAIN_BACK: "https://app.developerpa.com/api/request/bnp",
   mpay
 };
 

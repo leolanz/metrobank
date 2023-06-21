@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CamTemplate from "../../templates/CamTemplate";
-import BlueCheck from "../../Assets/BlueCheck.svg";
+import Success from "../../Assets/success.svg";
 import Person from "../../Assets/Person.svg";
 import { Button } from "../../Components";
 import { useHistory } from "react-router-dom";
@@ -81,23 +81,39 @@ const SuccessPage = () => {
           ) : (
             <>
               <div className="succeed">
-                <img src={BlueCheck} alt="BlueCheck" />
-                <h3>¡{RESPONSE?.name}, hemos recibido su solicitud!</h3>
-                <p>
-                  Nuestra Área de Atención al cliente estará evaluando su
-                  solicitud y próximamente será contactado.
+                <img src={Success} alt="success" />
+                <h3>
+                  ¡{RESPONSE?.name}, hemos validado su identidad{" "}
+                  <span>correctamente</span>
+                </h3>
+                <p className="menssage">
+                  Recibirá un mensaje de texto en su celular con un{" "}
+                  <p className="negrita">código de verificación</p> y podrá
+                  configurar su PIN y foto de Perfil.
                 </p>
               </div>
               <Button
                 ben
                 full
-                /* disabled={data === "" || value === ""} */
-                color="primary"
+                className="button-private"
+                color="private"
                 onClick={() => {
-                  window.history.go(-1); // regresa a la pagina anterior
+                  history.push("/BEN/info"); // regresa a la pagina anterior
                 }}
               >
-                Ok, entendido
+                Ver respuesta privada
+              </Button>
+              <Button
+                ben
+                full
+                /* disabled={data === "" || value === ""} */
+                className="button-next"
+                color="private"
+                // onClick={() => {
+                //   window.history.go(-1); // regresa a la pagina anterior
+                // }}
+              >
+                Siguiente
               </Button>
             </>
           )}

@@ -94,6 +94,8 @@ const SelfiePreview = () => {
           nextUrl="/BEN/docID"
           progressCount={1}
         ></CamTemplate>
+
+        
       </div>
     );
   return (
