@@ -94,12 +94,12 @@ const UserData = (props) => {
     <div className="user-info-container surface" >
       <ModalNew
         show={modal}
-        title="Listas"
+        title="Lista"
         close={() => {
           setModal(false);
         }}
       >
-        
+
         <List>
         {listaItems.map((item, index) => (
           <div key={index} className="div-listas">
