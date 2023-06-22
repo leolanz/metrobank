@@ -30,11 +30,10 @@ code {
   #image-preview-container {
     background-color: black;
     width: 100%;
-    height: auto;
+ 
     position: fixed;
     top: 82px;
-    img {
-      height: 100%;
+    img {   height: 68vh;
       width: 100%;
     }
   }

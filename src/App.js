@@ -14,11 +14,13 @@ import theme from "./Theme/theme";
 import "./Theme/global.scss";
 import "./Theme/reset.scss";
 import { RequireProvider } from "./Context";
-
+/*Nuevas*/
+import SuccessPage from "./Views/SuccessPage/SuccessPage";
+import Home from "./Views/Home/home";
 /* viejas */
 import Info from "./Views/Info/Info";
 import PepActivity from "./Views/PepActivity/PepActivity";
-import SuccessPage from "./Views/SuccessPage/SuccessPage";
+
 /* Experimentales */
 import Selfie2 from "./Views/Selfie/Selfie2";
 import SelfiePrev from "./Views/SelfiePreview/SelfiePreview2";
@@ -33,6 +35,7 @@ function App() {
         <ToastContainer />
         <Router>
           <Switch>
+          <Route path="/home" component={Home} />
             <Route exact path="/BEN/selfie" component={Selfie2} />
             <Route exact path="/BEN/selfie/preview" component={SelfiePrev} />
             <Route exact path="/BEN/docID" component={DocId2} />
@@ -41,7 +44,7 @@ function App() {
             <Route path="/BEN/activity" component={PepActivity} />
             <Route path="/BEN/success" component={SuccessPage} />
             <Route exact path="/">
-              <Redirect to="/BEN/selfie" />
+              <Redirect to="/home" />
             </Route>
           </Switch>
         </Router>
