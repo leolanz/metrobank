@@ -55,7 +55,7 @@ const Selfie2 = memo(() => {
   useEffect(() => {
     const email = query.email;
     const phone = query.phone;
-    let url = `${api.REACT_DOMAIN_BACK}/track?`;
+    let url = `${api.REACT_DOMAIN_BACK}/bnp/track?`;
     if (email) url += `email=${query.email}&`;
     if (phone) url += `phone=${query.phone}`;
     if (email === undefined || phone === undefined) return;
