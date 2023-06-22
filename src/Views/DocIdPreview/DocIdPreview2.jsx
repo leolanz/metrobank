@@ -3,7 +3,7 @@ import Navbar from "../../templates/components/Navbar/Navbar";
 import CamTemplate from "../../templates/CamTemplate";
 import "./DocIdPreview.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setPreviewImage } from "../../redux/features/cam";
+import { setPreviewImage, setRequestNumber } from "../../redux/features/cam";
 import { useHistory } from "react-router-dom";
 import Footer from "../../templates/components/Footer2/Footer";
 import axios from "axios";
@@ -23,6 +23,11 @@ const SelfiePreview = () => {
   const query = useQuery();
   const [loading, setloading] = useState(false);
   const sessionImage = sessionStorage.getItem("img-preview");
+
+  const handleResponse = (response) => {
+    const requestNumber = response.requestNumber;
+    dispatch(setRequestNumber(requestNumber)); // llama a la acción para guardar el valor en el state global
+  };
 
   useEffect(() => {
     const IMAGE = document.getElementById("image-preview-container");
@@ -49,7 +54,7 @@ const SelfiePreview = () => {
     formData.append("requestNumber", query.requestNumber);
     axios({
       method: "post",
-      url: `${api.REACT_DOMAIN_BACK}/document`,
+      url: `${api.REACT_DOMAIN_BACK}/bnp/document`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -61,11 +66,14 @@ const SelfiePreview = () => {
         setloading(false);
         /* dispatch(setTrackInfo({ trackInfo })); */
         history.push({
-          pathname: "/BEN/info",
-          state: { trackInfo },
+          pathname: "/BEN/success",
+          state: { trackInfo, email: query.email, },
+          
           /* search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`, */
           search: `?requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}&requestId=${query.requestId}`,
         });
+        handleResponse(response);
+   
       })
       .catch(function (Error) {
         //handle error
@@ -83,6 +91,7 @@ const SelfiePreview = () => {
           state: {},
           /*  search: `${history.location.search}&requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`, */
           search: `?requestNumber=${query.requestNumber}&email=${query.email}&phone=${query.phone}`,
+
         });
       });
   };

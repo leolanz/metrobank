@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import "./CamTemplate.scss";
 import Footer from "./components/Footer/Footer";
-import BackArrow from "../resources/icons/back.svg"
+import BackArrow from "../resources/icons/arrow_back.svg"
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import { ProgressBar } from "../Components";
 import ChangeCam from "../resources/icons/changecam.svg";
@@ -74,10 +74,7 @@ const TemplateArrow = memo(
     };
 
     const handleBack = () => {
-      /*  if (pathname.includes(urlPreview)) return history.push(`${url}/${params?.id}`);
-      if (pathname.includes(url)) return history.goBack();
-      return history.push(`/selfie/${params?.id}`); */
-      history.goBack();
+      history.go(-2);
     };
 
     let ClassName = "camera";
@@ -86,24 +83,11 @@ const TemplateArrow = memo(
 
     return (
       <div className="cam-body">
-        <div className="back-nav">
-          {!pathname.includes("success") && !pathname.includes("info") && (
-            <div className="icon" onClick={handleBack}>
-              <img src={BackArrow} alt="backArrow" />
-            </div>
-          )}
+        <div className="back-nav-info" >
+          <div className="icon" onClick={handleBack}>
+            <img src={BackArrow} alt="backArrow" />
+          </div>
           <div className="title">{title}</div>
-        {/* {(pathname.includes("selfie") || pathname.includes("docID")) && (
-            <div className="changeCam" onClick={changeVideoConstraints}>
-              <img src={ChangeCam} alt="ChangeCam" />
-            </div>
-          )} */}
-
-          {/* {!noProgress && (
-            <div className={`numbers-container`}>
-              <ProgressBar items={3} cont={progressCount} />
-            </div>
-          )}  */}
         </div>
 
         <div id="webcam" className={ClassName}>

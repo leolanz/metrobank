@@ -5,6 +5,7 @@ const initialState = {
   docPrev: null,
   image: null,
   file: null,
+  requestNumber: null,
 };
 
 export const previewImage = createSlice({
@@ -23,10 +24,16 @@ export const previewImage = createSlice({
         ...action.payload,
       };
     },
+    setRequestNumber: (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
   },
 });
 
 // Metodo global para actualizar el state
-export const { setPreviewImage, setPreviewDoc } = previewImage.actions;
+export const { setPreviewImage, setPreviewDoc, setRequestNumber } = previewImage.actions;
 
 export default previewImage.reducer;

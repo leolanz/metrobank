@@ -46,8 +46,10 @@
 .btn-primary {
   @include button();
   &.disabled {
-    opacity: 0.5;
+
     cursor: not-allowed;
+    background-color: #818999;
+    color: #64748B;
     &.ben {
       background-color: $gray-light;
       color: $gray-medium;

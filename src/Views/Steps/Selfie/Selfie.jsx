@@ -8,7 +8,7 @@ import TakePhotoIOS from '../../../Containers/TakePhoto/IOs/TakePhotoIOs';
 import { RequireContext } from '../../../Context';
 import placeHolder from '../../../Assets/placeholder-selfie.svg';
 import placeHolderBen from '../../../Assets/selfie-placeholder-V3.svg';
-import useToBase64 from '../../../Hooks/File/useToBase64';
+import useToBase64 from '../../../Hooks/File/useTo';
 import { toast } from 'react-toastify';
 import { api } from '../../../Connection/Connection';
 

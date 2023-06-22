@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./UserData.scss";
 import { Divider } from "@material-ui/core";
+import Nodata from "../../../resources/icons/no-data.svg"
+import Close from "../../../resources/icons/close-white.svg"
+import Check from "../../../resources/icons/check-white.svg"
+import CheckGreen from "../../../resources/icons/check-green.svg"
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { api } from "../../../Connection/Connection";
@@ -9,44 +13,25 @@ import { useQuery } from "../../../Hooks/useQuery";
 import { Modal } from "../../../Components";
 import ModalNew from "../../../Components/ModalNew/ModalNew";
 import List from "../../../Components/List/List";
+import CircularProgress from '@material-ui/core/CircularProgress';
 const UserData = (props) => {
   const history = useHistory();
-  const userData = history.location.state?.trackInfo?.data;
-  const trackInfo = history.location.state?.trackInfo;
+
   const [modal, setModal] = React.useState(false);
-  const [loading, setloading] = useState(false);
+  const [modalselfie, setModalSelfie] = React.useState(false);
+  const [modaldoc, setModalDoc] = React.useState(false);
+  const [userData, setUserData] = useState(null);
+  const trackInfo = history.location.state?.trackInfo;
+  const [loading, setLoading] = useState(false);
+  const [fileSelfieData, setFileSelfieData] = useState(null);
+  const [list, setList] = useState([]);
+  const [fileDocumentData, setFileDocumentData] = useState(null);
   const query = useQuery();
   const resultado = props.resultado;
 
-  const getBackgroundColor = () => {
-    if (resultado === "Aprobado") {
-      return "green";
-    } else if (resultado === "Revisión de cumplimiento") {
-      return "red";
-    } else {
-      return "transparent";
-    }
-  };
 
-  const getIcon = () => {
-    if (resultado === "Aprobado") {
-      return <i className="fas fa-check"></i>;
-    } else if (resultado === "Revisión de cumplimiento") {
-      return <i className="fas fa-close"></i>;
-    } else {
-      return null;
-    }
-  };
 
-  const getText = () => {
-    if (resultado === "Aprobado") {
-      return "Aprobado";
-    } else if (resultado === "Revisión de cumplimiento") {
-      return "Revisión de cumplimiento";
-    } else {
-      return "Resultado desconocido";
-    }
-  };
+
 
   const validateInfo = (type) => {
     let url = `${api.REACT_DOMAIN_BACK}/ocr?requestNumber=${trackInfo.requestNumber}`;
@@ -58,7 +43,7 @@ const UserData = (props) => {
     })
       .then(function (response) {
         const trackInfo = response.data;
-        setloading(false);
+        setLoading(false);
         let urlPath = "/BEN/activity";
         if (type === "bad") urlPath = "/BEN/docID";
         history.push({
@@ -69,7 +54,7 @@ const UserData = (props) => {
       })
       .catch(function (Error) {
         //handle error
-        setloading(false);
+        setLoading(false);
         error(Error);
 
         /*  const data = Error.response.data;
@@ -80,163 +65,373 @@ const UserData = (props) => {
           error(data.message);
         } */
       });
+
+
   };
 
-  const listaItems = [
-    { label: "Nombre", value: "Leonidas Nicolas, Centeno Rivera" },
-    { label: "Puntos", value: "100" },
-    { label: "Listas de Sanciones", value: "Canada" },
-    { label: "Prospecto", value: "Nicolas" },
-    { label: "ID", value: "1831.0" },
 
-  ];
+
+  //CONSULTA
+  useEffect(() => {
+
+    axios({
+      method: "post",
+      url: `${api.REACT_DOMAIN_BACK}/consult`,
+      data: {
+        requestNumber: query.requestNumber
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        const data = response.data;
+
+        setLoading(false);
+        setUserData(data)
+        console.log(data.ocr)
+
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
+
+  //  LISTAS RESTRICTIVAS
+
+  const Listas = () => {
+    axios({
+      method: "post",
+      url: `${api.REACT_DOMAIN_BACK}/sanction`,
+      data: {
+        requestNumber: query.requestNumber,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        const data = response.data;
+        setLoading(false);
+        setList(data)
+        console.log(data)
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  //FOTO SELFIE 
+  const FileSelfie = () => {
+    axios({
+      method: "post",
+      url: `${api.REACT_DOMAIN_BACK}/file/selfie`,
+      data: {
+        requestNumber: query.requestNumber,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        const data = response.data;
+        setLoading(false);
+        setFileSelfieData(data);
+        console.log(data)
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+  // FOTO DOC ID 
+  const FileDoc = () => {
+    axios({
+      method: "post",
+      url: `${api.REACT_DOMAIN_BACK}/file/document`,
+      data: {
+        requestNumber: query.requestNumber,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        const data = response.data;
+        setLoading(false);
+        setFileDocumentData(data);
+        console.log(data)
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+
+
+
+  const handleListModal = async () => {
+    await Listas();
+    setModal(true);
+  };
+  const handleFileSelfieModal = async () => {
+    await FileSelfie();
+    setModalSelfie(true);
+  };
+
+  const handleFileDocumentModal = async () => {
+    await FileDoc();
+    setModalDoc(true);
+  };
+
   return (
     <div className="user-info-container surface" >
+
+
       <ModalNew
         show={modal}
-        title="Lista"
+        title="Listas restrictivas"
         close={() => {
           setModal(false);
         }}
       >
 
-        <List>
-        {listaItems.map((item, index) => (
-          <div key={index} className="div-listas">
-         
-              <div className="title">{item.label}</div>
-              <div className="text">{item.value}</div>
-            </div>
 
-        ))}
-        </List>
+        {list.length > 0 ? (
+          list.map((item) => (
+            <List>
+              <div key={item.id}>
+                <div className="listas-listas">
+                  <div className="title-listas">
+                    <p className="titles">Nombre</p>
+                    <p className="titles">Puntos</p>
+                    <p className="titles">Lista de Sanciones</p>
+                    <p className="titles">Prospecto</p>
+                    <p className="titles">ID</p>
+                  </div>
+                  <div className="text-listas">
+                    <p className="text">{item.prospect}</p>
+                    <p className="text">{item.points}</p>
+                    <p className="text">{item.sanctionsList}</p>
+                    <p className="text">{item.coincidence}</p>
+                    <p className="text">{item.id}</p>
+                  </div>
+                </div>
+              </div>
+            </List>
+          ))
+        ) : (
+          <div>{loading ? <CircularProgress /> :
+            <div className="no-data">
+              <img src={Nodata} alt="nodata" className="icon-nodata" />
+              <p className="text-no-data">No se encontraron coincidencias en ninguna lista.</p></div>}
+          </div>
+
+        )}
+
 
       </ModalNew>
-      <div className="info-rows">
-        <div className="result">Resultado de OCR</div>
+      <ModalNew
+        show={modalselfie}
+        title="Foto selfie"
+        close={() => {
+          setModalSelfie(false);
+        }}
+      >
 
-        <div className="info-col">
-          <div className="label">
-            <p>ID Documento</p>
-            <p className="data">{userData?.idDocument}</p>
+        {fileSelfieData && fileSelfieData ? (
+          <div className="image-selfie">
+            <img className="selfie" src={`data:image/jpeg;base64, ${fileSelfieData.file}`} alt="Selfie" />
+
           </div>
-          <div className="label">
-            <p>Expedida</p>
-            <p className="data">
-              {userData?.expeditionDate}
-            </p>
+        ) : (
+          <>
+
+
+            <div className="cargando-info">
+              <CircularProgress className="spinner" />
+              Cargando...
+            </div>
+          </>
+
+        )}
+
+
+      </ModalNew>
+      <ModalNew
+        show={modaldoc}
+        title="Foto Documento ID"
+        close={() => {
+          setModalDoc(false);
+        }}
+      >
+
+        {fileDocumentData &&  fileDocumentData ?(
+          <div className="image-selfie">
+            <img className="doc" src={`data:image/jpeg;base64, ${fileDocumentData.file}`} alt="Documento" />
+
           </div>
-          <div className="label">
-            <p>Expira</p>
-            <p className="data">{userData?.expirationDate}</p>
-          </div>
-          <div className="label">
-            <p>Nombres</p>
-            <p className="data">{userData?.names}</p>
-          </div>
-          <div className="label">
-            <p>Apellidos</p>
-            <p className="data">{userData?.lastNames}</p>
-          </div>
-        </div>
-        <div className="info-col">
-          <div className="label">
-            <p>F. Nacimiento</p>
-            <p className="data">{userData?.birthday}</p>
-          </div>
-          <div className="label">
-            <p>Nacionalidad</p>
-            {userData?.nationality.includes("ñ") ? (
-              <p
-                className="data upper"
-                dangerouslySetInnerHTML={{
-                  __html: `${userData?.nationality.replaceAll("Ñ", "&ntilde")}`,
-                }}
-              ></p>
-            ) : (
-              <p className="data">{userData?.nationality}</p>
+        ) : (
+          <>
+
+
+            <div className="cargando-info">
+              <CircularProgress className="spinner" />
+              Cargando...
+            </div>
+          </>
+
+        )}
+
+
+      </ModalNew>
+      {userData && userData.ocr ? (
+        <div className="info-rows">
+          <div>
+
+            <div className="results">Resultado de OCR</div>
+
+            {userData && userData.ocr && (
+              <div className="table">
+                <div >
+                  <p className="titles">ID Documento</p>
+                  <p className="titles">Expedida</p>
+                  <p className="titles">Expira</p>
+                  <p className="titles">Nombres</p>
+                  <p className="titles">Apellidos</p>
+                  <p className="titles">F. Nacimiento</p>
+                  <p className="titles">Nacionalidad</p>
+                  <p className="titles">País de Nac.</p>
+                  <p className="titles">Sexo</p>
+                </div>
+                <div className="text">
+                  <p className="data">{userData.ocr.idDocument}</p>
+
+                  <p className="data">
+                    {userData.ocr.expeditionDate}
+                  </p>
+
+                  <p className="data">{userData.ocr.expirationDate}</p>
+
+                  <p className="data">{userData.ocr.names}</p>
+
+                  <p className="data">{userData.ocr.lastNames}</p>
+                  <p className="data">{userData.ocr.birthday}</p>
+                  {userData.ocr.nationality.includes("ñ") ? (
+                    <p
+                      className="data upper"
+                      dangerouslySetInnerHTML={{
+                        __html: `${userData.ocr.nationality.replaceAll("Ñ", "&ntilde")}`,
+                      }}
+                    ></p>
+                  ) : (
+                    <p className="data">{userData.ocr.nationality}</p>
+                  )}
+                  <p className="data">{userData.ocr.placeOfBirth}</p>
+                  <p className="data">{userData.ocr.gender}</p>
+                </div>
+              </div>
             )}
           </div>
-          <div className="label">
-            <p>Lugar de Nac.</p>
-            <p className="data">{userData?.placeOfBirth}</p>
+        </div>
+      ) : (
+        <>
+          <div className="cargando-info">
+            <CircularProgress className="spinner" />
+            Cargando...
           </div>
-          <div className="label">
-            <p>Sexo</p>
-            <p className="data">{userData?.gender}</p>
+        </>
+      )}
+      {userData && userData.user && (
+        <div className="info-rows">
+          <div >
+
+            <div className="results">Usuario</div>
+
+            {userData && userData.user && (
+              <div className="table">
+                <div >
+                  <p className="titles">Actividad</p>
+                  <p className="titles">Relación PEP</p>
+                  <p className="titles">Listas restrictivas</p>
+                  <p className="titles">Foto selfie</p>
+                  <p className="titles">Foto Doc ID</p>
+
+                </div>
+                <div className="text">
+
+                  <p className="data">
+                    {userData.user.activity ? userData.user.activity : 'No posee actividad'}
+                  </p>
+                  <p className="data">
+                    {userData.user.pep ? userData.user.pep : 'No posee PEP'}
+                  </p>
+
+                  <p ><button className="more" onClick={handleListModal}>En {userData.user.listSanction} listas</button></p>
+                  <p > <button className="more" onClick={handleFileSelfieModal}>Ver más</button></p>
+                  <p ><button className="more" onClick={handleFileDocumentModal}>Ver más</button></p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      <div className="info-rows">
-        <div className="result">Usuario</div>
+      )}
+      {userData && userData.response && (
+        <div className="info-rows">
+          <div >
 
-        <div className="info-col">
-          <div className="label">
-            <p>Actividad</p>
-            <p className="data">{userData?.activity}</p>
-          </div>
-          <div className="label">
-            <p>Relación PEP</p>
-            <p className="data">{userData?.pep}</p>
-          </div>
-          <div className="label">
-            <p>Listas restrictivas</p>
-            <p className="data">
+            <div className="results">Respuesta</div>
 
-              <button
-                className="button-result"
-                onClick={() => {
-                  setModal(true);
-                }}
-              >
-                En {userData?.listSanction} listas
-              </button>
-            </p>
-          </div>
-          <div className="label">
-            <p>Foto selfie</p>
-            <p className="data">
-              {userData?.names}
-              <button className="button-result">Ver más</button>
-            </p>
-          </div>
-          <div className="label">
-            <p>Foto Doc ID</p>
-            <p className="data">
-              {userData?.lastNames}
-              <button className="button-result">Ver más</button>
-            </p>
+            {userData && userData.response && (
+              <div className="table">
+                <div >
+                  <p className="titles">Fecha y hora</p>
+                  <p className="titles">Resultado</p>
+                </div>
+                <div className="text">
+                  <p className="data">{userData.response.dateTime}</p>
+                  <p className={`data ${userData.response.result ? 'aprobado' : 'revision'}`}>
+                    {userData.response.result ? (
+                      <>
+                        <img src={Check} className="check" />
+                        Aprobado
+                      </>
+                    ) : (
+                      <>
+                        <img src={Close} className="close" />
+                        Revisión de cumplimiento
+                      </>
+                    )}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-      <div className="info-rows">
-        <div className="result">Respuesta</div>
+      )}
+      {userData && userData.response && (
+        <div className="info-rows">
+          <div >
+            <div className="results">Respuesta</div>
 
-        <div className="info-col">
-          <div className="label">
-            <p>Fecha y hora</p>
-            <p className="data">{userData?.dateTime}</p>
-          </div>
-          <div className="label" >
-            <p>Resultado:</p>
-            <p className="data" style={{ backgroundColor: getBackgroundColor() }}>{userData?.result}      {getText()} {getIcon()}</p>
+            <div className="table">
+              <div >
+                <p className="titles">OCR</p>
+                <p className="titles">Comparación Biométrica</p>
+              </div>
+              <div className="text">
+                <p className="data">Satisfactorio   <img src={CheckGreen} className="check-green" />
+                </p>
+                <p className="data"> Satisfactorio  <img src={CheckGreen} className="check-green" /></p>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-      <div className="info-rows">
-        <div className="result">Apis</div>
+      )}
 
-        <div className="info-col">
-          <div className="label">
-            <p>OCR</p>
-            <p className="data">{userData?.idDocument}Satisfactorio</p>
-          </div>
-          <div className="label">
-            <p>Comparación Biométrica</p>
-            <p className="data">{userData?.expeditionDate}Satisfactorio</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

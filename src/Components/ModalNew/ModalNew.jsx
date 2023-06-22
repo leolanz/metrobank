@@ -11,9 +11,10 @@ const ModalNew = ({ show, close, title, children, ben }) => {
       >
         <div className="modal-container">
           <div className={`modal-header ${ben ? 'ben' : ''}`}>
-            <p className="title-header text-bold">{title}</p>
+            <p className="title-header text-bold" style={{ flex: '1', textAlign: 'center' }}>{title}</p>
             <div
               className="ic-close"
+              style={{ alignSelf: 'flex-end' }} 
               onClick={() => {
                 close();
               }}

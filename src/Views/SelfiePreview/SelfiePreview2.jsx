@@ -48,7 +48,7 @@ const SelfiePreview = () => {
     formData.append("phone", query.phone);
     axios({
       method: "post",
-      url: `${api.REACT_DOMAIN_BACK}/selfie`,
+      url: `${api.REACT_DOMAIN_BACK}/bnp/selfie`,
       data: formData,
       headers: {
         "Content-Type": "multipart/form-data",

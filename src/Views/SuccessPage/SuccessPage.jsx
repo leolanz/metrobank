@@ -6,42 +6,44 @@ import { Button } from "../../Components";
 import { useHistory } from "react-router-dom";
 import { api } from "../../Connection/Connection";
 import axios from "axios";
-
+import { useQuery } from "../../Hooks/useQuery";
+import { error } from "../../Hooks/File/useToast";
 import "./SuccessPage.scss";
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 const initialRef = null;
 
 const SuccessPage = () => {
   const webcamRef = React.useRef(initialRef);
   const history = useHistory();
-  const RESPONSE = history?.location?.state?.trackInfo?.data;
+  const { trackInfo, email } = history?.location?.state || {}; // Get trackInfo and email from location.state
   const [redirectUrl, setredirectUrl] = useState("");
-
-  const sendRequestMPAy = () => {
-    console.log("RESPONSE.body", RESPONSE.body);
-    axios({
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-Api-key": "a30a003d-0ec5-45c3-a585-d05507a90eef",
-      },
-      url: `${api.mpay}`,
-      body: JSON.stringify(RESPONSE.body),
-    })
-      .then(function (response) {
-        setredirectUrl(response.data.url);
-      })
-      .catch(function (Error) {
-        console.log(Error);
-      });
-  };
+  const [loading, setLoading] = useState(false);
+  const query = useQuery();
+  const [userData, setUserData] = useState(null);
+  const sessionImage = sessionStorage.getItem("img-preview");
 
   useEffect(() => {
-    if (RESPONSE?.resolution === "APPROVAL") {
-      sendRequestMPAy();
-    }
-  }, [RESPONSE]);
+    axios({
+      method: "post",
+      url: `${api.REACT_DOMAIN_BACK}/consult`,
+      data: {
+        requestNumber: query.requestNumber,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(function (response) {
+        const data = response.data;
+        setLoading(false);
+        setUserData(data);
+        console.log(data.ocr);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="page-SuccessPage">
@@ -55,50 +57,25 @@ const SuccessPage = () => {
         noProgress
       >
         <div className="body-success">
-          {RESPONSE?.resolution === "APPROVAL" ? (
+          {userData && userData.ocr ? (
             <>
               <div className="completed">
                 <img src={Person} alt="person" />
                 <h3>
-                  ¡{RESPONSE?.name}, hemos validado su identidad correctamente!
+                  ¡{userData?.ocr?.names}, hemos validado su identidad correctamente!
                 </h3>
                 <p>
-                  Recibirá un mensaje de texto en su celular con un{" "}
-                  <strong>código de verificación</strong> y podrá configurar su
-                  PIN y foto de Perfil.
+                  Recibirá un mensaje de texto en su celular con un código de verificación y podrá configurar su PIN y foto de Perfil.
                 </p>
               </div>
-              <Button
-                ben
-                full
-                /* disabled={data === "" || value === ""} */
-                color="primary"
-                onClick={() => window.location.replace(redirectUrl)}
-              >
-                Siguiente
-              </Button>
-            </>
-          ) : (
-            <>
-              <div className="succeed">
-                <img src={Success} alt="success" />
-                <h3>
-                  ¡{RESPONSE?.name}, hemos validado su identidad{" "}
-                  <span>correctamente</span>
-                </h3>
-                <p className="menssage">
-                  Recibirá un mensaje de texto en su celular con un{" "}
-                  <p className="negrita">código de verificación</p> y podrá
-                  configurar su PIN y foto de Perfil.
-                </p>
-              </div>
-              <Button
+
+              <div>     <Button
                 ben
                 full
                 className="button-private"
                 color="private"
                 onClick={() => {
-                  history.push("/BEN/info"); // regresa a la pagina anterior
+                  history.push("/BEN/info");
                 }}
               >
                 Ver respuesta privada
@@ -106,15 +83,22 @@ const SuccessPage = () => {
               <Button
                 ben
                 full
-                /* disabled={data === "" || value === ""} */
-                className="button-next"
-                color="private"
-                // onClick={() => {
-                //   window.history.go(-1); // regresa a la pagina anterior
-                // }}
+                color="primary"
+                onClick={() => window.location.replace(redirectUrl)}
+                disabled
               >
                 Siguiente
-              </Button>
+              </Button></div>
+         
+            </>
+          ) : (
+            <>
+
+            
+              <div className="circulo">
+              <CircularProgress className="spinner"/>
+                Cargando...
+              </div>
             </>
           )}
         </div>
