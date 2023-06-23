@@ -2,9 +2,9 @@
 
 .cam-body {
   overflow: hidden;
-  background-color: #E2E8F0;
+  background-color: $metrobank;
   .back-nav {
-    background-color: #D0CDCD;
+    background-color: $metrobank;
     // background-image: url("../Assets/bg-header-ben.svg");
     background-position: center;
     background-size: cover;
@@ -51,7 +51,7 @@
   }
 
   .back-nav-info {
-    background-color: #D0CDCD;
+    background-color: $metrobank;
 
     background-repeat: no-repeat;
     height: 82px;

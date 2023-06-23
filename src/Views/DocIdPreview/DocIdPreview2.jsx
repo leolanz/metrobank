@@ -66,7 +66,7 @@ const SelfiePreview = () => {
         setloading(false);
         /* dispatch(setTrackInfo({ trackInfo })); */
         history.push({
-          pathname: "/BEN/success",
+          pathname: "/BEN/activity",
           state: { trackInfo, email: query.email, },
           
           /* search: `${history.location.search}&requestNumber=${trackInfo.requestNumber}&email=${query.email}&phone=${query.phone}`, */

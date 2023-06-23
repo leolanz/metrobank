@@ -4,12 +4,13 @@
   z-index: 9;
   display: flex;
   overflow-y: hidden;
+  overflow-x: hidden;
   width: 100vw;
   padding: 16px 20px 44px 20px;
   flex-direction: column;
   align-items: flex-start;
   background-color: $metrobank;
-  height: 39vh;
+  height: 43vh;
   .cuenta {
     font-size: 14px;
     font-family: Helvetica Neue;
@@ -85,7 +86,7 @@
       }
       .input-tel {
         display: flex;
-        width: 70vw;
+        width: 69vw;
         height: 48px;
         padding: 8px 16px;
         align-items: center;

@@ -27,7 +27,7 @@ const Activity = (props) => {
 
   const economicActivity = () => {
     setLoading(true);
-    fetch(`${api.REACT_DOMAIN_BACK}/list/riskActivity`, {
+    fetch(`${api.REACT_DOMAIN_BACK}/bnp/list/riskActivity`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -54,7 +54,7 @@ const Activity = (props) => {
   };
 
   const pepList = () => {
-    fetch(`${api.REACT_DOMAIN_BACK}/list/listPep`, {
+    fetch(`${api.REACT_DOMAIN_BACK}/bnp/list/listPep`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -96,7 +96,7 @@ const Activity = (props) => {
     };
     axios({
       method: "post",
-      url: `${api.REACT_DOMAIN_BACK}/lastStep`,
+      url: `${api.REACT_DOMAIN_BACK}/bnp/lastStep`,
       data,
     })
       .then(function (response) {

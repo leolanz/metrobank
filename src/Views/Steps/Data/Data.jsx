@@ -434,7 +434,7 @@ const Data = (props) => {
             <p>Teléfono</p>
             <div className="phone">
               <Flag />
-              <span className="number">{`+507 ${require.phone}`}</span>
+              <span className="number">{`507 ${require.phone}`}</span>
             </div>
           </div>
 

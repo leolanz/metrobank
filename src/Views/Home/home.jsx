@@ -27,7 +27,7 @@ const Home = () => {
     }
 
     if (email && phone && !emailError && !phoneError) {
-      const params = `email=${email}&phone=+507${phone}`;
+      const params = `email=${email}&phone=507${phone}`;
       history.push(`/BEN/selfie?${params}`);
     }
   };
@@ -82,6 +82,7 @@ const Home = () => {
               <input
                 className={`input-tel ${emailError ? "error" : ""}`}
                 placeholder="Teléfono"
+                type="tel"
                 value={phone}
                 maxLength={8}
                 onChange={handlePhoneChange}
@@ -93,7 +94,7 @@ const Home = () => {
             <p className="error-message">
               {phone
                 ? "Formato de teléfono debe contener 8 dígitos"
-                : "Debe completar el campo de correo"}
+                : "Debe completar el campo de teléfono"}
             </p>
           )}
         </div>
