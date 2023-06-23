@@ -1,0 +1,90 @@
+@import "../../../Theme/variables.scss";
+.ocr-wrapper {
+  width: 100vw;
+  padding: 20px;
+  background-color: $blue_gray_200;
+  .datos-ocr {
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid $blue_gray_200;
+    padding: 20px;
+
+    .titulo {
+      padding: 16px 10px;
+      border-bottom: 1px solid $blue_gray_200;
+      .title {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+        letter-spacing: -0.32px;
+        color: $blue_gray_800;
+
+        .click {
+          text-decoration: none;
+          color: $metrobank_2;
+          background: transparent;
+          border: none;
+          font-weight: 900;
+        }
+      }
+    }
+    .ocr-listas {
+      display: flex;
+      flex-direction: row;
+      .ocr-rows {
+        display: flex;
+        flex-direction: column;
+        .datos {
+          width: calc(85vw - 20px);
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 5px;
+          margin: 6px 0;
+          font-size: 15px;
+
+          .negrita {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: -0.28px;
+            color: $blue_gray_500;
+          }
+          .data {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            letter-spacing: -0.28px;
+            color: $blue_gray_800;
+          }
+        }
+      }
+      .ocr-col {
+      }
+    }
+  }
+
+  .buttons {
+    padding: 20px;
+    width: 90%;
+    display: flex;
+    gap: 16px;
+    bottom: 0;
+    position: fixed;
+
+    button {
+      width: 100vw;
+      height: 48px;
+      background: #ffffff;
+      border: 2px solid #e7e7ed;
+      border-radius: 24px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: #364156;
+      &.green {
+        background: #26a69a;
+        border: none;
+        color: white;
+      }
+    }
+  }
+}

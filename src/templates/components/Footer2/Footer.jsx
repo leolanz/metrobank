@@ -122,7 +122,7 @@ const Footer = memo(
     if (pathname.includes("preview")) actualHeightRest = actualHeightRest - 6;
     return (
       <div
-        style={{ height: `calc(100vh - ${actualHeightRest}px)` }}
+        //style={{ height: `calc(100vh - ${actualHeightRest}px)` }}
         className={`camera-footer ${preview ? "preview" : ""}`}
       >
         {handleClickCapture && <ActionsButtons />}

@@ -73,8 +73,9 @@ const Selfie2 = memo(() => {
         }
         if (trackInfo.track === "1") url += "/docID";
         if (trackInfo.track === "2") url += "/activity";
-        if (trackInfo.track === "3") url += "/info";
-        if (trackInfo.track === "4") url += "/success";
+        if (trackInfo.track === "3") url += "/ocr";
+        if (trackInfo.track === "4") url += "/info";
+        if (trackInfo.track === "5") url += "/success";
         history.push({
           pathname: url,
           state: { trackInfo },

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./UserData.scss";
 import { Divider } from "@material-ui/core";
-import Nodata from "../../../resources/icons/no-data.svg"
-import Close from "../../../resources/icons/close-white.svg"
-import Check from "../../../resources/icons/check-white.svg"
-import CheckGreen from "../../../resources/icons/check-green.svg"
+import Nodata from "../../../resources/icons/no-data.svg";
+import Close from "../../../resources/icons/close-white.svg";
+import Check from "../../../resources/icons/check-white.svg";
+import CheckGreen from "../../../resources/icons/check-green.svg";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { api } from "../../../Connection/Connection";
@@ -13,7 +13,7 @@ import { useQuery } from "../../../Hooks/useQuery";
 import { Modal } from "../../../Components";
 import ModalNew from "../../../Components/ModalNew/ModalNew";
 import List from "../../../Components/List/List";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 const UserData = (props) => {
   const history = useHistory();
 
@@ -28,10 +28,6 @@ const UserData = (props) => {
   const [fileDocumentData, setFileDocumentData] = useState(null);
   const query = useQuery();
   const resultado = props.resultado;
-
-
-
-
 
   const validateInfo = (type) => {
     let url = `${api.REACT_DOMAIN_BACK}/ocr?requestNumber=${trackInfo.requestNumber}`;
@@ -65,20 +61,15 @@ const UserData = (props) => {
           error(data.message);
         } */
       });
-
-
   };
-
-
 
   //CONSULTA
   useEffect(() => {
-
     axios({
       method: "post",
       url: `${api.REACT_DOMAIN_BACK}/consult`,
       data: {
-        requestNumber: query.requestNumber
+        requestNumber: query.requestNumber,
       },
       headers: {
         "Content-Type": "application/json",
@@ -88,9 +79,8 @@ const UserData = (props) => {
         const data = response.data;
 
         setLoading(false);
-        setUserData(data)
-        console.log(data.ocr)
-
+        setUserData(data);
+        console.log(data.ocr);
       })
       .catch(function (error) {
         console.log(error);
@@ -114,8 +104,8 @@ const UserData = (props) => {
       .then(function (response) {
         const data = response.data;
         setLoading(false);
-        setList(data)
-        console.log(data)
+        setList(data);
+        console.log(data);
       })
       .catch(function (error) {
         console.log(error);
@@ -123,7 +113,7 @@ const UserData = (props) => {
       });
   };
 
-  //FOTO SELFIE 
+  //FOTO SELFIE
   const FileSelfie = () => {
     axios({
       method: "post",
@@ -139,14 +129,14 @@ const UserData = (props) => {
         const data = response.data;
         setLoading(false);
         setFileSelfieData(data);
-        console.log(data)
+        console.log(data);
       })
       .catch(function (error) {
         console.log(error);
         setLoading(false);
       });
   };
-  // FOTO DOC ID 
+  // FOTO DOC ID
   const FileDoc = () => {
     axios({
       method: "post",
@@ -162,16 +152,13 @@ const UserData = (props) => {
         const data = response.data;
         setLoading(false);
         setFileDocumentData(data);
-        console.log(data)
+        console.log(data);
       })
       .catch(function (error) {
         console.log(error);
         setLoading(false);
       });
   };
-
-
-
 
   const handleListModal = async () => {
     await Listas();
@@ -188,9 +175,7 @@ const UserData = (props) => {
   };
 
   return (
-    <div className="user-info-container surface" >
-
-
+    <div className="data-info-container surface">
       <ModalNew
         show={modal}
         title="Listas restrictivas"
@@ -198,41 +183,49 @@ const UserData = (props) => {
           setModal(false);
         }}
       >
-
-
         {list.length > 0 ? (
           list.map((item) => (
             <List>
               <div key={item.id}>
                 <div className="listas-listas">
-                  <div className="title-listas">
+                  <div className="datos-listas">
                     <p className="titles">Nombre</p>
-                    <p className="titles">Puntos</p>
-                    <p className="titles">Lista de Sanciones</p>
-                    <p className="titles">Prospecto</p>
-                    <p className="titles">ID</p>
+                    <p className="data-listas">{item.prospect}</p>
                   </div>
-                  <div className="text-listas">
-                    <p className="text">{item.prospect}</p>
-                    <p className="text">{item.points}</p>
-                    <p className="text">{item.sanctionsList}</p>
-                    <p className="text">{item.coincidence}</p>
-                    <p className="text">{item.id}</p>
+                  <div className="datos-listas">
+                    <p className="titles">Puntos</p>
+                    <p className="data-listas">{item.points}</p>
+                  </div>
+                  <div className="datos-listas">
+                    <p className="titles">Lista de Sanciones</p>
+                    <p className="data-listas">{item.sanctionsList}</p>
+                  </div>
+                  <div className="datos-listas">
+                    <p className="titles">Prospecto</p>
+                    <p className="data-listas">{item.coincidence}</p>
+                  </div>
+                  <div className="datos-listas">
+                    <p className="titles">ID</p>
+                    <p className="data-listas">{item.id}</p>
                   </div>
                 </div>
               </div>
             </List>
           ))
         ) : (
-          <div>{loading ? <CircularProgress /> :
-            <div className="no-data">
-              <img src={Nodata} alt="nodata" className="icon-nodata" />
-              <p className="text-no-data">No se encontraron coincidencias en ninguna lista.</p></div>}
+          <div>
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <div className="no-data">
+                <img src={Nodata} alt="nodata" className="icon-nodata" />
+                <p className="text-no-data">
+                  No se encontraron coincidencias en ninguna lista.
+                </p>
+              </div>
+            )}
           </div>
-
         )}
-
-
       </ModalNew>
       <ModalNew
         show={modalselfie}
@@ -241,25 +234,22 @@ const UserData = (props) => {
           setModalSelfie(false);
         }}
       >
-
         {fileSelfieData && fileSelfieData ? (
           <div className="image-selfie">
-            <img className="selfie" src={`data:image/jpeg;base64, ${fileSelfieData.file}`} alt="Selfie" />
-
+            <img
+              className="selfie"
+              src={`data:image/jpeg;base64, ${fileSelfieData.file}`}
+              alt="Selfie"
+            />
           </div>
         ) : (
           <>
-
-
             <div className="cargando-info">
               <CircularProgress className="spinner" />
               Cargando...
             </div>
           </>
-
         )}
-
-
       </ModalNew>
       <ModalNew
         show={modaldoc}
@@ -268,35 +258,31 @@ const UserData = (props) => {
           setModalDoc(false);
         }}
       >
-
-        {fileDocumentData &&  fileDocumentData ?(
+        {fileDocumentData && fileDocumentData ? (
           <div className="image-selfie">
-            <img className="doc" src={`data:image/jpeg;base64, ${fileDocumentData.file}`} alt="Documento" />
-
+            <img
+              className="doc"
+              src={`data:image/jpeg;base64, ${fileDocumentData.file}`}
+              alt="Documento"
+            />
           </div>
         ) : (
           <>
-
-
             <div className="cargando-info">
               <CircularProgress className="spinner" />
               Cargando...
             </div>
           </>
-
         )}
-
-
       </ModalNew>
       {userData && userData.ocr ? (
-        <div className="info-rows">
+        <div className="data-rows">
           <div>
-
             <div className="results">Resultado de OCR</div>
 
             {userData && userData.ocr && (
               <div className="table">
-                <div >
+                <div>
                   <p className="titles">ID Documento</p>
                   <p className="titles">Expedida</p>
                   <p className="titles">Expira</p>
@@ -310,9 +296,7 @@ const UserData = (props) => {
                 <div className="text">
                   <p className="data">{userData.ocr.idDocument}</p>
 
-                  <p className="data">
-                    {userData.ocr.expeditionDate}
-                  </p>
+                  <p className="data">{userData.ocr.expeditionDate}</p>
 
                   <p className="data">{userData.ocr.expirationDate}</p>
 
@@ -324,7 +308,10 @@ const UserData = (props) => {
                     <p
                       className="data upper"
                       dangerouslySetInnerHTML={{
-                        __html: `${userData.ocr.nationality.replaceAll("Ñ", "&ntilde")}`,
+                        __html: `${userData.ocr.nationality.replaceAll(
+                          "Ñ",
+                          "&ntilde"
+                        )}`,
                       }}
                     ></p>
                   ) : (
@@ -346,33 +333,45 @@ const UserData = (props) => {
         </>
       )}
       {userData && userData.user && (
-        <div className="info-rows">
-          <div >
-
+        <div className="data-rows">
+          <div>
             <div className="results">Usuario</div>
 
             {userData && userData.user && (
               <div className="table">
-                <div >
+                <div>
                   <p className="titles">Actividad</p>
                   <p className="titles">Relación PEP</p>
                   <p className="titles">Listas restrictivas</p>
                   <p className="titles">Foto selfie</p>
                   <p className="titles">Foto Doc ID</p>
-
                 </div>
                 <div className="text">
-
                   <p className="data">
-                    {userData.user.activity ? userData.user.activity : 'No posee actividad'}
+                    {userData.user.activity
+                      ? userData.user.activity
+                      : "No posee actividad"}
                   </p>
                   <p className="data">
-                    {userData.user.pep ? userData.user.pep : 'No posee PEP'}
+                    {userData.user.pep ? userData.user.pep : "No posee PEP"}
                   </p>
 
-                  <p ><button className="more" onClick={handleListModal}>En {userData.user.listSanction} listas</button></p>
-                  <p > <button className="more" onClick={handleFileSelfieModal}>Ver más</button></p>
-                  <p ><button className="more" onClick={handleFileDocumentModal}>Ver más</button></p>
+                  <p>
+                    <button className="more" onClick={handleListModal}>
+                      En {userData.user.listSanction} listas
+                    </button>
+                  </p>
+                  <p>
+                    {" "}
+                    <button className="more" onClick={handleFileSelfieModal}>
+                      Ver más
+                    </button>
+                  </p>
+                  <p>
+                    <button className="more" onClick={handleFileDocumentModal}>
+                      Ver más
+                    </button>
+                  </p>
                 </div>
               </div>
             )}
@@ -380,20 +379,23 @@ const UserData = (props) => {
         </div>
       )}
       {userData && userData.response && (
-        <div className="info-rows">
-          <div >
-
+        <div className="data-rows">
+          <div>
             <div className="results">Respuesta</div>
 
             {userData && userData.response && (
               <div className="table">
-                <div >
+                <div>
                   <p className="titles">Fecha y hora</p>
                   <p className="titles">Resultado</p>
                 </div>
                 <div className="text">
                   <p className="data">{userData.response.dateTime}</p>
-                  <p className={`data ${userData.response.result ? 'aprobado' : 'revision'}`}>
+                  <p
+                    className={`data ${
+                      userData.response.result ? "aprobado" : "revision"
+                    }`}
+                  >
                     {userData.response.result ? (
                       <>
                         <img src={Check} className="check" />
@@ -404,7 +406,8 @@ const UserData = (props) => {
                         <img src={Close} className="close" />
                         Revisión de cumplimiento
                       </>
-                    )}</p>
+                    )}
+                  </p>
                 </div>
               </div>
             )}
@@ -412,26 +415,28 @@ const UserData = (props) => {
         </div>
       )}
       {userData && userData.response && (
-        <div className="info-rows">
-          <div >
+        <div className="data-rows">
+          <div>
             <div className="results">Respuesta</div>
 
             <div className="table">
-              <div >
+              <div>
                 <p className="titles">OCR</p>
                 <p className="titles">Comparación Biométrica</p>
               </div>
               <div className="text">
-                <p className="data">Satisfactorio   <img src={CheckGreen} className="check-green" />
+                <p className="data">
+                  Satisfactorio <img src={CheckGreen} className="check-green" />
                 </p>
-                <p className="data"> Satisfactorio  <img src={CheckGreen} className="check-green" /></p>
+                <p className="data">
+                  {" "}
+                  Satisfactorio <img src={CheckGreen} className="check-green" />
+                </p>
               </div>
             </div>
-
           </div>
         </div>
       )}
-
     </div>
   );
 };

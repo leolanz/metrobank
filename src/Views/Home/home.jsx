@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import HomeTemplate from "../../templates/HomeTemplate/homeTemplate";
+import Logo from "../../resources/others/logo-metrobank.svg";
 import "./home.scss";
 import { Button } from "@material-ui/core";
 const Home = () => {
@@ -54,7 +54,12 @@ const Home = () => {
 
   return (
     <>
-      <HomeTemplate></HomeTemplate>
+      <div className="background">
+        {" "}
+        <div className="logo">
+          <img src={Logo} alt="logo-metrobank" />
+        </div>
+      </div>
       <div className="input-home">
         <div>
           <p className="cuenta">Ya tienes cuenta?</p>
@@ -76,9 +81,10 @@ const Home = () => {
                 : "Debe completar el campo de correo"}
             </p>
           )}
+          
           <div className="tel">
             <div className="numero">+507</div>
-            <div>
+       
               <input
                 className={`input-tel ${emailError ? "error" : ""}`}
                 placeholder="Teléfono"
@@ -87,7 +93,7 @@ const Home = () => {
                 maxLength={8}
                 onChange={handlePhoneChange}
               />
-            </div>
+         
           </div>
 
           {phoneError && (

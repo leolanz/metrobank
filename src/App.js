@@ -17,15 +17,17 @@ import { RequireProvider } from "./Context";
 /*Nuevas*/
 import SuccessPage from "./Views/SuccessPage/SuccessPage";
 import Home from "./Views/Home/home";
-/* viejas */
 import Info from "./Views/Info/Info";
-import PepActivity from "./Views/PepActivity/PepActivity";
+/* viejas */
 
+import PepActivity from "./Views/PepActivity/PepActivity";
+import OCR from "./Views/OCR/OCR";
 /* Experimentales */
 import Selfie2 from "./Views/Selfie/Selfie2";
 import SelfiePrev from "./Views/SelfiePreview/SelfiePreview2";
 import DocId2 from "./Views/DocId/DocId2";
 import DocIdPreview2 from "./Views/DocIdPreview/DocIdPreview2";
+
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
             <Route exact path="/BEN/docID" component={DocId2} />
             <Route exact path="/BEN/docID/preview" component={DocIdPreview2} />
             <Route path="/BEN/info" component={Info} />
+            <Route path="/BEN/ocr" component={OCR} />
             <Route path="/BEN/activity" component={PepActivity} />
             <Route path="/BEN/success" component={SuccessPage} />
             <Route exact path="/">
