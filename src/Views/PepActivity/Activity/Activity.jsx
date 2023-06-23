@@ -181,8 +181,8 @@ const Activity = (props) => {
           })}
         </div>
       </div>
-
-      <Button
+  <div className="button-activity">
+  <Button
         ben
         full
         /* disabled={data === "" || value === ""} */
@@ -191,6 +191,8 @@ const Activity = (props) => {
       >
         Enviar solicitud
       </Button>
+  </div>
+
     </div>
   );
 };

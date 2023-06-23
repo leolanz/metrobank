@@ -154,7 +154,7 @@
   .data-rows {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     align-items: center;
     padding: 20px 20px;
     color: #818999;
@@ -217,7 +217,7 @@
         .data.aprobado {
           color: white;
           background-color: $metrobank_2;
-          padding: 2px 6px;
+          padding: 2px 4px;
           display: flex;
           align-items: center;
           justify-items: center;
@@ -227,7 +227,7 @@
           font-weight: 500;
           line-height: 20px;
           letter-spacing: -0.28px; 
-
+          width: fit-content;
 
           .check {
             color: white;
